@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		097A6E636FDE92C568ED36C7 /* Pods_YRYRTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE31B18A32300C57833 /* AppDelegate.swift */; };
 		9E8C3BE71B18A32300C57833 /* YRYR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE51B18A32300C57833 /* YRYR.xcdatamodeld */; };
 		9E8C3BE91B18A32300C57833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE81B18A32300C57833 /* ViewController.swift */; };
@@ -14,6 +15,7 @@
 		9E8C3BEE1B18A32300C57833 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BED1B18A32300C57833 /* Images.xcassets */; };
 		9E8C3BF11B18A32300C57833 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */; };
 		9E8C3BFD1B18A32300C57833 /* YRYRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BFC1B18A32300C57833 /* YRYRTests.swift */; };
+		A2AE20420DF69DDE9D0DDBA4 /* Pods_YRYR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F573239C182A07098638B044 /* Pods_YRYR.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,12 @@
 		9E8C3BF61B18A32300C57833 /* YRYRTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YRYRTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8C3BFB1B18A32300C57833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8C3BFC1B18A32300C57833 /* YRYRTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YRYRTests.swift; sourceTree = "<group>"; };
+		A5F597D4BE7C786FFA9E3FB0 /* Pods-YRYR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYR.release.xcconfig"; path = "Pods/Target Support Files/Pods-YRYR/Pods-YRYR.release.xcconfig"; sourceTree = "<group>"; };
+		B21758A94EFD85CF6C3C0630 /* Pods-YRYR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YRYR/Pods-YRYR.debug.xcconfig"; sourceTree = "<group>"; };
+		BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YRYRTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8A199934B21681BD333F101 /* Pods-YRYRTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYRTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YRYRTests/Pods-YRYRTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9057D486511C7DB374E83F0 /* Pods-YRYRTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYRTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YRYRTests/Pods-YRYRTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F573239C182A07098638B044 /* Pods_YRYR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YRYR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2AE20420DF69DDE9D0DDBA4 /* Pods_YRYR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				097A6E636FDE92C568ED36C7 /* Pods_YRYRTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +74,8 @@
 				9E8C3BE01B18A32300C57833 /* YRYR */,
 				9E8C3BF91B18A32300C57833 /* YRYRTests */,
 				9E8C3BDF1B18A32300C57833 /* Products */,
+				D7CC54F143B29419CE66FBEF /* Pods */,
+				D2F6794212C6D1AF7ACCF684 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +127,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D2F6794212C6D1AF7ACCF684 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F573239C182A07098638B044 /* Pods_YRYR.framework */,
+				BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7CC54F143B29419CE66FBEF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B21758A94EFD85CF6C3C0630 /* Pods-YRYR.debug.xcconfig */,
+				A5F597D4BE7C786FFA9E3FB0 /* Pods-YRYR.release.xcconfig */,
+				D9057D486511C7DB374E83F0 /* Pods-YRYRTests.debug.xcconfig */,
+				C8A199934B21681BD333F101 /* Pods-YRYRTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,9 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E8C3C001B18A32300C57833 /* Build configuration list for PBXNativeTarget "YRYR" */;
 			buildPhases = (
+				254637CF764DD9F52F360A99 /* Check Pods Manifest.lock */,
 				9E8C3BDA1B18A32300C57833 /* Sources */,
 				9E8C3BDB1B18A32300C57833 /* Frameworks */,
 				9E8C3BDC1B18A32300C57833 /* Resources */,
+				E5FE32CB05C63338EBC6EFB8 /* Embed Pods Frameworks */,
+				56ECE64276406512D91392DF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -139,9 +174,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E8C3C031B18A32300C57833 /* Build configuration list for PBXNativeTarget "YRYRTests" */;
 			buildPhases = (
+				961640084924127EC44F1B26 /* Check Pods Manifest.lock */,
 				9E8C3BF21B18A32300C57833 /* Sources */,
 				9E8C3BF31B18A32300C57833 /* Frameworks */,
 				9E8C3BF41B18A32300C57833 /* Resources */,
+				DEA9297403F3C8E66FFE06AE /* Embed Pods Frameworks */,
+				39F5B33E31E74F569DA6BC74 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -209,6 +247,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		254637CF764DD9F52F360A99 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		39F5B33E31E74F569DA6BC74 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YRYRTests/Pods-YRYRTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56ECE64276406512D91392DF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YRYR/Pods-YRYR-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		961640084924127EC44F1B26 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DEA9297403F3C8E66FFE06AE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YRYRTests/Pods-YRYRTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5FE32CB05C63338EBC6EFB8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YRYR/Pods-YRYR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9E8C3BDA1B18A32300C57833 /* Sources */ = {
@@ -342,6 +473,7 @@
 		};
 		9E8C3C011B18A32300C57833 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B21758A94EFD85CF6C3C0630 /* Pods-YRYR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YRYR/Info.plist;
@@ -352,6 +484,7 @@
 		};
 		9E8C3C021B18A32300C57833 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5F597D4BE7C786FFA9E3FB0 /* Pods-YRYR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = YRYR/Info.plist;
@@ -362,6 +495,7 @@
 		};
 		9E8C3C041B18A32300C57833 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9057D486511C7DB374E83F0 /* Pods-YRYRTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -381,6 +515,7 @@
 		};
 		9E8C3C051B18A32300C57833 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8A199934B21681BD333F101 /* Pods-YRYRTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -413,6 +548,7 @@
 				9E8C3C021B18A32300C57833 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E8C3C031B18A32300C57833 /* Build configuration list for PBXNativeTarget "YRYRTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +557,7 @@
 				9E8C3C051B18A32300C57833 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
