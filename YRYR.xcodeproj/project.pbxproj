@@ -23,6 +23,7 @@
 		9E8C3C101B18ADF200C57833 /* PVRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C081B18AA3E00C57833 /* PVRProgram.swift */; };
 		9E8C3C111B18ADF600C57833 /* PVRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C0A1B18AAC600C57833 /* PVRManager.swift */; };
 		9E8C3C121B18ADFC00C57833 /* ChinachuPVRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */; };
+		9E8C3C151B18B89000C57833 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */; };
 		A2AE20420DF69DDE9D0DDBA4 /* Pods_YRYR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F573239C182A07098638B044 /* Pods_YRYR.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		9E8C3C081B18AA3E00C57833 /* PVRProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRProgram.swift; path = PVRManager/PVRProgram.swift; sourceTree = "<group>"; };
 		9E8C3C0A1B18AAC600C57833 /* PVRManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRManager.swift; path = PVRManager/PVRManager.swift; sourceTree = "<group>"; };
 		9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChinachuPVRManager.swift; sourceTree = "<group>"; };
+		9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		A5F597D4BE7C786FFA9E3FB0 /* Pods-YRYR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYR.release.xcconfig"; path = "Pods/Target Support Files/Pods-YRYR/Pods-YRYR.release.xcconfig"; sourceTree = "<group>"; };
 		B21758A94EFD85CF6C3C0630 /* Pods-YRYR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YRYR/Pods-YRYR.debug.xcconfig"; sourceTree = "<group>"; };
 		BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YRYRTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 				9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */,
 				9E8C3C0C1B18AB5500C57833 /* PVRManager */,
 				9E8C3BE81B18A32300C57833 /* ViewController.swift */,
+				9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */,
 				9E8C3BEA1B18A32300C57833 /* Main.storyboard */,
 				9E8C3BED1B18A32300C57833 /* Images.xcassets */,
 				9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */,
@@ -370,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E8C3C151B18B89000C57833 /* SettingTableViewController.swift in Sources */,
 				9E8C3C0B1B18AAC600C57833 /* PVRManager.swift in Sources */,
 				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
 				9E8C3BE91B18A32300C57833 /* ViewController.swift in Sources */,
