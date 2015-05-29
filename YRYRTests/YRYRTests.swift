@@ -25,6 +25,31 @@ class YRYRTests: XCTestCase {
         // This is an example of a functional test case.
         XCTAssert(true, "Pass")
     }
+
+	func testChinachuPVRManager() {
+		let reservingExpectation = self.expectationWithDescription("Reserving test")
+		let recordingExpectation = self.expectationWithDescription("Recording test")
+		
+		let manager = ChinachuPVRManager(remoteHost: NSURL(string: "http://chinachu:10772")!)
+		
+		manager.getReserving(
+			success: {program in
+				reservingExpectation.fulfill()
+			}, failure: {error in
+				XCTFail("\(error)")
+				reservingExpectation.fulfill()
+		})
+		
+		manager.getRecording(
+			success: {program in
+				recordingExpectation.fulfill()
+			}, failure: {error in
+				XCTFail("\(error)")
+				recordingExpectation.fulfill()
+		})
+		
+		self.waitForExpectationsWithTimeout(30, handler: nil)
+	}
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
