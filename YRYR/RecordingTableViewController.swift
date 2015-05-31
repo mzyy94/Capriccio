@@ -11,6 +11,7 @@ import UIKit
 class RecordingTableViewController: UITableViewController {
 
 	var programs : [PVRProgram] = []
+	var selectedIndex: NSIndexPath! = nil
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,7 @@ class RecordingTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+		self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,6 +74,11 @@ class RecordingTableViewController: UITableViewController {
     }
 	
 
+	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+		selectedIndex = indexPath
+		self.performSegueWithIdentifier("showProgramDetail", sender: self)
+	}
+	
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -109,14 +114,16 @@ class RecordingTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "showProgramDetail" {
+			let programDetailVC = segue.destinationViewController as! ProgramDetailViewController
+			programDetailVC.program = programs[selectedIndex.row]
+		}
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
-    */
 
 }

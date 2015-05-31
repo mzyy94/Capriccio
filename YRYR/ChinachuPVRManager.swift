@@ -49,6 +49,17 @@ class ChinachuPVRManager: PVRManager {
 		}
 	}
 	
+	func getPreviewImage(programId: String, isRecording: Bool = false, time: Int = 50, success: ((NSData) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded/" + programId + "/preview.jpg?pos=\(time)")
+			.response { (request, response, data, error) in
+				if error != nil {
+					failure(error!)
+				} else {
+					success(data as! NSData)
+				}
+		}
+	}
+	
 	override func getRecording(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded.json")
 			.responseJSON { (request, response, data, error) in
