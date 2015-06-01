@@ -10,6 +10,12 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+enum ChinachuPVRDeleteMode {
+	case File
+	case Information
+	case All
+}
+
 class ChinachuPVRManager: PVRManager {
 	
 	override init(remoteHost: NSURL) {
@@ -97,4 +103,44 @@ class ChinachuPVRManager: PVRManager {
 				}
 		}
 	}
+	
+	func deleteProgram(programId: String, mode: ChinachuPVRDeleteMode = .All, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		switch mode {
+		case .Information:
+			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + ".json")
+				.response { (request, response, data, error) in
+					if error != nil {
+						failure(error!)
+					} else {
+						success()
+					}
+			}
+		case .File:
+			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
+				.response { (request, response, data, error) in
+					if error != nil {
+						failure(error!)
+					} else {
+						success()
+					}
+			}
+		case .All:
+			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + ".json")
+				.response { (request, response, data, error) in
+					if error != nil {
+						failure(error!)
+					} else {
+						Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
+							.response { (request, response, data, error) in
+								if error != nil {
+									failure(error!)
+								} else {
+									success()
+								}
+						}
+					}
+			}
+		}
+	}
+
 }
