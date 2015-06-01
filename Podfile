@@ -7,6 +7,7 @@ target 'YRYR' do
 	pod 'SwiftyJSON', '~> 2.2.0'
 	pod 'SDWebImage', '~> 3.7.2'
 	pod 'MRProgress', '~> 0.8.2'
+	pod 'MobileVLCKit', '~> 2.2.1'
 end
 
 target 'YRYRTests' do
