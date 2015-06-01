@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MRProgress
 
 class RecordingTableViewController: UITableViewController {
 
@@ -20,12 +21,12 @@ class RecordingTableViewController: UITableViewController {
 		let programCellNib = UINib(nibName: "ProgramInfoTableViewCell", bundle: nil)
 		self.tableView.registerNib(programCellNib, forCellReuseIdentifier: "programCell")
 
+		MRProgressOverlayView.showOverlayAddedTo(self.parentViewController?.view, title: "Loading...", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
 		
 		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
 		manager.getRecording(success: { program in
-			for i in 0..<20 {
-				self.programs.append(program.reverse()[i])
-			}
+			self.programs = program.reverse()
+			MRProgressOverlayView.dismissAllOverlaysForView(self.parentViewController?.view, animated: true)
 			self.tableView.reloadData()
 			}, failure: nil)
         // Uncomment the following line to preserve selection between presentations
