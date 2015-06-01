@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+import MRProgress
 
 class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -58,11 +60,28 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		summaryView.sizeToFit()
 		
-		manager.getPreviewImage(program.id, success: { data in
-			self.previewImageView.image = UIImage(data: data)
 
-			}, failure: { error in
-				
+		let imageLoadingIndicatorView = MRActivityIndicatorView()
+		imageLoadingIndicatorView.startAnimating()
+		imageLoadingIndicatorView.hidesWhenStopped = true
+
+		imageLoadingIndicatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		previewImageView.addSubview(imageLoadingIndicatorView)
+		
+		imageLoadingIndicatorView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 60))
+		imageLoadingIndicatorView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 60))
+		previewImageView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .CenterX, relatedBy: .Equal, toItem: previewImageView, attribute: .CenterX, multiplier: 1.0, constant: 0))
+		previewImageView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .CenterY, relatedBy: .Equal, toItem: previewImageView, attribute: .CenterY, multiplier: 1.0, constant: 0))
+
+		
+		SDWebImageManager.sharedManager().downloadImageWithURL(manager.getPreviewImageUrl(program.id),
+			options: .CacheMemoryOnly,
+			progress: {(received, expected) in
+				return
+			},
+			completed: {(image, error, cacheType, finished, imageURL) in
+				imageLoadingIndicatorView.stopAnimating()
+				self.previewImageView.image = image
 		})
 		
 		

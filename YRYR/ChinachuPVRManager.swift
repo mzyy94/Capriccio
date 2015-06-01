@@ -59,6 +59,11 @@ class ChinachuPVRManager: PVRManager {
 				}
 		}
 	}
+
+	func getPreviewImageUrl(programId: String, isRecording: Bool = false, time: Int = 50) -> NSURL {
+		return NSURL(string: remoteHost.absoluteString! + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/preview.jpg?pos=\(time)")!
+	}
+
 	
 	override func getRecording(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded.json")
