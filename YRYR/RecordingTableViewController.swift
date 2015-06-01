@@ -23,7 +23,9 @@ class RecordingTableViewController: UITableViewController {
 		
 		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
 		manager.getRecording(success: { program in
-			self.programs = program.reverse()
+			for i in 0..<20 {
+				self.programs.append(program.reverse()[i])
+			}
 			self.tableView.reloadData()
 			}, failure: nil)
         // Uncomment the following line to preserve selection between presentations
@@ -48,7 +50,7 @@ class RecordingTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-		return programs.count > 0 ? 20 : 0
+		return programs.count
     }
 
 	
@@ -79,25 +81,42 @@ class RecordingTableViewController: UITableViewController {
 		self.performSegueWithIdentifier("showProgramDetail", sender: self)
 	}
 	
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
+	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+		
+		let del = UITableViewRowAction(style: .Default, title: "Delete") {
+			(action, indexPath) in
+			let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete this tv program?", preferredStyle: UIAlertControllerStyle.Alert)
+			confirmAlertView.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {alertAction in
+				let userDefault = NSUserDefaults()
+				let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
+				
+				manager.deleteProgram(self.programs[indexPath.row].id, success: {
+					self.programs.removeAtIndex(indexPath.row)
+					tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+					}, failure: nil)
+			}))
+			confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in }))
+			
+			self.parentViewController?.presentViewController(confirmAlertView, animated: true, completion: nil)
+			
+		}
+		
+		del.backgroundColor = UIColor.redColor()
+		
+		return [del]
+	}
+	
+	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return true
+	}
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		if editingStyle == .Delete {
+			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+		} else if editingStyle == .Insert {
+			// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+		}
+	}
 
     /*
     // Override to support rearranging the table view.
