@@ -24,8 +24,10 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		let userDefault = NSUserDefaults()
 		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
 		
+		let media = VLCMedia(URL: manager.getStreamingUrl(program.id))
+		media.addOptions(["network-caching": 3333])
 		mediaPlayer.drawable = self.mainVideoView
-		mediaPlayer.setMedia(VLCMedia(URL: manager.getStreamingUrl(program.id)))
+		mediaPlayer.setMedia(media)
 		mediaPlayer.setDeinterlaceFilter("blend")
 		mediaPlayer.setDelegate(self)
 		mediaPlayer.play()
