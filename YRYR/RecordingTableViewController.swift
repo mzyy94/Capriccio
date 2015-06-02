@@ -21,18 +21,50 @@ class RecordingTableViewController: UITableViewController {
 		let programCellNib = UINib(nibName: "ProgramInfoTableViewCell", bundle: nil)
 		self.tableView.registerNib(programCellNib, forCellReuseIdentifier: "programCell")
 
-		MRProgressOverlayView.showOverlayAddedTo(self.parentViewController?.view, title: "Loading...", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
-		
+		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
-		manager.getRecording(success: { program in
-			self.programs = program.reverse()
-			MRProgressOverlayView.dismissAllOverlaysForView(self.parentViewController?.view, animated: true)
+		manager.getRecording(success: { programs in
+			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+
+			// Remove unexist program
+			let programCount = self.programs.count
+			for (index, program) in enumerate(self.programs.reverse()) {
+				if programs.filter({$0.id == program.id}).count == 0 {
+					self.programs.removeAtIndex(programCount - 1 - index)
+					self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: programCount - 1 - index, inSection: 0)], withRowAnimation: .Fade)
+					let programStore = PVRProgramStore.by("id", equalTo: program.id).find().firstObject() as! PVRProgramStore
+					programStore.beginWriting().delete().endWriting()
+				}
+			}
+			
+			// Append unexist program
+			for (index, program) in enumerate(programs.reverse()) {
+				if self.programs.filter({$0.id == program.id}).count == 0 {
+					self.programs.insert(program, atIndex: index)
+					self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+					let programStore = PVRProgramStore.create() as! PVRProgramStore
+					programStore.setOriginalObject(program)
+					programStore.save()
+				}
+			}
+			
 			self.tableView.reloadData()
-			}, failure: nil)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+			}, failure: { error in
+				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+		})
+
+		// Uncomment the following line to preserve selection between presentations
+		// self.clearsSelectionOnViewWillAppear = false
 
 		self.navigationItem.rightBarButtonItem = self.editButtonItem()
+		
+		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
+			let program = (storedProgram as! PVRProgramStore).getOriginalObject()
+			programs.append(program)
+		}
+		
+		tableView.reloadData()
+		
     }
 
     override func didReceiveMemoryWarning() {
@@ -79,6 +111,7 @@ class RecordingTableViewController: UITableViewController {
 
 	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
 		selectedIndex = indexPath
+		PVRProgramStore.all().find()
 		self.performSegueWithIdentifier("showProgramDetail", sender: self)
 	}
 	
@@ -92,8 +125,11 @@ class RecordingTableViewController: UITableViewController {
 				let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
 				
 				manager.deleteProgram(self.programs[indexPath.row].id, success: {
+					let programStore = PVRProgramStore.by("id", equalTo: self.programs[indexPath.row].id).find().firstObject() as! PVRProgramStore
+					programStore.beginWriting().delete().endWriting()
 					self.programs.removeAtIndex(indexPath.row)
 					tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+
 					}, failure: nil)
 			}))
 			confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in }))
