@@ -81,9 +81,23 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			},
 			completed: {(image, error, cacheType, finished, imageURL) in
 				imageLoadingIndicatorView.stopAnimating()
+				
 				self.previewImageView.image = image
+				
+				let playButton = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 80, height: 80)))
+				playButton.setImage(UIImage(named: "play"), forState: .Normal)
+				playButton.tintColor = UIColor(white: 0.9, alpha: 0.9)
+				playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
+				
+				playButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+				self.view.addSubview(playButton)
+				
+				playButton.addConstraint(NSLayoutConstraint(item: playButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 80))
+				playButton.addConstraint(NSLayoutConstraint(item: playButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 80))
+				self.view.addConstraint(NSLayoutConstraint(item: playButton, attribute: .CenterX, relatedBy: .Equal, toItem: self.previewImageView, attribute: .CenterX, multiplier: 1.0, constant: 0))
+				self.view.addConstraint(NSLayoutConstraint(item: playButton, attribute: .CenterY, relatedBy: .Equal, toItem: self.previewImageView, attribute: .CenterY, multiplier: 1.0, constant: 0))
+				
 		})
-		
 		
 		self.informationTable.delegate = self
 		self.informationTable.dataSource = self
@@ -94,6 +108,11 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		self.informationTable.reloadData()
 
     }
+	
+	func playVideo(sendar: AnyObject) {
+		println("touched")
+		self.performSegueWithIdentifier("playVideo", sender: self)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -155,14 +174,16 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	
 	
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		// Get the new view controller using segue.destinationViewController.
+		// Pass the selected object to the new view controller.
+		if segue.identifier == "playVideo" {
+			let videoPlayVC = segue.destinationViewController as! VideoPlayViewController
+			videoPlayVC.program = program
+		}
+	}
 
 }

@@ -196,6 +196,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Lgl-S4-OMO" secondAttribute="bottom" id="Etf-IY-wA8"/>
                             <constraint firstItem="Lgl-S4-OMO" firstAttribute="leading" secondItem="fCs-G0-Wwi" secondAttribute="leading" id="FK9-Vz-FGV"/>
@@ -215,6 +216,7 @@
                         <outlet property="previewImageView" destination="fj6-OL-xsa" id="9DO-m9-27b"/>
                         <outlet property="summaryView" destination="e4h-sZ-k4p" id="kkG-p0-Cp7"/>
                         <outlet property="titleLabel" destination="E9k-W5-UXp" id="4SP-X8-DBj"/>
+                        <segue destination="1E2-OJ-4HW" kind="showDetail" identifier="playVideo" id="ikf-66-bQN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyp-LE-hRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -368,8 +370,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="ke3-JA-2Sb"/>
                                                     <exclude reference="7Yv-Nv-TmC"/>
+                                                    <exclude reference="ke3-JA-2Sb"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -418,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4A-TA-2pd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592" y="1905"/>
+            <point key="canvasLocation" x="1939" y="1790"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E82-tR-nCP">
@@ -545,4 +547,7 @@
         <image name="forward" width="30" height="30"/>
         <image name="pause" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ikf-66-bQN"/>
+    </inferredMetricsTieBreakers>
 </document>
