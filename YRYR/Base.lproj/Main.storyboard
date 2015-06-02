@@ -46,6 +46,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recording" id="vjb-cF-F25"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="adk-LG-rQN">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <segue destination="rqj-fx-chh" kind="show" identifier="showProgramDetail" id="PB7-aD-ker"/>
                         <segue destination="1E2-OJ-4HW" kind="showDetail" identifier="playVideo" id="xgo-6w-ruv"/>
@@ -543,9 +546,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backward" width="30" height="30"/>
-        <image name="forward" width="30" height="30"/>
-        <image name="pause" width="30" height="30"/>
+        <image name="backward" width="500" height="500"/>
+        <image name="forward" width="500" height="500"/>
+        <image name="pause" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ikf-66-bQN"/>
