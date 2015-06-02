@@ -18,10 +18,33 @@ class RecordingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		let userDefault = NSUserDefaults()
 		let programCellNib = UINib(nibName: "ProgramInfoTableViewCell", bundle: nil)
 		self.tableView.registerNib(programCellNib, forCellReuseIdentifier: "programCell")
 
+		updateRecordingPrograms()
+
+		// Uncomment the following line to preserve selection between presentations
+		// self.clearsSelectionOnViewWillAppear = false
+
+		self.navigationItem.rightBarButtonItem = self.editButtonItem()
+		
+		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
+			let program = (storedProgram as! PVRProgramStore).getOriginalObject()
+			programsById[program.id] = program
+			programIds.append(program.id)
+		}
+		
+		tableView.reloadData()
+		
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+	
+	func updateRecordingPrograms() {
+		let userDefault = NSUserDefaults()
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
 		manager.getRecording(success: { programs in
@@ -65,26 +88,7 @@ class RecordingTableViewController: UITableViewController {
 			}, failure: { error in
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		})
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-
-		self.navigationItem.rightBarButtonItem = self.editButtonItem()
-		
-		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
-			let program = (storedProgram as! PVRProgramStore).getOriginalObject()
-			programsById[program.id] = program
-			programIds.append(program.id)
-		}
-		
-		tableView.reloadData()
-		
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	}
 
     // MARK: - Table view data source
 
