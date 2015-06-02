@@ -11,7 +11,8 @@ import MRProgress
 
 class RecordingTableViewController: UITableViewController {
 
-	var programs : [PVRProgram] = []
+	var programIds: [String] = []
+	var programsById: [String: PVRProgram] = [:]
 	var selectedIndex: NSIndexPath! = nil
 	
     override func viewDidLoad() {
@@ -26,29 +27,41 @@ class RecordingTableViewController: UITableViewController {
 		manager.getRecording(success: { programs in
 			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 
-			// Remove unexist program
-			let programCount = self.programs.count
-			for (index, program) in enumerate(self.programs.reverse()) {
-				if programs.filter({$0.id == program.id}).count == 0 {
-					self.programs.removeAtIndex(programCount - 1 - index)
-					self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: programCount - 1 - index, inSection: 0)], withRowAnimation: .Fade)
-					let programStore = PVRProgramStore.by("id", equalTo: program.id).find().firstObject() as! PVRProgramStore
-					programStore.beginWriting().delete().endWriting()
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+				var upstreamProgramIds: [String: Bool] = [:]
+				for programs in programs {
+					upstreamProgramIds[programs.id] = true
 				}
-			}
-			
-			// Append unexist program
-			for (index, program) in enumerate(programs.reverse()) {
-				if self.programs.filter({$0.id == program.id}).count == 0 {
-					self.programs.insert(program, atIndex: index)
-					self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
-					let programStore = PVRProgramStore.create() as! PVRProgramStore
-					programStore.setOriginalObject(program)
-					programStore.save()
+				
+				// Remove unexist program
+				let programCount = self.programsById.count
+				for (index, programId) in enumerate(self.programIds.reverse()) {
+					if upstreamProgramIds[programId] == nil {
+						self.programsById.removeValueForKey(self.programIds.removeAtIndex(programCount - 1 - index) as String)
+						dispatch_sync(dispatch_get_main_queue(), {
+							self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: programCount - 1 - index, inSection: 0)], withRowAnimation: .Fade)
+						})
+						let programStore = PVRProgramStore.by("id", equalTo: programId).find().firstObject() as! PVRProgramStore
+						programStore.beginWriting().delete().endWriting()
+					}
 				}
-			}
-			
-			self.tableView.reloadData()
+				
+				// Append unexist program
+				for (index, program) in enumerate(programs.reverse()) {
+					if self.programsById[program.id] == nil {
+						self.programIds.insert(program.id, atIndex: index)
+						self.programsById[program.id] = program
+						dispatch_sync(dispatch_get_main_queue(), {
+							self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+						})
+						let programStore = PVRProgramStore.create() as! PVRProgramStore
+						programStore.setOriginalObject(program)
+						programStore.save()
+					}
+				}
+				
+				self.tableView.reloadData()
+			})
 			}, failure: { error in
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		})
@@ -60,7 +73,8 @@ class RecordingTableViewController: UITableViewController {
 		
 		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
 			let program = (storedProgram as! PVRProgramStore).getOriginalObject()
-			programs.append(program)
+			programsById[program.id] = program
+			programIds.append(program.id)
 		}
 		
 		tableView.reloadData()
@@ -83,14 +97,14 @@ class RecordingTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-		return programs.count
+		return programsById.count
     }
 
 	
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCellWithIdentifier("programCell", forIndexPath: indexPath) as! ProgramInfoTableViewCell
-		let program = programs[indexPath.row]
+		let program = programsById[programIds[indexPath.row]]!
 		let dateFormatter = NSDateFormatter()
 		
 		dateFormatter.dateFormat = "yyyy/MM/dd HH:mm-"
@@ -124,10 +138,11 @@ class RecordingTableViewController: UITableViewController {
 				let userDefault = NSUserDefaults()
 				let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
 				
-				manager.deleteProgram(self.programs[indexPath.row].id, success: {
-					let programStore = PVRProgramStore.by("id", equalTo: self.programs[indexPath.row].id).find().firstObject() as! PVRProgramStore
+				manager.deleteProgram(self.programsById[self.programIds[indexPath.row]]!.id, success: {
+					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.row]]!.id).find().firstObject() as! PVRProgramStore
 					programStore.beginWriting().delete().endWriting()
-					self.programs.removeAtIndex(indexPath.row)
+					self.programsById.removeValueForKey(self.programIds.removeAtIndex(indexPath.row) as String)
+
 					tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
 					}, failure: nil)
@@ -181,10 +196,10 @@ class RecordingTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "showProgramDetail" {
 			let programDetailVC = segue.destinationViewController as! ProgramDetailViewController
-			programDetailVC.program = programs[selectedIndex.row]
+			programDetailVC.program = programsById[programIds[selectedIndex.row]]
 		} else if segue.identifier == "playVideo" {
 			let videoPlayVC = segue.destinationViewController as! VideoPlayViewController
-			videoPlayVC.program = programs[selectedIndex.row]
+			videoPlayVC.program = programsById[programIds[selectedIndex.row]]
 		}
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
