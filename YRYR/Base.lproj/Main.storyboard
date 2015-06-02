@@ -293,23 +293,92 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ZK-Mm-s4P">
-                                            <rect key="frame" x="260" y="8" width="80" height="30"/>
+                                        <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="nL6-4t-nk5">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6g-7s-msw">
+                                                    <rect key="frame" x="290" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="0OQ-Jh-St4"/>
+                                                        <constraint firstAttribute="width" constant="30" id="4S7-6g-aLy"/>
+                                                        <constraint firstAttribute="width" constant="80" id="gzw-9c-5c4"/>
+                                                        <constraint firstAttribute="width" constant="20" id="rrQ-et-LUY"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="pause">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="4S7-6g-aLy"/>
+                                                            <exclude reference="gzw-9c-5c4"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="playPauseButtonTapped:" destination="1E2-OJ-4HW" eventType="touchUpInside" id="7D8-96-147"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYI-e4-KWv">
+                                                    <rect key="frame" x="370" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="I6x-UX-scy"/>
+                                                        <constraint firstAttribute="width" constant="20" id="pL9-bW-V6q"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="forward">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="forwardButtonTapped" destination="1E2-OJ-4HW" eventType="touchUpInside" id="BYU-vN-9ZO"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oem-4C-GH2">
+                                                    <rect key="frame" x="210" y="12" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="4SH-es-dEU"/>
+                                                        <constraint firstAttribute="width" constant="20" id="9MW-EH-wgB"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="backward">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="backwardButtonTapped" destination="1E2-OJ-4HW" eventType="touchUpInside" id="7iO-sz-hFD"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="lfM-JX-KT7" customClass="MPVolumeView">
+                                                    <rect key="frame" x="16" y="14" width="178" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="3Ag-cY-qsn"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="yhz-sG-jYb"/>
+                                                <constraint firstAttribute="bottom" secondItem="lfM-JX-KT7" secondAttribute="bottom" id="7Yv-Nv-TmC"/>
+                                                <constraint firstAttribute="centerY" secondItem="CYI-e4-KWv" secondAttribute="centerY" id="9LL-76-szf"/>
+                                                <constraint firstItem="Oem-4C-GH2" firstAttribute="leading" secondItem="lfM-JX-KT7" secondAttribute="trailing" constant="16" id="GBh-WZ-OjN"/>
+                                                <constraint firstAttribute="centerY" secondItem="lfM-JX-KT7" secondAttribute="centerY" id="JJe-nD-h02"/>
+                                                <constraint firstAttribute="centerY" secondItem="Oem-4C-GH2" secondAttribute="centerY" id="MuH-06-x1C"/>
+                                                <constraint firstAttribute="centerY" secondItem="P6g-7s-msw" secondAttribute="centerY" id="WUa-NK-IhC"/>
+                                                <constraint firstItem="lfM-JX-KT7" firstAttribute="top" secondItem="nL6-4t-nk5" secondAttribute="top" id="ke3-JA-2Sb"/>
+                                                <constraint firstAttribute="centerX" secondItem="P6g-7s-msw" secondAttribute="centerX" id="oiB-K4-wx2"/>
+                                                <constraint firstItem="P6g-7s-msw" firstAttribute="leading" secondItem="Oem-4C-GH2" secondAttribute="trailing" constant="60" id="s7B-7U-PmQ"/>
+                                                <constraint firstItem="lfM-JX-KT7" firstAttribute="leading" secondItem="nL6-4t-nk5" secondAttribute="leading" constant="16" id="skg-i3-OiH"/>
+                                                <constraint firstItem="CYI-e4-KWv" firstAttribute="leading" secondItem="P6g-7s-msw" secondAttribute="trailing" constant="60" id="zqq-cx-C3V"/>
                                             </constraints>
-                                            <state key="normal" title="Pause">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="playPauseButtonTapped:" destination="1E2-OJ-4HW" eventType="touchUpInside" id="eS8-gd-Xov"/>
-                                            </connections>
-                                        </button>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="ke3-JA-2Sb"/>
+                                                    <exclude reference="7Yv-Nv-TmC"/>
+                                                </mask>
+                                            </variation>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="centerX" secondItem="3ZK-Mm-s4P" secondAttribute="centerX" id="2Vq-5V-9bx"/>
-                                        <constraint firstItem="3ZK-Mm-s4P" firstAttribute="top" secondItem="2ew-BB-RUC" secondAttribute="top" constant="8" id="Dav-Rb-1m6"/>
-                                        <constraint firstAttribute="bottom" secondItem="3ZK-Mm-s4P" secondAttribute="bottom" constant="6" id="Yoi-by-AlL"/>
+                                        <constraint firstItem="nL6-4t-nk5" firstAttribute="top" secondItem="2ew-BB-RUC" secondAttribute="top" id="h1O-4e-3Gg"/>
+                                        <constraint firstItem="nL6-4t-nk5" firstAttribute="leading" secondItem="2ew-BB-RUC" secondAttribute="leading" id="mms-Yx-sYZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="nL6-4t-nk5" secondAttribute="trailing" id="paq-jP-JsM"/>
+                                        <constraint firstAttribute="bottom" secondItem="nL6-4t-nk5" secondAttribute="bottom" id="xOy-xr-9ui"/>
                                     </constraints>
                                 </view>
                                 <constraints>
@@ -344,6 +413,7 @@
                         <outlet property="mediaProgressNavigationBar" destination="RJT-cZ-NX2" id="T0F-Fm-puH"/>
                         <outlet property="videoProgressSlider" destination="2hN-G5-bXh" id="BHf-FJ-IVB"/>
                         <outlet property="videoTimeLabel" destination="m3i-Vl-25r" id="2tB-KR-ThI"/>
+                        <outlet property="volumeSliderPlaceView" destination="lfM-JX-KT7" id="L9P-WX-ZT0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4A-TA-2pd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,4 +540,9 @@
             <point key="canvasLocation" x="402" y="999"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backward" width="30" height="30"/>
+        <image name="forward" width="30" height="30"/>
+        <image name="pause" width="30" height="30"/>
+    </resources>
 </document>

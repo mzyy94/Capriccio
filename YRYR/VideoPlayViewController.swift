@@ -15,6 +15,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBOutlet weak var mediaControlView: UIVisualEffectView!
 	@IBOutlet weak var videoProgressSlider: UISlider!
 	@IBOutlet weak var videoTimeLabel: UILabel!
+	@IBOutlet weak var volumeSliderPlaceView: MPVolumeView!
 	
 	let mediaPlayer = VLCMediaPlayer()
 	var program: PVRProgram!
@@ -41,6 +42,14 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		UIGraphicsEndImageContext()
 		
 		videoProgressSlider.setThumbImage(thumbImage, forState: UIControlState.Normal)
+		
+		for subview:AnyObject in volumeSliderPlaceView.subviews {
+			if NSStringFromClass(subview.classForCoder) == "MPVolumeSlider" {
+				let volumeSlider = subview as! UISlider
+				volumeSlider.setThumbImage(thumbImage, forState: UIControlState.Normal)
+				break
+			}
+		}
 		
 		UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
@@ -83,10 +92,34 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBAction func playPauseButtonTapped(sender: UIButton) {
 		if mediaPlayer.isPlaying() {
 			mediaPlayer.pause()
-			sender.setTitle("Play", forState: UIControlState.Normal)
+			sender.setImage(UIImage(named: "play"), forState: .Normal)
 		} else {
 			mediaPlayer.play()
-			sender.setTitle("Pause", forState: UIControlState.Normal)
+			sender.setImage(UIImage(named: "pause"), forState: .Normal)
+		}
+	}
+	
+	@IBAction func backwardButtonTapped() {
+		let second: Float = 30
+		let step: Float = second / Float(program.duration)
+		if mediaPlayer.position() - step > 0 {
+			mediaPlayer.setPosition(mediaPlayer.position() - step)
+			videoProgressSlider.value = mediaPlayer.position()
+			
+			let time = Int(NSTimeInterval(videoProgressSlider.value) * program.duration)
+			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
+		}
+	}
+	
+	@IBAction func forwardButtonTapped() {
+		let second: Float = 30
+		let step: Float = second / Float(program.duration)
+		if mediaPlayer.position() + step < 1 {
+			mediaPlayer.setPosition(mediaPlayer.position() + step)
+			videoProgressSlider.value = mediaPlayer.position()
+			
+			let time = Int(NSTimeInterval(videoProgressSlider.value) * program.duration)
+			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
 		}
 	}
 	
