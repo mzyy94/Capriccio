@@ -75,8 +75,6 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBAction func doneButtonTapped(sender: UIBarButtonItem) {
 		mediaPlayer.setDelegate(nil)
 		mediaPlayer.stop()
-		UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
-		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 
 		self.dismissViewControllerAnimated(true, completion: nil)
 	}
