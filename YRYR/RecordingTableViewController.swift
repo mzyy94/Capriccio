@@ -110,6 +110,11 @@ class RecordingTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		return true
 	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		selectedIndex = indexPath
+		self.performSegueWithIdentifier("playVideo", sender: self)
+	}
 
 	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 		if editingStyle == .Delete {
@@ -141,6 +146,9 @@ class RecordingTableViewController: UITableViewController {
 		if segue.identifier == "showProgramDetail" {
 			let programDetailVC = segue.destinationViewController as! ProgramDetailViewController
 			programDetailVC.program = programs[selectedIndex.row]
+		} else if segue.identifier == "playVideo" {
+			let videoPlayVC = segue.destinationViewController as! VideoPlayViewController
+			videoPlayVC.program = programs[selectedIndex.row]
 		}
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
