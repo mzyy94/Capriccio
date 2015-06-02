@@ -250,6 +250,35 @@
                                                 <action selector="doneButtonTapped:" destination="1E2-OJ-4HW" id="Nft-L5-qIL"/>
                                             </connections>
                                         </barButtonItem>
+                                        <view key="titleView" contentMode="scaleToFill" id="dy6-DZ-vbP" customClass="UIVisualEffectView">
+                                            <rect key="frame" x="64" y="25" width="520" height="55"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2hN-G5-bXh">
+                                                    <rect key="frame" x="6" y="13" width="456" height="31"/>
+                                                    <connections>
+                                                        <action selector="videoProgressSliderChanged:" destination="1E2-OJ-4HW" eventType="valueChanged" id="JEB-gY-B8c"/>
+                                                        <action selector="videoProgressSliderTouchedUp:" destination="1E2-OJ-4HW" eventType="touchUpInside" id="oSn-oC-ge6"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3i-Vl-25r">
+                                                    <rect key="frame" x="468" y="17" width="44" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="8pC-GI-MZP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="m3i-Vl-25r" secondAttribute="trailing" constant="8" id="4Cr-Q7-kVp"/>
+                                                <constraint firstItem="2hN-G5-bXh" firstAttribute="leading" secondItem="dy6-DZ-vbP" secondAttribute="leading" constant="8" id="5ae-eu-chk"/>
+                                                <constraint firstAttribute="centerY" secondItem="m3i-Vl-25r" secondAttribute="centerY" id="Y1e-5L-2kh"/>
+                                                <constraint firstItem="m3i-Vl-25r" firstAttribute="leading" secondItem="2hN-G5-bXh" secondAttribute="trailing" constant="8" id="i6d-66-hVr"/>
+                                                <constraint firstAttribute="centerY" secondItem="2hN-G5-bXh" secondAttribute="centerY" id="wzm-ll-6Q2"/>
+                                            </constraints>
+                                        </view>
                                     </navigationItem>
                                 </items>
                                 <variation key="default">
@@ -313,6 +342,8 @@
                         <outlet property="mainVideoView" destination="VCA-kS-urr" id="GKD-gN-c0q"/>
                         <outlet property="mediaControlView" destination="AFw-62-qkZ" id="wes-tw-xBU"/>
                         <outlet property="mediaProgressNavigationBar" destination="RJT-cZ-NX2" id="T0F-Fm-puH"/>
+                        <outlet property="videoProgressSlider" destination="2hN-G5-bXh" id="BHf-FJ-IVB"/>
+                        <outlet property="videoTimeLabel" destination="m3i-Vl-25r" id="2tB-KR-ThI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4A-TA-2pd" userLabel="First Responder" sceneMemberID="firstResponder"/>

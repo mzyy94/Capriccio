@@ -9,10 +9,12 @@
 import UIKit
 import MediaPlayer
 
-class VideoPlayViewController: UIViewController {
+class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBOutlet var mainVideoView: UIView!
 	@IBOutlet weak var mediaProgressNavigationBar: UINavigationBar!
 	@IBOutlet weak var mediaControlView: UIVisualEffectView!
+	@IBOutlet weak var videoProgressSlider: UISlider!
+	@IBOutlet weak var videoTimeLabel: UILabel!
 	
 	let mediaPlayer = VLCMediaPlayer()
 	var program: PVRProgram!
@@ -24,7 +26,21 @@ class VideoPlayViewController: UIViewController {
 		mediaPlayer.drawable = self.mainVideoView
 		mediaPlayer.setMedia(VLCMedia(URL: manager.getStreamingUrl(program.id)))
 		mediaPlayer.setDeinterlaceFilter("blend")
+		mediaPlayer.setDelegate(self)
 		mediaPlayer.play()
+		
+		// Generate slider thumb image
+		let thumbRadius: CGFloat = 6
+		
+		let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: thumbRadius * 2,
+			height: thumbRadius * 2), cornerRadius: thumbRadius)
+		UIGraphicsBeginImageContextWithOptions(path.bounds.size, false, 0)
+		UIColor.whiteColor().setFill()
+		path.fill()
+		let thumbImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		videoProgressSlider.setThumbImage(thumbImage, forState: UIControlState.Normal)
 		
 		UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
@@ -39,12 +55,25 @@ class VideoPlayViewController: UIViewController {
 	override func viewDidDisappear(animated: Bool) {
 		super.viewDidDisappear(animated)
 		
+		mediaPlayer.setDelegate(nil)
+
 		UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 		mediaPlayer.stop()
 	}
+	
+	func mediaPlayerTimeChanged(aNotification: NSNotification!) {
+		// Only when slider is not under control
+		if !videoProgressSlider.touchInside {
+			let mediaPlayer = aNotification.object as! VLCMediaPlayer
+			let time = Int(NSTimeInterval(mediaPlayer.position()) * program.duration)
+			videoProgressSlider.value = mediaPlayer.position()
+			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
+		}
+	}
 
 	@IBAction func doneButtonTapped(sender: UIBarButtonItem) {
+		mediaPlayer.setDelegate(nil)
 		mediaPlayer.stop()
 		UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
@@ -61,6 +90,15 @@ class VideoPlayViewController: UIViewController {
 			mediaPlayer.play()
 			sender.setTitle("Pause", forState: UIControlState.Normal)
 		}
+	}
+	
+	@IBAction func videoProgressSliderChanged(sender: UISlider) {
+		let time = Int(NSTimeInterval(sender.value) * program.duration)
+		videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
+	}
+	
+	@IBAction func videoProgressSliderTouchedUp(sender: UISlider) {
+		mediaPlayer.setPosition(sender.value)
 	}
 	
 	override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
