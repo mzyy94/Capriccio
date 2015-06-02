@@ -8,6 +8,7 @@ target 'YRYR' do
 	pod 'SDWebImage', '~> 3.7.2'
 	pod 'MRProgress', '~> 0.8.2'
 	pod 'MobileVLCKit', '~> 2.2.1'
+	pod 'SugarRecord/CoreData', :git => 'https://github.com/SugarRecord/SugarRecord.git', :commit => '3a9bdf27da'
 end
 
 target 'YRYRTests' do
