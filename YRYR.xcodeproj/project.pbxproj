@@ -60,6 +60,7 @@
 		9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChinachuPVRManager.swift; sourceTree = "<group>"; };
 		9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		9EA4EEE81B1CEA77008D4059 /* Empty.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Empty.mm; sourceTree = "<group>"; };
+		9EA4EF241B1CF0A2008D4059 /* YRYR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YRYR-Bridging-Header.h"; sourceTree = "<group>"; };
 		9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailViewController.swift; sourceTree = "<group>"; };
 		9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramInfoTableViewCell.swift; path = View/ProgramInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProgramInfoTableViewCell.xib; path = View/ProgramInfoTableViewCell.xib; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 				9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */,
 				9E8C3BE51B18A32300C57833 /* YRYR.xcdatamodeld */,
 				9EA4EEE81B1CEA77008D4059 /* Empty.mm */,
+				9EA4EF241B1CF0A2008D4059 /* YRYR-Bridging-Header.h */,
 				9E8C3BE11B18A32300C57833 /* Supporting Files */,
 			);
 			path = YRYR;
@@ -494,6 +496,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -531,6 +534,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -544,6 +548,7 @@
 				INFOPLIST_FILE = YRYR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YRYR/YRYR-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -557,6 +562,7 @@
 				INFOPLIST_FILE = YRYR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "YRYR/YRYR-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -576,6 +582,7 @@
 				INFOPLIST_FILE = YRYRTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YRYR.app/YRYR";
 			};
 			name = Debug;
@@ -592,6 +599,7 @@
 				INFOPLIST_FILE = YRYRTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YRYR.app/YRYR";
 			};
 			name = Release;
