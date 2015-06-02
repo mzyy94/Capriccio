@@ -110,7 +110,6 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
 	
 	func playVideo(sendar: AnyObject) {
-		println("touched")
 		self.performSegueWithIdentifier("playVideo", sender: self)
 	}
 
