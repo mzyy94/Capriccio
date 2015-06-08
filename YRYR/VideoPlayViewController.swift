@@ -20,6 +20,9 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	let mediaPlayer = VLCMediaPlayer()
 	var program: PVRProgram!
 	
+	var externalWindow: UIWindow! = nil
+	var savedViewConstraints: [AnyObject] = []
+	
 	override func viewDidLoad() {
 		let userDefault = NSUserDefaults()
 		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
@@ -57,11 +60,29 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 	}
 	
+	override func shouldAutorotate() -> Bool {
+		return externalWindow == nil
+	}
+	
+	override func supportedInterfaceOrientations() -> Int {
+		return Int(UIInterfaceOrientationMask.All.rawValue)
+	}
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
 	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		// Save current constraints
+		savedViewConstraints = self.view.constraints()
+		
+		// Set externel display event
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("screenDidConnect:"), name: UIScreenDidConnectNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("screenDidDisconnect:"), name: UIScreenDidDisconnectNotification, object: nil)
+	}
 	
 	override func viewDidDisappear(animated: Bool) {
 		super.viewDidDisappear(animated)
@@ -71,8 +92,12 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 		mediaPlayer.stop()
+		
+		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIScreenDidConnectNotification, object: nil)
+		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIScreenDidDisconnectNotification, object: nil)
 	}
 	
+	var onceToken : dispatch_once_t = 0
 	func mediaPlayerTimeChanged(aNotification: NSNotification!) {
 		// Only when slider is not under control
 		if !videoProgressSlider.touchInside {
@@ -80,6 +105,12 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 			let time = Int(NSTimeInterval(mediaPlayer.position()) * program.duration)
 			videoProgressSlider.value = mediaPlayer.position()
 			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
+		}
+		
+		// First time of video playback
+		dispatch_once(&onceToken) {
+			let notification = NSNotification(name: UIScreenDidConnectNotification, object: nil)
+			self.screenDidConnect(notification)
 		}
 	}
 
@@ -165,6 +196,63 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 					})
 				}
 			}
+		}
+	}
+	
+	func screenDidConnect(aNotification: NSNotification) {
+		let screens = UIScreen.screens()
+		if screens.count > 1 {
+			let externalScreen = screens[1] as! UIScreen
+			let availableModes = externalScreen.availableModes
+			
+			// Set up external screen
+			externalScreen.currentMode = availableModes.last as? UIScreenMode
+			externalScreen.overscanCompensation = .InsetApplicationFrame
+			
+			// Change device orientation to portrait
+			let portraitOrientation = UIInterfaceOrientation.Portrait.rawValue
+			UIDevice.currentDevice().setValue(portraitOrientation, forKey: "orientation")
+
+			if self.externalWindow == nil {
+				self.externalWindow = UIWindow(frame: externalScreen.bounds)
+			}
+			
+			// Set up external window
+			self.externalWindow.screen = externalScreen
+			self.externalWindow.hidden = false
+			self.externalWindow.layer.contentsGravity = kCAGravityResizeAspect
+			
+			// Move mainVideoView to external window
+			mainVideoView.removeFromSuperview()
+			let externalViewController = UIViewController()
+			externalViewController.view = mainVideoView
+			self.externalWindow.rootViewController = externalViewController
+			
+			// Show media controls
+			self.mediaControlView.hidden = false
+			self.mediaProgressNavigationBar.hidden = false
+			UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
+			
+			UIView.animateWithDuration(0.4, animations: {
+				self.mediaControlView.alpha = 1.0
+				self.mediaProgressNavigationBar.alpha = 1.0
+			})
+
+		}
+	}
+	
+	func screenDidDisconnect(aNotification: NSNotification) {
+		if self.externalWindow != nil {
+			// Restore mainVideoView
+			mainVideoView.removeFromSuperview()
+			self.view.addSubview(mainVideoView)
+			self.view.sendSubviewToBack(mainVideoView)
+
+			// Restore view constraints
+			self.view.removeConstraints(self.view.constraints())
+			self.view.addConstraints(savedViewConstraints)
+
+			self.externalWindow = nil
 		}
 	}
 
