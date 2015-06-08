@@ -30,7 +30,8 @@ class YRYRTests: XCTestCase {
 		let reservingExpectation = self.expectationWithDescription("Reserving test")
 		let recordingExpectation = self.expectationWithDescription("Recording test")
 		
-		let manager = ChinachuPVRManager(remoteHost: NSURL(string: "http://chinachu:10772")!)
+		let manager = ChinachuPVRManager()
+		manager.remoteHost = NSURL(string: "http://chinachu:10772")!
 		
 		manager.getReserving(
 			success: {program in

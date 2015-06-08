@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		SugarRecord.addStack(stack)
 		
 		SugarRecordLogger.currentLevel = .logLevelError
+		
+		let userDefault = NSUserDefaults()
+		ChinachuPVRManager.sharedInstance.remoteHost = NSURL(string: userDefault.stringForKey("pvrUrl")!)!
+
 		return true
 	}
 

@@ -46,9 +46,8 @@ class RecordingTableViewController: UITableViewController {
 	func updateRecordingPrograms() {
 		MRProgressOverlayView.showOverlayAddedTo(self.parentViewController?.view, title: "Loading...", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
 		
-		let userDefault = NSUserDefaults()
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
+		let manager = ChinachuPVRManager.sharedInstance
 		manager.getRecording(success: { programs in
 			self.refreshControl!.endRefreshing()
 			MRProgressOverlayView.dismissAllOverlaysForView(self.parentViewController?.view, animated: true)
@@ -152,8 +151,7 @@ class RecordingTableViewController: UITableViewController {
 			(action, indexPath) in
 			let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete this tv program?", preferredStyle: UIAlertControllerStyle.Alert)
 			confirmAlertView.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {alertAction in
-				let userDefault = NSUserDefaults()
-				let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
+				let manager = ChinachuPVRManager.sharedInstance
 				
 				manager.deleteProgram(self.programsById[self.programIds[indexPath.row]]!.id, success: {
 					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.row]]!.id).find().firstObject() as! PVRProgramStore

@@ -18,8 +18,10 @@ enum ChinachuPVRDeleteMode {
 
 class ChinachuPVRManager: PVRManager {
 	
-	override init(remoteHost: NSURL) {
-		super.init(remoteHost: remoteHost)
+	static let sharedInstance = ChinachuPVRManager()
+
+	override init() {
+		super.init()
 	}
 	
 	override func getReserving(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {

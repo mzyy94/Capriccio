@@ -10,11 +10,12 @@ import UIKit
 
 class PVRManager: NSObject {
 	
-	let remoteHost: NSURL
+	var remoteHost: NSURL!
 	
-	init(remoteHost: NSURL) {
-		self.remoteHost = remoteHost
+	override init() {
+		super.init()
 	}
+	
 	
 	func getReserving(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		fatalError("must be overridden")

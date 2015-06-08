@@ -32,9 +32,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		
-		let userDefault = NSUserDefaults()
-		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
+		let manager = ChinachuPVRManager.sharedInstance
 		
 		self.title = program.title
 		let titleText = NSMutableAttributedString(string: program.fullTitle,attributes: [NSFontAttributeName: UIFont.systemFontOfSize(19.0, weight: 6.0)])

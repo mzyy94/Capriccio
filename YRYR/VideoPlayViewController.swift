@@ -24,8 +24,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	var savedViewConstraints: [AnyObject] = []
 	
 	override func viewDidLoad() {
-		let userDefault = NSUserDefaults()
-		let manager = ChinachuPVRManager(remoteHost: NSURL(string: userDefault.stringForKey("pvrUrl")!)!)
+		let manager = ChinachuPVRManager.sharedInstance
 		
 		let media = VLCMedia(URL: manager.getStreamingUrl(program.id))
 		media.addOptions(["network-caching": 3333])
