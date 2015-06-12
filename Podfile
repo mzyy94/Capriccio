@@ -10,6 +10,7 @@ target 'YRYR' do
 	pod 'MobileVLCKit', '~> 2.2.1'
 	pod 'SugarRecord/CoreData', :git => 'https://github.com/SugarRecord/SugarRecord.git', :commit => '3a9bdf27da'
 	pod 'FFCircularProgressView', '~> 0.3'
+	pod 'GSIndeterminateProgressBar', '~> 0.1.0'
 end
 
 target 'YRYRTests' do
