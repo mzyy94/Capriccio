@@ -26,7 +26,7 @@ class PVRProgram: NSObject {
 	let endTime: NSDate
 	let duration: NSTimeInterval
 	
-	let userData: AnyObject?
+	var userData: AnyObject?
 	
 	init(id: String, title: String, fullTitle: String, subTitle: String, detail: String,
 		attributes: [String], genre: String, channel: PVRChannel, episode: Int?,
