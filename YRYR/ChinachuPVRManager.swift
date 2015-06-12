@@ -72,10 +72,89 @@ class ChinachuPVRManager: PVRManager {
 		return NSURL(string: remoteHost.absoluteString! + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/preview.jpg?pos=\(time)")!
 	}
 		
-	func getStreamingUrl(programId: String, isRecording: Bool = false) -> NSURL {
-		return NSURL(string: remoteHost.absoluteString! + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+	func getMediaUrl(programId: String, isRecording: Bool = false) -> NSURL {
+		if NSFileManager.defaultManager().fileExistsAtPath(getDownloadedFileUrl(programId).relativePath!) {
+			return getDownloadedFileUrl(programId)
+		} else {
+			return NSURL(string: remoteHost.absoluteString! + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+		}
 	}
 
+	func getDownloadedFileUrl(programId: String) -> NSURL {
+		var err: NSError? = nil
+		
+		let documentURL = NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: &err)
+		let programDir = documentURL!.URLByAppendingPathComponent(programId)
+		let downloadPath = programDir.URLByAppendingPathComponent("file.m2ts")
+		
+		return downloadPath
+	}
+	
+	func startDownloadVideo(programId: String, inProgress progress: (Float) -> Void, onComplete complete: (Void) -> Void) -> Request {
+		var err: NSError? = nil
+		
+		let documentURL = NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: &err)
+		let programDir = documentURL!.URLByAppendingPathComponent(programId)
+		if !NSFileManager.defaultManager().fileExistsAtPath(programDir.absoluteString!) {
+			NSFileManager.defaultManager().createDirectoryAtURL(programDir, withIntermediateDirectories: false, attributes: nil, error: &err)
+		}
+		
+		let downloadPath = programDir.URLByAppendingPathComponent("file.m2ts")
+		
+		let downloadRequest = Alamofire.download(.GET, remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.m2ts", { (temporaryURL, response) in
+			return downloadPath
+			})
+			.progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
+				progress(Float(totalBytesRead) / Float(totalBytesExpectedToRead))
+			}
+			.response { (request, response, _, error) in
+				if error == nil {
+					complete()
+				}
+		}
+		
+		return downloadRequest
+	}
+	
+	func cancelDownloadVideo(request: AnyObject?) {
+		if request == nil {
+			return
+		}
+		
+		let downloadRequest = request as! Request
+		downloadRequest.cancel()
+	}
+	
+	func setDownloadVideoHandler(request: AnyObject?, inProgress progress:(Float) -> Void, onComplete complete:(Void) -> Void) {
+		if request == nil {
+			return
+		}
+		
+		let downloadRequest = request as! Request
+		downloadRequest.progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
+			progress(Float(totalBytesRead) / Float(totalBytesExpectedToRead))
+			}
+			.response { (request, response, _, error) in
+				if error == nil {
+					complete()
+				}
+		}
+	}
+	
+	func fileDownloaded(programId: String) -> Bool {
+		return NSFileManager.defaultManager().fileExistsAtPath(getDownloadedFileUrl(programId).relativePath!)
+	}
+	
+	func removeDownloadedFile(programId: String, onComplete complete:(Void) -> Void) {
+		var error: NSError?
+		
+		NSFileManager.defaultManager().removeItemAtURL(getDownloadedFileUrl(programId), error: &error)
+		
+		if error == nil {
+			complete()
+		}
+		
+	}
 	
 	override func getRecording(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded.json")

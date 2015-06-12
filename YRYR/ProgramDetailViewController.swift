@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import MRProgress
+import FFCircularProgressView
 
 class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -104,8 +105,98 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		self.informationTable.addConstraint(NSLayoutConstraint(item: informationTable, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 44 * 5))
 
 		self.informationTable.reloadData()
+		
+		if manager.fileDownloaded(self.program.id) {
+			let deleteFileButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: Selector("confirmToDeleteFile:"))
+			self.navigationItem.rightBarButtonItem = deleteFileButton
 
+		} else {
+			let circularProgressView = FFCircularProgressView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+			let downloadButton = UIBarButtonItem(customView: circularProgressView)
+			self.navigationItem.rightBarButtonItem = downloadButton
+			if let request: AnyObject = self.program.userData {
+				manager.setDownloadVideoHandler(request, inProgress: { progress in
+					dispatch_async(dispatch_get_main_queue(), {
+						circularProgressView.progress = CGFloat(progress)
+					})
+					}, onComplete: {
+						let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+						circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
+					}
+				)
+				
+				let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillCancel:"))
+				circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
+			} else {
+				let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillStart:"))
+				circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
+			}
+		}
+		
     }
+	
+	func downloadWillStart(sendor: AnyObject) {
+		let circularProgressView = self.navigationItem.rightBarButtonItem?.customView as! FFCircularProgressView
+		circularProgressView.startSpinProgressBackgroundLayer()
+		
+		let downloadRequest = ChinachuPVRManager.sharedInstance.startDownloadVideo(program.id, inProgress: { (progress) in
+			dispatch_async(dispatch_get_main_queue(), {
+				circularProgressView.stopSpinProgressBackgroundLayer()
+				circularProgressView.progress = CGFloat(progress)
+			})
+			
+			}, onComplete: {
+				let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+				circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
+		})
+		
+		self.program.userData = downloadRequest as AnyObject
+		
+		let navigationViewControllers = self.navigationController!.viewControllers as! [UIViewController]
+		let recordingTableViewController = navigationViewControllers[0] as! RecordingTableViewController
+		recordingTableViewController.programsById[self.program.id] = self.program
+		
+		let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+		circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
+		let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillCancel:"))
+		circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
+	}
+	
+	func downloadWillCancel(sendar: AnyObject) {
+		let circularProgressView = self.navigationItem.rightBarButtonItem?.customView as! FFCircularProgressView
+		ChinachuPVRManager.sharedInstance.cancelDownloadVideo(self.program.userData)
+		
+		self.program.userData = nil
+		
+		let navigationViewControllers = self.navigationController!.viewControllers as! [UIViewController]
+		let recordingTableViewController = navigationViewControllers[0] as! RecordingTableViewController
+		recordingTableViewController.programsById[self.program.id] = self.program
+
+		let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+		circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
+		let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillStart:"))
+		circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
+		circularProgressView.progress = 0
+	}
+	
+	func confirmToDeleteFile(sendar: AnyObject) {
+		let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete downloaded file?", preferredStyle: UIAlertControllerStyle.Alert)
+		confirmAlertView.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {alertAction in
+			let manager = ChinachuPVRManager.sharedInstance
+			
+			manager.removeDownloadedFile(self.program.id, onComplete: {
+				let circularProgressView = FFCircularProgressView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+				let downloadButton = UIBarButtonItem(customView: circularProgressView)
+				self.navigationItem.rightBarButtonItem = downloadButton
+				let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillStart:"))
+				circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
+			})
+		}))
+		confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in }))
+		
+		self.parentViewController?.presentViewController(confirmAlertView, animated: true, completion: nil)
+
+	}
 	
 	func playVideo(sendar: AnyObject) {
 		self.performSegueWithIdentifier("playVideo", sender: self)
@@ -182,5 +273,6 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			videoPlayVC.program = program
 		}
 	}
+	
 
 }

@@ -26,7 +26,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	override func viewDidLoad() {
 		let manager = ChinachuPVRManager.sharedInstance
 		
-		let media = VLCMedia(URL: manager.getStreamingUrl(program.id))
+		let media = VLCMedia(URL: manager.getMediaUrl(program.id))
 		media.addOptions(["network-caching": 3333])
 		mediaPlayer.drawable = self.mainVideoView
 		mediaPlayer.setMedia(media)
