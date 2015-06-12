@@ -44,13 +44,10 @@ class RecordingTableViewController: UITableViewController {
     }
 	
 	func updateRecordingPrograms() {
-		MRProgressOverlayView.showOverlayAddedTo(self.parentViewController?.view, title: "Loading...", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
-		
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		let manager = ChinachuPVRManager.sharedInstance
 		manager.getRecording(success: { programs in
 			self.refreshControl!.endRefreshing()
-			MRProgressOverlayView.dismissAllOverlaysForView(self.parentViewController?.view, animated: true)
 			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -90,18 +87,10 @@ class RecordingTableViewController: UITableViewController {
 			})
 			}, failure: { error in
 				self.refreshControl!.endRefreshing()
-				MRProgressOverlayView.dismissAllOverlaysForView(self.parentViewController?.view, animated: true)
-				MRProgressOverlayView.showOverlayAddedTo(self.parentViewController?.view, title: "Failed", mode: .Cross, animated: true)
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-				let waitTimer = NSTimer(timeInterval: 2.0, target: self, selector: Selector("dismissAllOverlays"), userInfo: nil, repeats: false)
-				NSRunLoop.mainRunLoop().addTimer(waitTimer, forMode: NSDefaultRunLoopMode)
 		})
 	}
 	
-	func dismissAllOverlays() {
-		MRProgressOverlayView.dismissAllOverlaysForView(self.parentViewController?.view, animated: true)
-	}
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

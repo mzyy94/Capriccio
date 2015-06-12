@@ -162,29 +162,34 @@ class ChinachuPVRManager: PVRManager {
 				if error != nil {
 					failure(error!)
 				} else {
-					let json = JSON(data!)
-					var programs: [PVRProgram] = []
-					for prog in json.arrayValue {
-						let ch = prog["channel"]
-						let channel = PVRChannel(id: ch["id"].stringValue, channel: ch["channel"].intValue,
-							name: ch["name"].stringValue, number: ch["n"].intValue, sid: ch["sid"].intValue,
-							type: ch["type"].stringValue, userData: nil)
-						
-						var attrs: [String] = []
-						for attr in prog["flags"].arrayValue {
-							attrs.append(attr.stringValue)
+					dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+						let json = JSON(data!)
+						var programs: [PVRProgram] = []
+						for prog in json.arrayValue {
+							let ch = prog["channel"]
+							let channel = PVRChannel(id: ch["id"].stringValue, channel: ch["channel"].intValue,
+								name: ch["name"].stringValue, number: ch["n"].intValue, sid: ch["sid"].intValue,
+								type: ch["type"].stringValue, userData: nil)
+							
+							var attrs: [String] = []
+							for attr in prog["flags"].arrayValue {
+								attrs.append(attr.stringValue)
+							}
+							let program = PVRProgram(id: prog["id"].stringValue, title: prog["title"].stringValue,
+								fullTitle: prog["fullTitle"].stringValue, subTitle: prog["subTitle"].stringValue,
+								detail: prog["detail"].stringValue, attributes: attrs, genre: prog["category"].stringValue,
+								channel: channel, episode: prog["episode"].intValue,
+								startTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["start"].intValue / 1000)),
+								endTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["end"].intValue / 1000)),
+								duration: NSTimeInterval(prog["seconds"].intValue), userData: nil)
+							
+							programs.append(program)
 						}
-						let program = PVRProgram(id: prog["id"].stringValue, title: prog["title"].stringValue,
-							fullTitle: prog["fullTitle"].stringValue, subTitle: prog["subTitle"].stringValue,
-							detail: prog["detail"].stringValue, attributes: attrs, genre: prog["category"].stringValue,
-							channel: channel, episode: prog["episode"].intValue,
-							startTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["start"].intValue / 1000)),
-							endTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["end"].intValue / 1000)),
-							duration: NSTimeInterval(prog["seconds"].intValue), userData: nil)
 						
-						programs.append(program)
-					}
-					success(programs)
+						dispatch_sync(dispatch_get_main_queue(), {
+							success(programs)
+						})
+					})
 				}
 		}
 	}
