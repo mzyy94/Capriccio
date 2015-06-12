@@ -45,6 +45,8 @@ class RecordingTableViewController: UITableViewController {
 		self.progressView.backgroundColor = UIColor.clearColor()
 		self.progressView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin
 		navigationBar.addSubview(self.progressView)
+		
+		updateRecordingPrograms()
     }
 
     override func didReceiveMemoryWarning() {
