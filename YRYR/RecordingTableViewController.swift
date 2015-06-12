@@ -8,12 +8,14 @@
 
 import UIKit
 import MRProgress
+import GSIndeterminateProgressBar
 
 class RecordingTableViewController: UITableViewController {
 
 	var programIds: [String] = []
 	var programsById: [String: PVRProgram] = [:]
 	var selectedIndex: NSIndexPath! = nil
+	var progressView: GSIndeterminateProgressView! = nil
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,13 @@ class RecordingTableViewController: UITableViewController {
 		
 		tableView.reloadData()
 		
+		let navigationBar = self.navigationController!.navigationBar
+		
+		self.progressView = GSIndeterminateProgressView(frame: CGRect(x: 0, y: navigationBar.frame.size.height, width: navigationBar.frame.size.width, height: 2))
+		self.progressView.progressTintColor = navigationBar.superview!.tintColor
+		self.progressView.backgroundColor = UIColor.clearColor()
+		self.progressView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin
+		navigationBar.addSubview(self.progressView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,10 +54,12 @@ class RecordingTableViewController: UITableViewController {
 	
 	func updateRecordingPrograms() {
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+		self.progressView.startAnimating()
 		let manager = ChinachuPVRManager.sharedInstance
 		manager.getRecording(success: { programs in
 			self.refreshControl!.endRefreshing()
 			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+			self.progressView.stopAnimating()
 
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 				var upstreamProgramIds: [String: Bool] = [:]
