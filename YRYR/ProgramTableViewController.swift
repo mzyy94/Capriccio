@@ -1,5 +1,5 @@
 //
-//  RecordingTableViewController.swift
+//  ProgramTableViewController.swift
 //  YRYR
 //
 //  Created by Yuki MIZUNO on 5/30/15.
@@ -10,7 +10,7 @@ import UIKit
 import MRProgress
 import GSIndeterminateProgressBar
 
-class RecordingTableViewController: UITableViewController {
+class ProgramTableViewController: UITableViewController {
 
 	var programIds: [String] = []
 	var programsById: [String: PVRProgram] = [:]

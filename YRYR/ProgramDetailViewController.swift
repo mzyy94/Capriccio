@@ -153,7 +153,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		self.program.userData = downloadRequest as AnyObject
 		
 		let navigationViewControllers = self.navigationController!.viewControllers as! [UIViewController]
-		let recordingTableViewController = navigationViewControllers[0] as! RecordingTableViewController
+		let recordingTableViewController = navigationViewControllers[0] as! ProgramTableViewController
 		recordingTableViewController.programsById[self.program.id] = self.program
 		
 		let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
@@ -169,7 +169,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		self.program.userData = nil
 		
 		let navigationViewControllers = self.navigationController!.viewControllers as! [UIViewController]
-		let recordingTableViewController = navigationViewControllers[0] as! RecordingTableViewController
+		let recordingTableViewController = navigationViewControllers[0] as! ProgramTableViewController
 		recordingTableViewController.programsById[self.program.id] = self.program
 
 		let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]

@@ -27,7 +27,7 @@
         <!--Recording-->
         <scene sceneID="Hpr-lJ-Fdi">
             <objects>
-                <tableViewController title="Recording" id="KuS-5f-sDs" customClass="RecordingTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Recording" id="KuS-5f-sDs" customClass="ProgramTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="LMJ-wJ-X2I">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
