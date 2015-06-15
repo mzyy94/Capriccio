@@ -471,7 +471,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WFO-tC-bWQ" id="zOz-Js-hN8">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://192.168.123.45:6789" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kT3-Qz-8gZ">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="http://192.168.123.45" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kT3-Qz-8gZ">
                                                     <rect key="frame" x="16" y="0.0" width="584" height="43"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -486,6 +486,26 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="StP-oh-D8M">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="StP-oh-D8M" id="1uo-7W-NZv">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10772" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9u-qx-9LP">
+                                                    <rect key="frame" x="16" y="0.0" width="584" height="43"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="d9u-qx-9LP" firstAttribute="top" secondItem="1uo-7W-NZv" secondAttribute="top" id="607-Hj-50Z"/>
+                                                <constraint firstItem="d9u-qx-9LP" firstAttribute="leading" secondItem="1uo-7W-NZv" secondAttribute="leading" constant="16" id="BcF-5K-rwc"/>
+                                                <constraint firstAttribute="trailing" secondItem="d9u-qx-9LP" secondAttribute="trailing" id="OpO-uM-ayU"/>
+                                                <constraint firstAttribute="bottom" secondItem="d9u-qx-9LP" secondAttribute="bottom" id="ozE-zs-u5S"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="FQQ-fL-ee8">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQQ-fL-ee8" id="8vW-Px-YI6">
@@ -495,7 +515,7 @@
                                                     <rect key="frame" x="16" y="0.0" width="584" height="43"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                                    <textInputTraits key="textInputTraits" spellCheckingType="no"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -515,7 +535,7 @@
                                                     <rect key="frame" x="16" y="0.0" width="584" height="43"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="URL" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" spellCheckingType="no" secureTextEntry="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -537,6 +557,7 @@
                     <connections>
                         <outlet property="pvrAddressTextField" destination="kT3-Qz-8gZ" id="zbn-uW-1GC"/>
                         <outlet property="pvrPasswordTextField" destination="K0f-bp-wuP" id="FGj-ig-BGa"/>
+                        <outlet property="pvrPortTextField" destination="d9u-qx-9LP" id="tV9-2Z-Z9D"/>
                         <outlet property="pvrUserTextField" destination="Odd-Q5-GYn" id="1WK-VJ-CTX"/>
                     </connections>
                 </tableViewController>

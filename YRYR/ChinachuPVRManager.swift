@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import KeychainAccess
 
 enum ChinachuPVRDeleteMode {
 	case File
@@ -24,8 +25,27 @@ class ChinachuPVRManager: PVRManager {
 		super.init()
 	}
 	
+	private func getAccount() -> (String, String) {
+		let userDefaults = NSUserDefaults()
+
+		let username = userDefaults.stringForKey("pvrUser")!
+		let password: String
+		if let storedPassword = Keychain(server: remoteHost.absoluteString!,
+			protocolType: remoteHost.scheme! == "https" ? .HTTPS : .HTTP,
+			authenticationType: .HTTPBasic).get(username) {
+				
+			password = storedPassword
+		} else {
+			password = ""
+		}
+		
+		return (username, password)
+	}
+	
 	override func getReserving(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
 		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/reserves.json")
+			.authenticate(user: username, password: password)
 			.responseJSON { (request, response, data, error) in
 				if error != nil {
 					failure(error!)
@@ -58,7 +78,9 @@ class ChinachuPVRManager: PVRManager {
 	}
 	
 	func getPreviewImage(programId: String, isRecording: Bool = false, time: Int = 50, success: ((NSData) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
 		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded/" + programId + "/preview.jpg?pos=\(time)")
+			.authenticate(user: username, password: password)
 			.response { (request, response, data, error) in
 				if error != nil {
 					failure(error!)
@@ -76,7 +98,9 @@ class ChinachuPVRManager: PVRManager {
 		if NSFileManager.defaultManager().fileExistsAtPath(getDownloadedFileUrl(programId).relativePath!) {
 			return getDownloadedFileUrl(programId)
 		} else {
-			return NSURL(string: remoteHost.absoluteString! + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+			let (username, password) = getAccount()
+
+			return NSURL(scheme: remoteHost.scheme!, host: "\(username):\(password)@\(remoteHost.host!):\(remoteHost.port!)", path: "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
 		}
 	}
 
@@ -101,9 +125,12 @@ class ChinachuPVRManager: PVRManager {
 		
 		let downloadPath = programDir.URLByAppendingPathComponent("file.m2ts")
 		
+		let (username, password) = getAccount()
+
 		let downloadRequest = Alamofire.download(.GET, remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.m2ts", { (temporaryURL, response) in
 			return downloadPath
 			})
+			.authenticate(user: username, password: password)
 			.progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
 				progress(Float(totalBytesRead) / Float(totalBytesExpectedToRead))
 			}
@@ -157,7 +184,10 @@ class ChinachuPVRManager: PVRManager {
 	}
 	
 	override func getRecording(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
+		
 		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded.json")
+			.authenticate(user: username, password: password)
 			.responseJSON { (request, response, data, error) in
 				if error != nil {
 					failure(error!)
@@ -195,9 +225,12 @@ class ChinachuPVRManager: PVRManager {
 	}
 	
 	func deleteProgram(programId: String, mode: ChinachuPVRDeleteMode = .All, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
+
 		switch mode {
 		case .Information:
 			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + ".json")
+				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
 						failure(error!)
@@ -207,6 +240,7 @@ class ChinachuPVRManager: PVRManager {
 			}
 		case .File:
 			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
+				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
 						failure(error!)
@@ -216,11 +250,13 @@ class ChinachuPVRManager: PVRManager {
 			}
 		case .All:
 			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + ".json")
+				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
 						failure(error!)
 					} else {
 						Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
+							.authenticate(user: username, password: password)
 							.response { (request, response, data, error) in
 								if error != nil {
 									failure(error!)

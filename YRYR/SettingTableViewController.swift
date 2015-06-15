@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import KeychainAccess
 
 class SettingTableViewController: UITableViewController {
 
 	@IBOutlet weak var pvrAddressTextField: UITextField!
+	@IBOutlet weak var pvrPortTextField: UITextField!
 	@IBOutlet weak var pvrUserTextField: UITextField!
 	@IBOutlet weak var pvrPasswordTextField: UITextField!
 	
@@ -31,17 +33,43 @@ class SettingTableViewController: UITableViewController {
 		
 		let userDefaults = NSUserDefaults()
 
+		let pvrUrl = userDefaults.stringForKey("pvrUrl")!
+		let pvrPort = userDefaults.integerForKey("pvrPort")
+		let pvrUser = userDefaults.stringForKey("pvrUser")!
+		
 		pvrAddressTextField.leftView = createLabel("Address")
-		pvrAddressTextField.text = userDefaults.stringForKey("pvrUrl")
+		pvrAddressTextField.text = pvrUrl
 		pvrAddressTextField.leftViewMode = .Always
 		
+		pvrPortTextField.leftView = createLabel("Port")
+		pvrPortTextField.text = String(pvrPort)
+		pvrPortTextField.leftViewMode = .Always
+		
 		pvrUserTextField.leftView = createLabel("Username")
-		pvrUserTextField.text = userDefaults.stringForKey("pvrUser")
+		pvrUserTextField.text = pvrUser
 		pvrUserTextField.leftViewMode = .Always
 		
 		pvrPasswordTextField.leftView = createLabel("Password")
-		pvrPasswordTextField.text = userDefaults.stringForKey("pvrPassword")
 		pvrPasswordTextField.leftViewMode = .Always
+		
+		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)",
+			protocolType: pvrUrl.rangeOfString("^https://",
+			options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP,
+			authenticationType: .HTTPBasic)
+		
+		if let password = keychain.get(pvrUser) {
+			pvrPasswordTextField.text = password
+		} else {
+			keychain.getSharedPassword(pvrUser) { (password, error) -> () in
+				if password != nil {
+					self.pvrPasswordTextField.text = password
+					
+					keychain[pvrUser] = password
+				} else {
+					self.pvrPasswordTextField.text = ""
+				}
+			}
+		}
 
     }
 
@@ -49,9 +77,26 @@ class SettingTableViewController: UITableViewController {
 
 		let userDefaults = NSUserDefaults()
 		
-		userDefaults.setObject(pvrAddressTextField.text, forKey: "pvrUrl")
-		userDefaults.setObject(pvrUserTextField.text, forKey: "pvrUser")
-		userDefaults.setObject(pvrPasswordTextField.text, forKey: "pvrPassword")
+		let pvrUrl = pvrAddressTextField.text!
+		let pvrPort = pvrPortTextField.text.toInt()!
+		let pvrUser = pvrUserTextField.text!
+		
+		
+		// TODO: check whether the authentication succeeded or not
+		
+		userDefaults.setObject(pvrUrl, forKey: "pvrUrl")
+		userDefaults.setInteger(pvrPort, forKey: "pvrPort")
+		userDefaults.setObject(pvrUser, forKey: "pvrUser")
+		
+		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)", protocolType: pvrUrl.rangeOfString("^https://", options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP, authenticationType: .HTTPBasic)
+		
+		
+		let pvrPass = pvrPasswordTextField.text
+		
+		keychain[pvrUser] = pvrPass
+		keychain.setSharedPassword(pvrPass, account: pvrUser)
+		
+		ChinachuPVRManager.sharedInstance.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
 
 	}
 	
@@ -71,7 +116,7 @@ class SettingTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 3
+        return 4
     }
 
     /*
