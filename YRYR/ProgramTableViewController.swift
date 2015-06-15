@@ -7,15 +7,11 @@
 //
 
 import UIKit
-import MRProgress
-import GSIndeterminateProgressBar
 
 class ProgramTableViewController: UITableViewController {
 
 	var programIds: [String] = []
 	var programsById: [String: PVRProgram] = [:]
-	var selectedIndex: NSIndexPath! = nil
-	var progressView: GSIndeterminateProgressView! = nil
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,30 +19,14 @@ class ProgramTableViewController: UITableViewController {
 		let programCellNib = UINib(nibName: "ProgramInfoTableViewCell", bundle: nil)
 		self.tableView.registerNib(programCellNib, forCellReuseIdentifier: "programCell")
 
-		self.refreshControl!.addTarget(self, action: Selector("updateRecordingPrograms"), forControlEvents: .ValueChanged)
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-
-		self.navigationItem.rightBarButtonItem = self.editButtonItem()
-		
 		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
 			let program = (storedProgram as! PVRProgramStore).getOriginalObject()
 			programsById[program.id] = program
 			programIds.append(program.id)
 		}
 		
-		tableView.reloadData()
+		self.tableView.reloadData()
 		
-		let navigationBar = self.navigationController!.navigationBar
-		
-		self.progressView = GSIndeterminateProgressView(frame: CGRect(x: 0, y: navigationBar.frame.size.height, width: navigationBar.frame.size.width, height: 2))
-		self.progressView.progressTintColor = navigationBar.superview!.tintColor
-		self.progressView.backgroundColor = UIColor.clearColor()
-		self.progressView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin
-		navigationBar.addSubview(self.progressView)
-		
-		updateRecordingPrograms()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,55 +34,6 @@ class ProgramTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 	
-	func updateRecordingPrograms() {
-		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-		self.progressView.startAnimating()
-		let manager = ChinachuPVRManager.sharedInstance
-		manager.getRecording(success: { programs in
-			self.refreshControl!.endRefreshing()
-			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-			self.progressView.stopAnimating()
-
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-				var upstreamProgramIds: [String: Bool] = [:]
-				for programs in programs {
-					upstreamProgramIds[programs.id] = true
-				}
-				
-				// Remove unexist program
-				let programCount = self.programsById.count
-				for (index, programId) in enumerate(self.programIds.reverse()) {
-					if upstreamProgramIds[programId] == nil {
-						self.programsById.removeValueForKey(self.programIds.removeAtIndex(programCount - 1 - index) as String)
-						dispatch_sync(dispatch_get_main_queue(), {
-							self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: programCount - 1 - index, inSection: 0)], withRowAnimation: .Fade)
-						})
-						let programStore = PVRProgramStore.by("id", equalTo: programId).find().firstObject() as! PVRProgramStore
-						programStore.beginWriting().delete().endWriting()
-					}
-				}
-				
-				// Append unexist program
-				for (index, program) in enumerate(programs.reverse()) {
-					if self.programsById[program.id] == nil {
-						self.programIds.insert(program.id, atIndex: index)
-						self.programsById[program.id] = program
-						dispatch_sync(dispatch_get_main_queue(), {
-							self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
-						})
-						let programStore = PVRProgramStore.create() as! PVRProgramStore
-						programStore.setOriginalObject(program)
-						programStore.save()
-					}
-				}
-				
-				self.tableView.reloadData()
-			})
-			}, failure: { error in
-				self.refreshControl!.endRefreshing()
-				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-		})
-	}
 	
     // MARK: - Table view data source
 
@@ -115,7 +46,7 @@ class ProgramTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-		return programsById.count
+		return programIds.count
     }
 
 	
@@ -142,9 +73,11 @@ class ProgramTableViewController: UITableViewController {
 	
 
 	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-		selectedIndex = indexPath
-		PVRProgramStore.all().find()
-		self.performSegueWithIdentifier("showProgramDetail", sender: self)
+		let programDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
+		
+		programDetailViewController.program = programsById[programIds[indexPath.row]]
+		
+		self.navigationController?.pushViewController(programDetailViewController, animated: true)
 	}
 	
 	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
@@ -179,9 +112,15 @@ class ProgramTableViewController: UITableViewController {
 		return true
 	}
 	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 58
+	}
+	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		selectedIndex = indexPath
-		self.performSegueWithIdentifier("playVideo", sender: self)
+		let videoPlayViewController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
+		videoPlayViewController.program = programsById[programIds[indexPath.row]]
+
+		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}
 
 	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -206,20 +145,5 @@ class ProgramTableViewController: UITableViewController {
         return true
     }
     */
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "showProgramDetail" {
-			let programDetailVC = segue.destinationViewController as! ProgramDetailViewController
-			programDetailVC.program = programsById[programIds[selectedIndex.row]]
-		} else if segue.identifier == "playVideo" {
-			let videoPlayVC = segue.destinationViewController as! VideoPlayViewController
-			videoPlayVC.program = programsById[programIds[selectedIndex.row]]
-		}
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
 
 }
