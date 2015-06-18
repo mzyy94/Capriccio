@@ -9,7 +9,7 @@
 import UIKit
 import KeychainAccess
 
-class SettingTableViewController: UITableViewController {
+class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 
 	@IBOutlet weak var pvrAddressTextField: UITextField!
 	@IBOutlet weak var pvrPortTextField: UITextField!
@@ -31,6 +31,14 @@ class SettingTableViewController: UITableViewController {
 		
         super.viewDidLoad()
 		
+		let toolBar = UIToolbar()
+		
+		let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+		let done = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("closeKeyboard:"))
+
+		toolBar.items = [spacer, done]
+		toolBar.sizeToFit()
+		
 		let userDefaults = NSUserDefaults()
 
 		let pvrUrl = userDefaults.stringForKey("pvrUrl")!
@@ -40,17 +48,25 @@ class SettingTableViewController: UITableViewController {
 		pvrAddressTextField.leftView = createLabel("Address")
 		pvrAddressTextField.text = pvrUrl
 		pvrAddressTextField.leftViewMode = .Always
+		pvrAddressTextField.delegate = self
+		pvrAddressTextField.inputAccessoryView = toolBar
 		
 		pvrPortTextField.leftView = createLabel("Port")
 		pvrPortTextField.text = String(pvrPort)
 		pvrPortTextField.leftViewMode = .Always
+		pvrPortTextField.delegate = self
+		pvrPortTextField.inputAccessoryView = toolBar
 		
 		pvrUserTextField.leftView = createLabel("Username")
 		pvrUserTextField.text = pvrUser
 		pvrUserTextField.leftViewMode = .Always
+		pvrUserTextField.delegate = self
+		pvrUserTextField.inputAccessoryView = toolBar
 		
 		pvrPasswordTextField.leftView = createLabel("Password")
 		pvrPasswordTextField.leftViewMode = .Always
+		pvrPasswordTextField.delegate = self
+		pvrPasswordTextField.inputAccessoryView = toolBar
 		
 		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)",
 			protocolType: pvrUrl.rangeOfString("^https://",
@@ -98,7 +114,35 @@ class SettingTableViewController: UITableViewController {
 		
 		ChinachuPVRManager.sharedInstance.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
 
+		closeKeyboard(sender)
 	}
+	
+	@IBAction func cancelButtonTapped(sender: AnyObject) {
+		closeKeyboard(sender)
+	}
+	
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		switch textField {
+		case pvrAddressTextField:
+			pvrPortTextField.becomeFirstResponder()
+		case pvrPortTextField:
+			pvrUserTextField.becomeFirstResponder()
+		case pvrUserTextField:
+			pvrPasswordTextField.becomeFirstResponder()
+		default:
+			textField.resignFirstResponder()
+		}
+		
+		return true
+	}
+	
+	func closeKeyboard(sender: AnyObject) {
+		pvrAddressTextField.resignFirstResponder()
+		pvrPortTextField.resignFirstResponder()
+		pvrUserTextField.resignFirstResponder()
+		pvrPasswordTextField.resignFirstResponder()
+	}
+
 	
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

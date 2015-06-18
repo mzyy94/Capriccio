@@ -474,7 +474,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Settings" id="0wV-c2-KOJ">
-                                    <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="pe4-jC-5gc"/>
+                                    <barButtonItem key="leftBarButtonItem" title="Cancel" style="plain" id="pe4-jC-5gc">
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="Ogp-UB-SZY" id="Xev-hm-Jka"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="jBx-fu-Q6T">
                                         <connections>
                                             <action selector="saveButtonTapped:" destination="Ogp-UB-SZY" id="Ljb-lb-L0g"/>
@@ -511,7 +515,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="StP-oh-D8M" id="1uo-7W-NZv">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10772" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9u-qx-9LP">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10772" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9u-qx-9LP">
                                                     <rect key="frame" x="16" y="0.0" width="584" height="43"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
