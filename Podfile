@@ -12,6 +12,7 @@ target 'YRYR' do
 	pod 'FFCircularProgressView', '~> 0.3'
 	pod 'GSIndeterminateProgressBar', '~> 0.1.0'
 	pod 'KeychainAccess', '~> 1.2.1'
+	pod 'BFPaperTabBarController', '~> 2.1.10'
 end
 
 target 'YRYRTests' do
