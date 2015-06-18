@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ucO-Vr-b8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AMO-7n-nUe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -67,7 +67,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ODE-qb-hLB"/>
                     </layoutGuides>
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fCs-G0-Wwi">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1136"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lgl-S4-OMO">
@@ -210,7 +210,7 @@
                     </scrollView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="1200"/>
+                    <size key="freeformSize" width="600" height="800"/>
                     <connections>
                         <outlet property="channelLabel" destination="4WW-re-mOw" id="JZp-vd-oCr"/>
                         <outlet property="detailLabel" destination="koP-db-BvL" id="MjN-ii-zLv"/>
@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyp-LE-hRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2590" y="931"/>
+            <point key="canvasLocation" x="2524" y="931"/>
         </scene>
         <!--Video Play View Controller-->
         <scene sceneID="pht-5Z-1bA">
@@ -423,12 +423,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4A-TA-2pd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1939" y="1790"/>
+            <point key="canvasLocation" x="2215" y="1760"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="E82-tR-nCP">
             <objects>
                 <navigationController id="ucO-Vr-b8X" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="xCb-lx-cZ8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fbp-Ru-FUB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -440,6 +441,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYK-Iu-y3m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1093" y="931"/>
+        </scene>
+        <!--Paper Tab Bar Controller-->
+        <scene sceneID="jgq-mo-DNW">
+            <objects>
+                <tabBarController id="AMO-7n-nUe" customClass="BFPaperTabBarController" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="lU0-xb-oXR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ucO-Vr-b8X" kind="relationship" relationship="viewControllers" id="ca6-l1-6qY"/>
+                        <segue destination="Ogp-UB-SZY" kind="relationship" relationship="viewControllers" id="5yN-rY-RNv"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0bl-pg-ErA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="257" y="1343"/>
         </scene>
         <!--Settings-->
         <scene sceneID="VPD-nT-05Y">
@@ -554,6 +574,7 @@
                             <outlet property="delegate" destination="Ogp-UB-SZY" id="6VC-83-may"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Item" id="vth-cq-80d"/>
                     <connections>
                         <outlet property="pvrAddressTextField" destination="kT3-Qz-8gZ" id="zbn-uW-1GC"/>
                         <outlet property="pvrPasswordTextField" destination="K0f-bp-wuP" id="FGj-ig-BGa"/>
@@ -563,7 +584,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bir-NC-7s4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402" y="999"/>
+            <point key="canvasLocation" x="1093" y="1760"/>
         </scene>
     </scenes>
     <resources>
@@ -572,6 +593,6 @@
         <image name="pause" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xgo-6w-ruv"/>
+        <segue reference="ikf-66-bQN"/>
     </inferredMetricsTieBreakers>
 </document>
