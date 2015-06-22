@@ -416,6 +416,7 @@
                         <outlet property="mainVideoView" destination="VCA-kS-urr" id="GKD-gN-c0q"/>
                         <outlet property="mediaControlView" destination="AFw-62-qkZ" id="wes-tw-xBU"/>
                         <outlet property="mediaProgressNavigationBar" destination="RJT-cZ-NX2" id="T0F-Fm-puH"/>
+                        <outlet property="playPauseButton" destination="P6g-7s-msw" id="BUA-Bg-wnI"/>
                         <outlet property="videoProgressSlider" destination="2hN-G5-bXh" id="BHf-FJ-IVB"/>
                         <outlet property="videoTimeLabel" destination="m3i-Vl-25r" id="2tB-KR-ThI"/>
                         <outlet property="volumeSliderPlaceView" destination="lfM-JX-KT7" id="L9P-WX-ZT0"/>

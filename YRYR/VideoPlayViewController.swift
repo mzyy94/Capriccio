@@ -16,6 +16,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBOutlet weak var videoProgressSlider: UISlider!
 	@IBOutlet weak var videoTimeLabel: UILabel!
 	@IBOutlet weak var volumeSliderPlaceView: MPVolumeView!
+	@IBOutlet weak var playPauseButton: UIButton!
 	
 	let mediaPlayer = VLCMediaPlayer()
 	var program: PVRProgram!
@@ -81,6 +82,10 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		// Set externel display event
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("screenDidConnect:"), name: UIScreenDidConnectNotification, object: nil)
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("screenDidDisconnect:"), name: UIScreenDidDisconnectNotification, object: nil)
+		
+		// Start remote control events
+		UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+		self.becomeFirstResponder()
 	}
 	
 	override func viewDidDisappear(animated: Bool) {
@@ -94,7 +99,28 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		
 		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIScreenDidConnectNotification, object: nil)
 		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIScreenDidDisconnectNotification, object: nil)
+		
+		UIApplication.sharedApplication().endReceivingRemoteControlEvents()
+		self.resignFirstResponder()
 	}
+
+
+	override func remoteControlReceivedWithEvent(event: UIEvent) {
+		if event.type == UIEventType.RemoteControl {
+			switch event.subtype {
+			case .RemoteControlPlay, .RemoteControlPause, .RemoteControlTogglePlayPause:
+				self.playPauseButtonTapped(playPauseButton)
+				break
+			default:
+				break
+			}
+		}
+	}
+	
+	override func canBecomeFirstResponder() -> Bool {
+		return true
+	}
+
 	
 	var onceToken : dispatch_once_t = 0
 	func mediaPlayerTimeChanged(aNotification: NSNotification!) {
@@ -112,6 +138,22 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 			self.screenDidConnect(notification)
 		}
 	}
+	
+	func mediaPlayerStateChanged(aNotification: NSNotification!) {
+		updateMetadata()
+	}
+	
+	func updateMetadata() {
+		let time = Int(NSTimeInterval(mediaPlayer.position()) * program.duration)
+		let videoInfo = [MPMediaItemPropertyTitle: program.title,
+			MPMediaItemPropertyMediaType: MPMediaType.TVShow.rawValue,
+			MPMediaItemPropertyPlaybackDuration: program.duration,
+			MPNowPlayingInfoPropertyElapsedPlaybackTime: time,
+			MPNowPlayingInfoPropertyPlaybackRate: mediaPlayer.rate
+		]
+		MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = videoInfo as [NSObject : AnyObject]
+	}
+	
 
 	@IBAction func doneButtonTapped(sender: UIBarButtonItem) {
 		mediaPlayer.setDelegate(nil)
