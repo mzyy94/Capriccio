@@ -59,7 +59,7 @@ class ChinachuPVRManager: PVRManager {
 			.authenticate(user: username, password: password)
 			.responseJSON { (request, response, data, error) in
 				if error != nil {
-					failure(error!)
+					failure?(error!)
 				} else {
 					let json = JSON(data!)
 					var programs: [PVRProgram] = []
@@ -83,7 +83,7 @@ class ChinachuPVRManager: PVRManager {
 						
 						programs.append(program)
 					}
-					success(programs)
+					success?(programs)
 				}
 		}
 	}
@@ -98,7 +98,7 @@ class ChinachuPVRManager: PVRManager {
 			.authenticate(user: username, password: password)
 			.responseJSON { (request, response, data, error) in
 				if error != nil {
-					failure(error!)
+					failure?(error!)
 				} else {
 					dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 						let json = JSON(data!)
@@ -125,7 +125,7 @@ class ChinachuPVRManager: PVRManager {
 						}
 						
 						dispatch_sync(dispatch_get_main_queue(), {
-							success(programs)
+							success?(programs)
 						})
 					})
 				}
@@ -141,9 +141,9 @@ class ChinachuPVRManager: PVRManager {
 				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
-						failure(error!)
+						failure?(error!)
 					} else {
-						success()
+						success?()
 					}
 			}
 		case .File:
@@ -151,9 +151,9 @@ class ChinachuPVRManager: PVRManager {
 				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
-						failure(error!)
+						failure?(error!)
 					} else {
-						success()
+						success?()
 					}
 			}
 		case .All:
@@ -161,15 +161,15 @@ class ChinachuPVRManager: PVRManager {
 				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
-						failure(error!)
+						failure?(error!)
 					} else {
 						Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
 							.authenticate(user: username, password: password)
 							.response { (request, response, data, error) in
 								if error != nil {
-									failure(error!)
+									failure?(error!)
 								} else {
-									success()
+									success?()
 								}
 						}
 					}
@@ -186,9 +186,9 @@ class ChinachuPVRManager: PVRManager {
 			.authenticate(user: username, password: password)
 			.response { (request, response, data, error) in
 				if error != nil {
-					failure(error!)
+					failure?(error!)
 				} else {
-					success(data as! NSData)
+					success?(data as! NSData)
 				}
 		}
 	}
