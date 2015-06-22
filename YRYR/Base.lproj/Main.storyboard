@@ -28,10 +28,10 @@
         <scene sceneID="Hpr-lJ-Fdi">
             <objects>
                 <tableViewController id="KuS-5f-sDs" customClass="RecordingTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="LMJ-wJ-X2I">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="LMJ-wJ-X2I">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="58" id="adB-Al-eIs">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -597,6 +597,6 @@
         <image name="pause" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ikf-66-bQN"/>
+        <segue reference="xgo-6w-ruv"/>
     </inferredMetricsTieBreakers>
 </document>

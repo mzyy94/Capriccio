@@ -25,6 +25,8 @@ class ProgramTableViewController: UITableViewController {
 			programIds.append(program.id)
 		}
 		
+		self.tableView.separatorStyle = .None
+		
 		self.tableView.reloadData()
 		
     }
@@ -40,20 +42,20 @@ class ProgramTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return programIds.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-		return programIds.count
+		return 1
     }
 
 	
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCellWithIdentifier("programCell", forIndexPath: indexPath) as! ProgramInfoTableViewCell
-		let program = programsById[programIds[indexPath.row]]!
+		let program = programsById[programIds[indexPath.section]]!
 		let dateFormatter = NSDateFormatter()
 		
 		dateFormatter.dateFormat = "yyyy/MM/dd HH:mm-"
@@ -75,7 +77,7 @@ class ProgramTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
 		let programDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
 		
-		programDetailViewController.program = programsById[programIds[indexPath.row]]
+		programDetailViewController.program = programsById[programIds[indexPath.section]]
 		
 		self.navigationController?.pushViewController(programDetailViewController, animated: true)
 	}
@@ -88,10 +90,10 @@ class ProgramTableViewController: UITableViewController {
 			confirmAlertView.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {alertAction in
 				let manager = ChinachuPVRManager.sharedInstance
 				
-				manager.deleteProgram(self.programsById[self.programIds[indexPath.row]]!.id, success: {
-					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.row]]!.id).find().firstObject() as! PVRProgramStore
+				manager.deleteProgram(self.programsById[self.programIds[indexPath.section]]!.id, success: {
+					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.section]]!.id).find().firstObject() as! PVRProgramStore
 					programStore.beginWriting().delete().endWriting()
-					self.programsById.removeValueForKey(self.programIds.removeAtIndex(indexPath.row) as String)
+					self.programsById.removeValueForKey(self.programIds.removeAtIndex(indexPath.section) as String)
 
 					tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
@@ -116,9 +118,17 @@ class ProgramTableViewController: UITableViewController {
 		return 58
 	}
 	
+	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 10
+	}
+	
+	override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		return UIView()
+	}
+	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		let videoPlayViewController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
-		videoPlayViewController.program = programsById[programIds[indexPath.row]]
+		videoPlayViewController.program = programsById[programIds[indexPath.section]]
 
 		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}

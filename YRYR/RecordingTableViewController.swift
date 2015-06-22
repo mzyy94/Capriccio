@@ -74,7 +74,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 					if upstreamProgramIds[programId] == nil {
 						self.programsById.removeValueForKey(self.programIds.removeAtIndex(programCount - 1 - index) as String)
 						dispatch_sync(dispatch_get_main_queue(), {
-							self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: programCount - 1 - index, inSection: 0)], withRowAnimation: .Fade)
+							self.tableView.deleteSections(NSIndexSet(index: programCount - 1 - index), withRowAnimation: .Fade)
 						})
 						let programStore = PVRProgramStore.by("id", equalTo: programId).find().firstObject() as! PVRProgramStore
 						programStore.beginWriting().delete().endWriting()
@@ -87,7 +87,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 						self.programIds.insert(program.id, atIndex: index)
 						self.programsById[program.id] = program
 						dispatch_sync(dispatch_get_main_queue(), {
-							self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+							self.tableView.insertSections(NSIndexSet(index: index), withRowAnimation: .Fade)
 						})
 						let programStore = PVRProgramStore.create() as! PVRProgramStore
 						programStore.setOriginalObject(program)
@@ -112,8 +112,8 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		let programDetailViewController = storyBoard.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
 		
 		programDetailViewController.program = tableView == self.tableView ?
-			programsById[self.programIds[indexPath.row]] :
-			programsById[resultProgramTableView.programIds[indexPath.row]]
+			programsById[self.programIds[indexPath.section]] :
+			programsById[resultProgramTableView.programIds[indexPath.section]]
 		
 		self.navigationController!.pushViewController(programDetailViewController, animated: true)
 	}
@@ -122,8 +122,8 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 		let videoPlayViewController = storyBoard.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
 		videoPlayViewController.program = tableView == self.tableView ?
-			programsById[self.programIds[indexPath.row]] :
-			programsById[resultProgramTableView.programIds[indexPath.row]]
+			programsById[self.programIds[indexPath.section]] :
+			programsById[resultProgramTableView.programIds[indexPath.section]]
 		
 		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}
