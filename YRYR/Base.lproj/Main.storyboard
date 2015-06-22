@@ -33,7 +33,6 @@
                     </refreshControl>
                     <connections>
                         <segue destination="rqj-fx-chh" kind="show" identifier="showProgramDetail" id="PB7-aD-ker"/>
-                        <segue destination="1E2-OJ-4HW" kind="showDetail" identifier="playVideo" id="xgo-6w-ruv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="poD-gm-q9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -201,7 +200,6 @@
                         <outlet property="previewImageView" destination="fj6-OL-xsa" id="9DO-m9-27b"/>
                         <outlet property="summaryView" destination="e4h-sZ-k4p" id="kkG-p0-Cp7"/>
                         <outlet property="titleLabel" destination="E9k-W5-UXp" id="4SP-X8-DBj"/>
-                        <segue destination="1E2-OJ-4HW" kind="showDetail" identifier="playVideo" id="ikf-66-bQN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyp-LE-hRd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -406,7 +404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4A-TA-2pd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2215" y="1760"/>
+            <point key="canvasLocation" x="3211" y="931"/>
         </scene>
         <!--Item-->
         <scene sceneID="E82-tR-nCP">
@@ -437,7 +435,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="ucO-Vr-b8X" kind="relationship" relationship="viewControllers" id="ca6-l1-6qY"/>
-                        <segue destination="Ogp-UB-SZY" kind="relationship" relationship="viewControllers" id="5yN-rY-RNv"/>
+                        <segue destination="n44-8E-7Ji" kind="relationship" relationship="viewControllers" id="JDb-0w-2Gm"/>
+                        <segue destination="Ogp-UB-SZY" kind="relationship" relationship="viewControllers" id="cWp-zG-u2T"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bl-pg-ErA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -571,7 +570,57 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bir-NC-7s4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1093" y="1760"/>
+            <point key="canvasLocation" x="997" y="2686"/>
+        </scene>
+        <!--Reserving-->
+        <scene sceneID="ZNO-fw-jPP">
+            <objects>
+                <tableViewController id="QEN-1b-GdU" customClass="ReservingTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="kPW-50-Nyh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="58" id="KHP-wm-LgX">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KHP-wm-LgX" id="wzA-Zr-oX1">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QEN-1b-GdU" id="sRL-yM-ZYO"/>
+                            <outlet property="delegate" destination="QEN-1b-GdU" id="KRz-aX-qDH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reserving" id="i4E-YC-SMa"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="LvU-Gj-VRJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
+                    <connections>
+                        <segue destination="rqj-fx-chh" kind="show" identifier="showProgramDetail" id="Pog-bE-naL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L9A-RP-rzM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1788" y="1653"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="F9X-dS-TvP">
+            <objects>
+                <navigationController id="n44-8E-7Ji" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="SoA-HJ-HYD"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PAk-J6-hJB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="QEN-1b-GdU" kind="relationship" relationship="rootViewController" id="46y-lg-c6m"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JVR-ei-IBK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1093" y="1653"/>
         </scene>
     </scenes>
     <resources>
@@ -580,6 +629,6 @@
         <image name="pause" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xgo-6w-ruv"/>
+        <segue reference="Pog-bE-naL"/>
     </inferredMetricsTieBreakers>
 </document>

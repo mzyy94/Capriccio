@@ -29,6 +29,7 @@
 		9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */; };
 		9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */; };
 		9EE583781B1DFBC60011E41A /* PVRChannelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */; };
+		9EEF69F21B3853B700099B64 /* ReservingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */; };
 		9EF414721B18E4A40096C2CE /* ProgramInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */; };
 		9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */; };
 		9EF414761B18E5180096C2CE /* ProgramTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */; };
@@ -68,6 +69,7 @@
 		9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailViewController.swift; sourceTree = "<group>"; };
 		9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRProgramStore.swift; path = CoreDataObject/PVRProgramStore.swift; sourceTree = "<group>"; };
 		9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRChannelStore.swift; path = CoreDataObject/PVRChannelStore.swift; sourceTree = "<group>"; };
+		9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservingTableViewController.swift; sourceTree = "<group>"; };
 		9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramInfoTableViewCell.swift; path = View/ProgramInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProgramInfoTableViewCell.xib; path = View/ProgramInfoTableViewCell.xib; sourceTree = "<group>"; };
 		9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */,
 				9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */,
 				9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */,
+				9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */,
 				9EA4EEEA1B1CEC3C008D4059 /* VideoPlayViewController.swift */,
 				9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */,
 				9E8C3BEA1B18A32300C57833 /* Main.storyboard */,
@@ -434,6 +437,7 @@
 				9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */,
 				9EA4EEE91B1CEA77008D4059 /* Empty.mm in Sources */,
 				9E8C3C0E1B18ADC100C57833 /* ChinachuPVRManager.swift in Sources */,
+				9EEF69F21B3853B700099B64 /* ReservingTableViewController.swift in Sources */,
 				9E8C3BE71B18A32300C57833 /* YRYR.xcdatamodeld in Sources */,
 				9EE583781B1DFBC60011E41A /* PVRChannelStore.swift in Sources */,
 			);
