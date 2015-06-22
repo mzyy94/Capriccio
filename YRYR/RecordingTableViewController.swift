@@ -142,6 +142,33 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}
 	
+	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+		let del = UITableViewRowAction(style: .Default, title: "Delete") {
+			(action, indexPath) in
+			let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete this tv program?", preferredStyle: .Alert)
+			confirmAlertView.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: {alertAction in
+				let manager = ChinachuPVRManager.sharedManager
+				
+				manager.deleteProgram(self.programsById[self.programIds[indexPath.section]]!.id, success: {
+					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.section]]!.id).find().firstObject() as! PVRProgramStore
+					programStore.beginWriting().delete().endWriting()
+					self.programsById.removeValueForKey(self.programIds.removeAtIndex(indexPath.section) as String)
+
+					tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+
+					}, failure: nil)
+			}))
+			confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {alertAction in }))
+			
+			self.parentViewController?.presentViewController(confirmAlertView, animated: true, completion: nil)
+			
+		}
+		
+		del.backgroundColor = UIColor.redColor()
+		
+		return [del]
+	}
+
 	
 	// MARK: - Search controller methods
 	
