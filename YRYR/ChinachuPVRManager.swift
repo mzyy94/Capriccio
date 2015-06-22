@@ -73,13 +73,22 @@ class ChinachuPVRManager: PVRManager {
 						for attr in prog["flags"].arrayValue {
 							attrs.append(attr.stringValue)
 						}
+						let reservingState: PVRProgramState = {() -> PVRProgramState in
+							if prog["isManualReserved"].boolValue {
+								return .ManualReserving
+							} else if prog["isSkip"].boolValue {
+								return .SkippedReserving
+							} else {
+								return .AutomaticReserving
+							}
+						}()
 						let program = PVRProgram(id: prog["id"].stringValue, title: prog["title"].stringValue,
 							fullTitle: prog["fullTitle"].stringValue, subTitle: prog["subTitle"].stringValue,
 							detail: prog["detail"].stringValue, attributes: attrs, genre: prog["category"].stringValue,
 							channel: channel, episode: prog["episode"].intValue,
 							startTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["start"].intValue / 1000)),
 							endTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["end"].intValue / 1000)),
-							duration: NSTimeInterval(prog["seconds"].intValue), state: .Reserving, userData: nil)
+							duration: NSTimeInterval(prog["seconds"].intValue), state: reservingState, userData: nil)
 						
 						programs.append(program)
 					}

@@ -10,8 +10,10 @@ import UIKit
 
 enum PVRProgramState: NSNumber {
 	case None = 0
-	case Reserving = 1
-	case Recording = 2
+	case Recording = 1
+	case AutomaticReserving = 2
+	case ManualReserving = 3
+	case SkippedReserving = 4
 }
 
 class PVRProgram: NSObject {

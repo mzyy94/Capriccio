@@ -66,7 +66,6 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 			programsById[program.id] = program
 			programIds.append(program.id)
 		}
-		
 		self.tableView.reloadData()
 
 	}
