@@ -223,7 +223,10 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	// MARK: - Video play
 	
 	func playVideo(sendar: AnyObject) {
-		self.performSegueWithIdentifier("playVideo", sender: self)
+		let videoPlayViewController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
+		videoPlayViewController.program = program
+		
+		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}
 	
 	
@@ -277,14 +280,4 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		}
 	}
 	
-	
-	// MARK: - Navigation
-
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if segue.identifier == "playVideo" {
-			let videoPlayVC = segue.destinationViewController as! VideoPlayViewController
-			videoPlayVC.program = program
-		}
-	}
-
 }
