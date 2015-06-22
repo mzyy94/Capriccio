@@ -12,13 +12,19 @@ import GSIndeterminateProgressBar
 
 class RecordingTableViewController: ProgramTableViewController, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
 	
+	// MARK: - Instance fileds
+	
 	var searchController: UISearchController! = nil
 	var resultProgramTableView: ProgramTableViewController! = nil
 	var progressView: GSIndeterminateProgressView! = nil
-
+	
+	
+	// MARK: - View initialization
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		// Search controller initialization
 		resultProgramTableView = ProgramTableViewController()
 		resultProgramTableView.tableView.delegate = self
 		
@@ -33,30 +39,35 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		self.tableView.tableHeaderView = self.searchController.searchBar
 		self.tableView.tableHeaderView!.sizeToFit()
 		
+		self.definesPresentationContext = true
+		
+		
+		// Progress view initialization
 		let navigationBar = self.navigationController!.navigationBar
 		
 		self.progressView = GSIndeterminateProgressView(frame: CGRect(x: 0, y: navigationBar.frame.size.height, width: navigationBar.frame.size.width, height: 2))
 		self.progressView.progressTintColor = navigationBar.superview!.tintColor
 		self.progressView.backgroundColor = UIColor.clearColor()
-		self.progressView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin
+		self.progressView.autoresizingMask = .FlexibleWidth | .FlexibleTopMargin
 		navigationBar.addSubview(self.progressView)
 		
-		updateRecordingPrograms()
-		
+		// Set refresh control action
 		self.refreshControl!.addTarget(self, action: Selector("updateRecordingPrograms"), forControlEvents: .ValueChanged)
 		
+		// Show edit button
 		self.navigationItem.rightBarButtonItem = self.editButtonItem()
 		
-		
-		self.definesPresentationContext = true
+		// Refresh recording programs
+		updateRecordingPrograms()
 
 	}
 	
+	// MARK: - Refreshing recording data
 	
 	func updateRecordingPrograms() {
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		self.progressView.startAnimating()
-		let manager = ChinachuPVRManager.sharedInstance
+		let manager = ChinachuPVRManager.sharedManager
 		manager.getRecording(success: { programs in
 			self.refreshControl!.endRefreshing()
 			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -90,7 +101,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 							self.tableView.insertSections(NSIndexSet(index: index), withRowAnimation: .Fade)
 						})
 						let programStore = PVRProgramStore.create() as! PVRProgramStore
-						programStore.setOriginalObject(program)
+						programStore.originalObject = program
 						programStore.save()
 					}
 				}
@@ -106,6 +117,9 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		})
 	}
+	
+	
+	// MARK: - Table view data source
 	
 	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
 		let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -128,10 +142,16 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}
 	
+	
+	// MARK: - Search controller methods
+	
+	func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+		updateSearchResult(searchByText: searchBar.text!, inScope: selectedScope)
+	}
+
 	func updateSearchResultsForSearchController(searchController: UISearchController) {
 		self.updateSearchResult(searchByText: searchController.searchBar.text!, inScope: searchController.searchBar.selectedScopeButtonIndex)
 	}
-	
 	
 	func updateSearchResult(searchByText searchText: String = "", inScope scope: Int = 0) {
 		resultProgramTableView.programIds = []
@@ -151,11 +171,6 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 			}
 		}
 		resultProgramTableView.tableView.reloadData()
-	}
-
-	
-	func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-		updateSearchResult(searchByText: searchBar.text!, inScope: selectedScope)
 	}
 
 }

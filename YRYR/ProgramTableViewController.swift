@@ -9,58 +9,66 @@
 import UIKit
 
 class ProgramTableViewController: UITableViewController {
-
+	
+	// MARK: - Instance fileds
+	
 	var programIds: [String] = []
 	var programsById: [String: PVRProgram] = [:]
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
+	
+	// MARK: - View initialization
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		// Cell registration
 		let programCellNib = UINib(nibName: "ProgramInfoTableViewCell", bundle: nil)
 		self.tableView.registerNib(programCellNib, forCellReuseIdentifier: "programCell")
 
+		// Set table view style
+		self.tableView.separatorStyle = .None
+		
+		// Load stored data in Core Data
 		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
-			let program = (storedProgram as! PVRProgramStore).getOriginalObject()
+			let program = (storedProgram as! PVRProgramStore).originalObject
 			programsById[program.id] = program
 			programIds.append(program.id)
 		}
 		
-		self.tableView.separatorStyle = .None
-		
 		self.tableView.reloadData()
-		
-    }
+	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	
+	// MARK: - Memory/resource management
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
 	
 	
-    // MARK: - Table view data source
+	// MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return programIds.count
-    }
+	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		// Return the number of programs
+		return programIds.count
+	}
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		// Return 1, because each section has only 1 program
 		return 1
-    }
+	}
 
-	
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("programCell", forIndexPath: indexPath) as! ProgramInfoTableViewCell
 		let program = programsById[programIds[indexPath.section]]!
+
+		// Date formation
 		let dateFormatter = NSDateFormatter()
-		
 		dateFormatter.dateFormat = "yyyy/MM/dd HH:mm-"
 		
-		cell.accessoryType = UITableViewCellAccessoryType.DetailButton
+		// Cell configuratoins
+		cell.accessoryType = .DetailButton
 		cell.tintColor = .grayColor()
 		cell.titleLabel.text = program.title
 		cell.subTitleLabel.text = program.subTitle
@@ -70,9 +78,8 @@ class ProgramTableViewController: UITableViewController {
 		cell.dateLabel.text = dateFormatter.stringFromDate(program.startTime)
 		
 
-        return cell
-    }
-	
+		return cell
+	}
 
 	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
 		let programDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
@@ -86,9 +93,9 @@ class ProgramTableViewController: UITableViewController {
 		
 		let del = UITableViewRowAction(style: .Default, title: "Delete") {
 			(action, indexPath) in
-			let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete this tv program?", preferredStyle: UIAlertControllerStyle.Alert)
-			confirmAlertView.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {alertAction in
-				let manager = ChinachuPVRManager.sharedInstance
+			let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete this tv program?", preferredStyle: .Alert)
+			confirmAlertView.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: {alertAction in
+				let manager = ChinachuPVRManager.sharedManager
 				
 				manager.deleteProgram(self.programsById[self.programIds[indexPath.section]]!.id, success: {
 					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.section]]!.id).find().firstObject() as! PVRProgramStore
@@ -99,7 +106,7 @@ class ProgramTableViewController: UITableViewController {
 
 					}, failure: nil)
 			}))
-			confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in }))
+			confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {alertAction in }))
 			
 			self.parentViewController?.presentViewController(confirmAlertView, animated: true, completion: nil)
 			
@@ -140,20 +147,5 @@ class ProgramTableViewController: UITableViewController {
 			// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 		}
 	}
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
 }

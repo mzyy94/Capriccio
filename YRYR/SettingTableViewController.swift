@@ -11,13 +11,55 @@ import KeychainAccess
 
 class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 
+	// MARK: - Interface Builder outlets
+	
 	@IBOutlet weak var pvrAddressTextField: UITextField!
 	@IBOutlet weak var pvrPortTextField: UITextField!
 	@IBOutlet weak var pvrUserTextField: UITextField!
 	@IBOutlet weak var pvrPasswordTextField: UITextField!
 	
-	override func viewDidLoad() {
+	
+	// MARK: - Interface Builder actions
+	
+	@IBAction func saveButtonTapped(sender: AnyObject) {
+
+		let userDefaults = NSUserDefaults()
 		
+		// Get value from text field
+		let pvrUrl = pvrAddressTextField.text!
+		let pvrPort = pvrPortTextField.text.toInt()!
+		let pvrUser = pvrUserTextField.text!
+		
+		
+		// TODO: check whether the authentication succeeded or not
+		
+		// Save values
+		userDefaults.setObject(pvrUrl, forKey: "pvrUrl")
+		userDefaults.setInteger(pvrPort, forKey: "pvrPort")
+		userDefaults.setObject(pvrUser, forKey: "pvrUser")
+		
+		// Save confidential value
+		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)", protocolType: pvrUrl.rangeOfString("^https://", options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP, authenticationType: .HTTPBasic)
+		let pvrPass = pvrPasswordTextField.text
+		
+		keychain[pvrUser] = pvrPass
+		keychain.setSharedPassword(pvrPass, account: pvrUser)
+		
+		// Set new url to PVRManager
+		ChinachuPVRManager.sharedManager.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
+
+		closeKeyboard(sender)
+	}
+	
+	@IBAction func cancelButtonTapped(sender: AnyObject) {
+		closeKeyboard(sender)
+	}
+	
+	
+	// MARK: - View initialization
+	
+	override func viewDidLoad() {
+		// Local function for label generation
 		func createLabel(text: String) -> UILabel {
 			let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
 			
@@ -29,8 +71,9 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 			return label
 		}
 		
-        super.viewDidLoad()
-		
+		super.viewDidLoad()
+
+		// Keyboard toolbar setup
 		let toolBar = UIToolbar()
 		
 		let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
@@ -39,6 +82,8 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 		toolBar.items = [spacer, done]
 		toolBar.sizeToFit()
 		
+		
+		// TextField setup
 		let userDefaults = NSUserDefaults()
 
 		let pvrUrl = userDefaults.stringForKey("pvrUrl")!
@@ -68,6 +113,8 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 		pvrPasswordTextField.delegate = self
 		pvrPasswordTextField.inputAccessoryView = toolBar
 		
+		
+		// Get saved password from Keychain service
 		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)",
 			protocolType: pvrUrl.rangeOfString("^https://",
 			options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP,
@@ -87,40 +134,19 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 			}
 		}
 
-    }
-
-	@IBAction func saveButtonTapped(sender: AnyObject) {
-
-		let userDefaults = NSUserDefaults()
-		
-		let pvrUrl = pvrAddressTextField.text!
-		let pvrPort = pvrPortTextField.text.toInt()!
-		let pvrUser = pvrUserTextField.text!
-		
-		
-		// TODO: check whether the authentication succeeded or not
-		
-		userDefaults.setObject(pvrUrl, forKey: "pvrUrl")
-		userDefaults.setInteger(pvrPort, forKey: "pvrPort")
-		userDefaults.setObject(pvrUser, forKey: "pvrUser")
-		
-		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)", protocolType: pvrUrl.rangeOfString("^https://", options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP, authenticationType: .HTTPBasic)
-		
-		
-		let pvrPass = pvrPasswordTextField.text
-		
-		keychain[pvrUser] = pvrPass
-		keychain.setSharedPassword(pvrPass, account: pvrUser)
-		
-		ChinachuPVRManager.sharedInstance.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
-
-		closeKeyboard(sender)
 	}
 	
-	@IBAction func cancelButtonTapped(sender: AnyObject) {
-		closeKeyboard(sender)
-	}
 	
+	// MARK: - Memory/resource management
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
+
+	
+	// MARK: - Keyboard show/hide methods
+
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		switch textField {
 		case pvrAddressTextField:
@@ -142,80 +168,16 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 		pvrUserTextField.resignFirstResponder()
 		pvrPasswordTextField.resignFirstResponder()
 	}
-
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	// MARK: - Table view data source
 
-    // MARK: - Table view data source
+	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		return 1
+	}
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 4
-    }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		// Return number of settings
+		return 4
+	}
+	
 }

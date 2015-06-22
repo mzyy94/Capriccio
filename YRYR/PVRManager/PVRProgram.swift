@@ -10,28 +10,28 @@ import UIKit
 
 class PVRProgram: NSObject {
 	
-	let id: String
+	// MARK: - Instance fileds
 	
+	let id: String
 	let title: String
 	let fullTitle: String
 	let subTitle: String
 	let detail: String
 	let attributes: [String]
-	
 	let genre: String
 	let channel: PVRChannel
 	let episode: Int?
-	
 	let startTime: NSDate
 	let endTime: NSDate
 	let duration: NSTimeInterval
-	
 	var userData: AnyObject?
+	
+	
+	// MARK: - Initialization
 	
 	init(id: String, title: String, fullTitle: String, subTitle: String, detail: String,
 		attributes: [String], genre: String, channel: PVRChannel, episode: Int?,
 		startTime: NSDate, endTime: NSDate, duration: NSTimeInterval, userData: NSObject?) {
-			
 			self.id = id
 			self.title = title
 			self.fullTitle = fullTitle
@@ -45,11 +45,9 @@ class PVRProgram: NSObject {
 			self.endTime = endTime
 			self.duration = duration
 			self.userData = userData
-			
 	}
 	
 	init(fromDictionary dict: NSDictionary) {
-		
 		self.id = dict["id"] as! String
 		self.title = dict["title"] as! String
 		self.fullTitle = dict["fullTitle"] as! String
@@ -63,8 +61,10 @@ class PVRProgram: NSObject {
 		self.endTime = dict["endTime"] as! NSDate
 		self.duration = dict["duration"] as! NSTimeInterval
 		self.userData = dict["userData"] as? NSObject
-		
 	}
+	
+	
+	// MARK: - Program informations
 	
 	func isOnAir() -> Bool {
 		let now = NSDate.new()

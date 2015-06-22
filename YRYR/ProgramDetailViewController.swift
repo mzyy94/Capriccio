@@ -13,14 +13,17 @@ import FFCircularProgressView
 
 class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var program: PVRProgram! = nil
+	// MARK: - Instance fileds
 	
+	var program: PVRProgram! = nil
 	enum viewType {
 		case detail
 		case service
 	}
-	
 	var currentViewType: viewType = .detail
+	
+	
+	// MARK: - Interface Builder outlets
 	
 	@IBOutlet weak var previewImageView: UIImageView!
 	@IBOutlet weak var titleLabel: UILabel!
@@ -30,26 +33,25 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	@IBOutlet weak var summaryView: UIView!
 	@IBOutlet weak var informationTable: UITableView!
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-		let manager = ChinachuPVRManager.sharedInstance
+	
+	// MARK: - View initialization
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
 		self.title = program.title
 		let titleText = NSMutableAttributedString(string: program.fullTitle,attributes: [NSFontAttributeName: UIFont.systemFontOfSize(19.0, weight: 6.0)])
 		
+		// Add episode and subtitle
 		if program.subTitle != "" || program.episode > 0 {
-			
 			titleText.appendAttributedString(NSAttributedString(string: "\n"))
 			
 			if  program.episode > 0 {
 				titleText.appendAttributedString(NSMutableAttributedString(string: "#\(program.episode!) ", attributes: [NSFontAttributeName: UIFont.systemFontOfSize(17.0), NSForegroundColorAttributeName: UIColor.redColor()]))
 			}
-			
 			if program.subTitle != "" {
 				titleText.appendAttributedString(NSMutableAttributedString(string: program.subTitle, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(17.0), NSForegroundColorAttributeName: UIColor.grayColor()]))
 			}
-			
 		}
 		
 		titleLabel.attributedText = titleText
@@ -60,6 +62,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		summaryView.sizeToFit()
 		
 
+		// Thumbnail loader
 		let imageLoadingIndicatorView = MRActivityIndicatorView()
 		imageLoadingIndicatorView.startAnimating()
 		imageLoadingIndicatorView.hidesWhenStopped = true
@@ -72,7 +75,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		previewImageView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .CenterX, relatedBy: .Equal, toItem: previewImageView, attribute: .CenterX, multiplier: 1.0, constant: 0))
 		previewImageView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .CenterY, relatedBy: .Equal, toItem: previewImageView, attribute: .CenterY, multiplier: 1.0, constant: 0))
 
-		
+		let manager = ChinachuPVRManager.sharedManager
 		SDWebImageManager.sharedManager().downloadImageWithURL(manager.getPreviewImageUrl(program.id),
 			options: .CacheMemoryOnly,
 			progress: {(received, expected) in
@@ -98,6 +101,8 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				
 		})
 		
+		
+		// Setup table view
 		self.informationTable.delegate = self
 		self.informationTable.dataSource = self
 
@@ -106,6 +111,8 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 
 		self.informationTable.reloadData()
 		
+		
+		// Setup file download button
 		if manager.fileDownloaded(self.program.id) {
 			let deleteFileButton = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: Selector("confirmToDeleteFile:"))
 			self.navigationItem.rightBarButtonItem = deleteFileButton
@@ -133,13 +140,24 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			}
 		}
 		
-    }
+	}
+	
+	
+	// MARK: - Memory/resource management
+	
+	override func didReceiveMemoryWarning() {
+		super.didReceiveMemoryWarning()
+		// Dispose of any resources that can be recreated.
+	}
+
+	
+	// MARK: - Video download
 	
 	func downloadWillStart(sendor: AnyObject) {
 		let circularProgressView = self.navigationItem.rightBarButtonItem?.customView as! FFCircularProgressView
 		circularProgressView.startSpinProgressBackgroundLayer()
 		
-		let downloadRequest = ChinachuPVRManager.sharedInstance.startDownloadVideo(program.id, inProgress: { (progress) in
+		let downloadRequest = ChinachuPVRManager.sharedManager.startDownloadVideo(program.id, inProgress: { (progress) in
 			dispatch_async(dispatch_get_main_queue(), {
 				circularProgressView.stopSpinProgressBackgroundLayer()
 				circularProgressView.progress = CGFloat(progress)
@@ -164,7 +182,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	func downloadWillCancel(sendar: AnyObject) {
 		let circularProgressView = self.navigationItem.rightBarButtonItem?.customView as! FFCircularProgressView
-		ChinachuPVRManager.sharedInstance.cancelDownloadVideo(self.program.userData)
+		ChinachuPVRManager.sharedManager.cancelDownloadVideo(self.program.userData)
 		
 		self.program.userData = nil
 		
@@ -179,10 +197,13 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		circularProgressView.progress = 0
 	}
 	
+	
+	// MARK: - Local downloaded file management
+	
 	func confirmToDeleteFile(sendar: AnyObject) {
-		let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete downloaded file?", preferredStyle: UIAlertControllerStyle.Alert)
-		confirmAlertView.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {alertAction in
-			let manager = ChinachuPVRManager.sharedInstance
+		let confirmAlertView = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete downloaded file?", preferredStyle: .Alert)
+		confirmAlertView.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: {alertAction in
+			let manager = ChinachuPVRManager.sharedManager
 			
 			manager.removeDownloadedFile(self.program.id, onComplete: {
 				let circularProgressView = FFCircularProgressView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -192,21 +213,19 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
 			})
 		}))
-		confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in }))
+		confirmAlertView.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {alertAction in }))
 		
 		self.parentViewController?.presentViewController(confirmAlertView, animated: true, completion: nil)
 
 	}
 	
+	
+	// MARK: - Video play
+	
 	func playVideo(sendar: AnyObject) {
 		self.performSegueWithIdentifier("playVideo", sender: self)
 	}
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+	
 	
 	// MARK: - Table view data source
 	
@@ -222,7 +241,6 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			return 0
 		}
 	}
-
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		switch currentViewType {
@@ -255,24 +273,18 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		case .service:
 			let cell = tableView.dequeueReusableCellWithIdentifier("programInfoCell", forIndexPath: indexPath) as! UITableViewCell
 			
-			
 			return cell
 		}
 	}
 	
 	
-	
-    // MARK: - Navigation
+	// MARK: - Navigation
 
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		// Get the new view controller using segue.destinationViewController.
-		// Pass the selected object to the new view controller.
 		if segue.identifier == "playVideo" {
 			let videoPlayVC = segue.destinationViewController as! VideoPlayViewController
 			videoPlayVC.program = program
 		}
 	}
-	
 
 }

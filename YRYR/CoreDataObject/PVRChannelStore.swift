@@ -10,25 +10,31 @@ import Foundation
 import CoreData
 
 class PVRChannelStore: NSManagedObject {
+	
+	// MARK: - Managed instance fileds
+	
+	@NSManaged var channel: NSNumber
+	@NSManaged var id: String
+	@NSManaged var name: String
+	@NSManaged var number: NSNumber
+	@NSManaged var sid: NSNumber
+	@NSManaged var type: String
 
-    @NSManaged var channel: NSNumber
-    @NSManaged var id: String
-    @NSManaged var name: String
-    @NSManaged var number: NSNumber
-    @NSManaged var sid: NSNumber
-    @NSManaged var type: String
 	
-	func getOriginalObject() -> PVRChannel {
-		return PVRChannel(id: id, channel: Int(channel), name: name, number: Int(number), sid: Int(sid), type: type, userData: nil)
-	}
+	// MARK: - Unmanaged instance fileds
 	
-	func setOriginalObject(object: PVRChannel) {
-		self.channel = object.channel
-		self.id = object.id
-		self.name = object.name
-		self.number = object.number
-		self.sid = object.sid
-		self.type = object.type
+	var originalObject: PVRChannel {
+		get {
+			return PVRChannel(id: id, channel: Int(channel), name: name, number: Int(number), sid: Int(sid), type: type, userData: nil)
+		}
+		set(object) {
+			self.channel = object.channel
+			self.id = object.id
+			self.name = object.name
+			self.number = object.number
+			self.sid = object.sid
+			self.type = object.type
+		}
 	}
 
 }

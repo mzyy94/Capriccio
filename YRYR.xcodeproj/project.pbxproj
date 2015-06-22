@@ -10,7 +10,6 @@
 		097A6E636FDE92C568ED36C7 /* Pods_YRYRTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE31B18A32300C57833 /* AppDelegate.swift */; };
 		9E8C3BE71B18A32300C57833 /* YRYR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE51B18A32300C57833 /* YRYR.xcdatamodeld */; };
-		9E8C3BE91B18A32300C57833 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE81B18A32300C57833 /* ViewController.swift */; };
 		9E8C3BEC1B18A32300C57833 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BEA1B18A32300C57833 /* Main.storyboard */; };
 		9E8C3BEE1B18A32300C57833 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BED1B18A32300C57833 /* Images.xcassets */; };
 		9E8C3BF11B18A32300C57833 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */; };
@@ -51,7 +50,6 @@
 		9E8C3BE21B18A32300C57833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8C3BE31B18A32300C57833 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8C3BE61B18A32300C57833 /* YRYR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YRYR.xcdatamodel; sourceTree = "<group>"; };
-		9E8C3BE81B18A32300C57833 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9E8C3BEB1B18A32300C57833 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E8C3BED1B18A32300C57833 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E8C3BF01B18A32300C57833 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				9E8C3BE31B18A32300C57833 /* AppDelegate.swift */,
 				9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */,
 				9E8C3C0C1B18AB5500C57833 /* PVRManager */,
-				9E8C3BE81B18A32300C57833 /* ViewController.swift */,
 				9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */,
 				9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */,
 				9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */,
@@ -432,7 +429,6 @@
 				9E8C3C0B1B18AAC600C57833 /* PVRManager.swift in Sources */,
 				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
 				9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */,
-				9E8C3BE91B18A32300C57833 /* ViewController.swift in Sources */,
 				9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */,
 				9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */,
 				9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */,
