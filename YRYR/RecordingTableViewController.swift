@@ -60,6 +60,15 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		// Refresh recording programs
 		updateRecordingPrograms()
 
+		// Load stored data in Core Data
+		for storedProgram in PVRProgramStore.by("state", equalTo: "\(PVRProgramState.Recording.rawValue.integerValue)").sorted(by: "startTime", ascending: true).find() {
+			let program = (storedProgram as! PVRProgramStore).originalObject
+			programsById[program.id] = program
+			programIds.append(program.id)
+		}
+		
+		self.tableView.reloadData()
+
 	}
 	
 	// MARK: - Refreshing recording data
@@ -87,7 +96,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 						dispatch_sync(dispatch_get_main_queue(), {
 							self.tableView.deleteSections(NSIndexSet(index: programCount - 1 - index), withRowAnimation: .Fade)
 						})
-						let programStore = PVRProgramStore.by("id", equalTo: programId).find().firstObject() as! PVRProgramStore
+						let programStore = PVRProgramStore.by("state", equalTo: "\(PVRProgramState.Recording.rawValue.integerValue)").by("id", equalTo: programId).find().firstObject() as! PVRProgramStore
 						programStore.beginWriting().delete().endWriting()
 					}
 				}
@@ -150,7 +159,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				let manager = ChinachuPVRManager.sharedManager
 				
 				manager.deleteProgram(self.programsById[self.programIds[indexPath.section]]!.id, success: {
-					let programStore = PVRProgramStore.by("id", equalTo: self.programsById[self.programIds[indexPath.section]]!.id).find().firstObject() as! PVRProgramStore
+					let programStore = PVRProgramStore.by("state", equalTo: "\(PVRProgramState.Recording.rawValue.integerValue)").by("id", equalTo: self.programsById[self.programIds[indexPath.section]]!.id).find().firstObject() as! PVRProgramStore
 					programStore.beginWriting().delete().endWriting()
 					self.programsById.removeValueForKey(self.programIds.removeAtIndex(indexPath.section) as String)
 

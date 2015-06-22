@@ -28,15 +28,6 @@ class ProgramTableViewController: UITableViewController {
 		// Set table view style
 		self.tableView.separatorStyle = .None
 		self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-		
-		// Load stored data in Core Data
-		for storedProgram in PVRProgramStore.all().sorted(by: "startTime", ascending: true).find() {
-			let program = (storedProgram as! PVRProgramStore).originalObject
-			programsById[program.id] = program
-			programIds.append(program.id)
-		}
-		
-		self.tableView.reloadData()
 	}
 
 	
