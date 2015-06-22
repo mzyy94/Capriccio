@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import BFPaperTableViewCell
 
-class ProgramInfoTableViewCell: UITableViewCell {
+class ProgramInfoTableViewCell: BFPaperTableViewCell {
 	
 	// MARK: - Instance fileds
 	var borderLayer: CALayer! = nil
@@ -54,6 +55,14 @@ class ProgramInfoTableViewCell: UITableViewCell {
 		borderLayer = CALayer()
 		borderLayer.backgroundColor = UIColor.lightGrayColor().CGColor
 		borderLayer.frame = CGRect(x: 0, y: self.frame.size.height - borderHeight, width: self.frame.size.width, height: borderHeight)
+		
+		// BFPaperTableViewCell settings
+		self.usesSmartColor = true
+		self.tapDelay = 0
+		self.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall
+		self.alwaysCompleteFullAnimation = false
+		
+		self.tintColor = .grayColor()
 	}
 
 	

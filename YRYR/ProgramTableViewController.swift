@@ -69,14 +69,12 @@ class ProgramTableViewController: UITableViewController {
 		
 		// Cell configuratoins
 		cell.accessoryType = .DetailButton
-		cell.tintColor = .grayColor()
 		cell.titleLabel.text = program.title
 		cell.subTitleLabel.text = program.subTitle
 		cell.genreLabel.text = program.genre
 		cell.episodeLabel.text = program.episode != nil && program.episode > 0 ? "#\(program.episode!) " : ""
 		cell.durationLabel.text = "\(Int(program.duration / 60)) min."
 		cell.dateLabel.text = dateFormatter.stringFromDate(program.startTime)
-		
 
 		return cell
 	}
