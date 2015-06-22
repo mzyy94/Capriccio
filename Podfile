@@ -13,6 +13,7 @@ target 'YRYR' do
 	pod 'GSIndeterminateProgressBar', '~> 0.1.0'
 	pod 'KeychainAccess', '~> 1.2.1'
 	pod 'BFPaperTabBarController', '~> 2.1.10'
+	pod 'BFPaperTableViewCell', '~> 2.3.3'
 end
 
 target 'YRYRTests' do
