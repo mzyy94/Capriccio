@@ -97,6 +97,47 @@ class ChinachuPVRManager: PVRManager {
 		}
 	}
 
+	func cancelReserving(programId: String, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
+		
+		Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/reserves/" + programId + ".json")
+			.authenticate(user: username, password: password)
+			.response { (request, response, data, error) in
+				if error != nil {
+					failure(error!)
+				} else {
+					success()
+				}
+		}
+	}
+	
+	func skipReserving(programId: String, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
+		
+		Alamofire.request(.PUT, self.remoteHost.absoluteString! + "/api/reserves/" + programId + "/skip.json")
+			.authenticate(user: username, password: password)
+			.response { (request, response, data, error) in
+				if error != nil {
+					failure(error!)
+				} else {
+					success()
+				}
+		}
+	}
+	
+	func unskipReserving(programId: String, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
+		let (username, password) = getAccount()
+		
+		Alamofire.request(.PUT, self.remoteHost.absoluteString! + "/api/reserves/" + programId + "/unskip.json")
+			.authenticate(user: username, password: password)
+			.response { (request, response, data, error) in
+				if error != nil {
+					failure(error!)
+				} else {
+					success()
+				}
+		}
+	}
 	
 	// MARK: - Recording program
 	
