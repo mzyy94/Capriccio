@@ -79,7 +79,7 @@ class ChinachuPVRManager: PVRManager {
 							channel: channel, episode: prog["episode"].intValue,
 							startTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["start"].intValue / 1000)),
 							endTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["end"].intValue / 1000)),
-							duration: NSTimeInterval(prog["seconds"].intValue), userData: nil)
+							duration: NSTimeInterval(prog["seconds"].intValue), state: .Reserving, userData: nil)
 						
 						programs.append(program)
 					}
@@ -119,7 +119,7 @@ class ChinachuPVRManager: PVRManager {
 								channel: channel, episode: prog["episode"].intValue,
 								startTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["start"].intValue / 1000)),
 								endTime: NSDate(timeIntervalSince1970: NSTimeInterval(prog["end"].intValue / 1000)),
-								duration: NSTimeInterval(prog["seconds"].intValue), userData: nil)
+								duration: NSTimeInterval(prog["seconds"].intValue), state: .Recording, userData: nil)
 							
 							programs.append(program)
 						}

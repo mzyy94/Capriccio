@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum PVRProgramState: NSNumber {
+	case None = 0
+	case Reserving = 1
+	case Recording = 2
+}
+
 class PVRProgram: NSObject {
 	
 	// MARK: - Instance fileds
@@ -24,6 +30,7 @@ class PVRProgram: NSObject {
 	let startTime: NSDate
 	let endTime: NSDate
 	let duration: NSTimeInterval
+	var state: PVRProgramState
 	var userData: AnyObject?
 	
 	
@@ -31,7 +38,7 @@ class PVRProgram: NSObject {
 	
 	init(id: String, title: String, fullTitle: String, subTitle: String, detail: String,
 		attributes: [String], genre: String, channel: PVRChannel, episode: Int?,
-		startTime: NSDate, endTime: NSDate, duration: NSTimeInterval, userData: NSObject?) {
+		startTime: NSDate, endTime: NSDate, duration: NSTimeInterval, state: PVRProgramState, userData: NSObject?) {
 			self.id = id
 			self.title = title
 			self.fullTitle = fullTitle
@@ -44,6 +51,7 @@ class PVRProgram: NSObject {
 			self.startTime = startTime
 			self.endTime = endTime
 			self.duration = duration
+			self.state = state
 			self.userData = userData
 	}
 	
@@ -60,6 +68,7 @@ class PVRProgram: NSObject {
 		self.startTime = dict["startTime"] as! NSDate
 		self.endTime = dict["endTime"] as! NSDate
 		self.duration = dict["duration"] as! NSTimeInterval
+		self.state = dict["state"] as! PVRProgramState
 		self.userData = dict["userData"] as? NSObject
 	}
 	

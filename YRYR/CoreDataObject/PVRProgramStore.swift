@@ -22,6 +22,7 @@ class PVRProgramStore: NSManagedObject {
 	@NSManaged var genre: String
 	@NSManaged var id: String
 	@NSManaged var startTime: NSDate
+	@NSManaged var state: NSNumber
 	@NSManaged var subTitle: String
 	@NSManaged var title: String
 	@NSManaged var channel: PVRChannelStore
@@ -34,7 +35,7 @@ class PVRProgramStore: NSManagedObject {
 			return PVRProgram(id: id, title: title, fullTitle: fullTitle, subTitle: subTitle,
 				detail: detail, attributes: split(attributes) { contains(",", $0) }, genre: genre,
 				channel: channel.originalObject, episode: Int(episode), startTime: startTime,
-				endTime: endTime, duration: NSTimeInterval(duration), userData: nil)
+				endTime: endTime, duration: NSTimeInterval(duration), state: PVRProgramState(rawValue: state)! ,userData: nil)
 		}
 		set (object) {
 			self.attributes = join(",", object.attributes)
@@ -46,6 +47,7 @@ class PVRProgramStore: NSManagedObject {
 			self.genre = object.genre
 			self.id = object.id
 			self.startTime = object.startTime
+			self.state = object.state.rawValue
 			self.subTitle = object.subTitle
 			self.title = object.title
 			if let channel = PVRChannelStore.by("id", equalTo: object.channel.id).find().firstObject() as? PVRChannelStore {
