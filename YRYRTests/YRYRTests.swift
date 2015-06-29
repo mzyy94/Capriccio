@@ -52,6 +52,23 @@ class YRYRTests: XCTestCase {
 		self.waitForExpectationsWithTimeout(30, handler: nil)
 	}
 	
+	func testMusicStoreManager() {
+		let musicSearchExpectation = self.expectationWithDescription("Music search test")
+		
+		let manager = MusicStoreManager()
+		
+		manager.getRelatedMusicTracks("ご注文はうさぎですか？",
+			success: {tracks in
+				musicSearchExpectation.fulfill()
+			}, failure: {error in
+				XCTFail("\(error)")
+				musicSearchExpectation.fulfill()
+		})
+		
+		
+		self.waitForExpectationsWithTimeout(30, handler: nil)
+	}
+	
 	func testPerformanceExample() {
 		// This is an example of a performance test case.
 		self.measureBlock() {

@@ -27,6 +27,10 @@
 		9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA4EEEA1B1CEC3C008D4059 /* VideoPlayViewController.swift */; };
 		9EB59A761B2E80DF0046846B /* RecordingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */; };
 		9EBAD3671B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */; };
+		9EBAD3691B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */; };
+		9EBAD36A1B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */; };
+		9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */; };
+		9EBAD36E1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */; };
 		9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */; };
 		9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */; };
 		9EE583781B1DFBC60011E41A /* PVRChannelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */; };
@@ -68,6 +72,8 @@
 		9EA4EF241B1CF0A2008D4059 /* YRYR-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YRYR-Bridging-Header.h"; sourceTree = "<group>"; };
 		9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableViewController.swift; sourceTree = "<group>"; };
 		9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GSIndeterminateProgressView+ShowColor.swift"; path = "Extension/GSIndeterminateProgressView+ShowColor.swift"; sourceTree = "<group>"; };
+		9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicTrackInformation.swift; path = MusicStoreManager/MusicTrackInformation.swift; sourceTree = "<group>"; };
+		9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicStoreManager.swift; path = MusicStoreManager/MusicStoreManager.swift; sourceTree = "<group>"; };
 		9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailViewController.swift; sourceTree = "<group>"; };
 		9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRProgramStore.swift; path = CoreDataObject/PVRProgramStore.swift; sourceTree = "<group>"; };
 		9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRChannelStore.swift; path = CoreDataObject/PVRChannelStore.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 				9E8C3BE31B18A32300C57833 /* AppDelegate.swift */,
 				9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */,
 				9E8C3C0C1B18AB5500C57833 /* PVRManager */,
+				9EBAD36B1B41A9C300906B5C /* MusicStoreManager */,
 				9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */,
 				9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */,
 				9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */,
@@ -190,6 +197,15 @@
 				9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */,
 			);
 			name = Extension;
+			sourceTree = "<group>";
+		};
+		9EBAD36B1B41A9C300906B5C /* MusicStoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */,
+				9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */,
+			);
+			name = MusicStoreManager;
 			sourceTree = "<group>";
 		};
 		9EE583791B1DFBCC0011E41A /* CoreDataObject */ = {
@@ -441,12 +457,14 @@
 				9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */,
 				9EB59A761B2E80DF0046846B /* RecordingTableViewController.swift in Sources */,
 				9E8C3C0B1B18AAC600C57833 /* PVRManager.swift in Sources */,
+				9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
 				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
 				9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */,
 				9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */,
 				9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */,
 				9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */,
 				9EA4EEE91B1CEA77008D4059 /* Empty.mm in Sources */,
+				9EBAD3691B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */,
 				9E8C3C0E1B18ADC100C57833 /* ChinachuPVRManager.swift in Sources */,
 				9EEF69F21B3853B700099B64 /* ReservingTableViewController.swift in Sources */,
 				9E8C3BE71B18A32300C57833 /* YRYR.xcdatamodeld in Sources */,
@@ -459,6 +477,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EBAD36E1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
+				9EBAD36A1B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */,
 				9E8C3C121B18ADFC00C57833 /* ChinachuPVRManager.swift in Sources */,
 				9E8C3C0F1B18ADEF00C57833 /* PVRChannel.swift in Sources */,
 				9E8C3C101B18ADF200C57833 /* PVRProgram.swift in Sources */,
