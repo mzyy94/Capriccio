@@ -121,6 +121,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				
 			})
 			}, failure: { error in
+				self.progressView.stopAnimatingAndShowColor(.redColor())
 				self.refreshControl!.endRefreshing()
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		})
