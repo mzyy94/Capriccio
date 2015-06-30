@@ -14,6 +14,7 @@ target 'YRYR' do
 	pod 'KeychainAccess', '~> 1.2.1'
 	pod 'BFPaperTabBarController', '~> 2.1.10'
 	pod 'BFPaperTableViewCell', '~> 2.3.3'
+	pod 'UIColor+BFPaperColors', '~> 1.7.1'
 end
 
 target 'YRYRTests' do

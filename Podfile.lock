@@ -58,6 +58,7 @@ DEPENDENCIES:
   - SugarRecord/CoreData (from `https://github.com/SugarRecord/SugarRecord.git`, commit
     `3a9bdf27da`)
   - SwiftyJSON (~> 2.2.0)
+  - UIColor+BFPaperColors (~> 1.7.1)
 
 EXTERNAL SOURCES:
   SugarRecord:
