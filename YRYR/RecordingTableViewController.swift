@@ -121,7 +121,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				
 			})
 			}, failure: { error in
-				self.progressView.stopAnimatingAndShowColor(.redColor())
+				self.progressView.stopAnimatingAndShowColor(UIColor.paperColorRed500())
 				self.refreshControl!.endRefreshing()
 				UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		})
@@ -173,7 +173,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 			
 		}
 		
-		del.backgroundColor = UIColor.redColor()
+		del.backgroundColor = UIColor.paperColorRed500()
 		
 		return [del]
 	}

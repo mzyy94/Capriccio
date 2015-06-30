@@ -27,7 +27,7 @@ class ProgramTableViewController: UITableViewController {
 
 		// Set table view style
 		self.tableView.separatorStyle = .None
-		self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+		self.tableView.backgroundColor = UIColor.paperColorBlueGray200()
 	}
 
 	

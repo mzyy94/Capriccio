@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SugarRecord
+import UIColor_BFPaperColors
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let pvrPort = userDefaults.integerForKey("pvrPort")
 
 		ChinachuPVRManager.sharedManager.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
+		
+		UITabBar.appearance().tintColor = UIColor.paperColorCyan600()
 
 		return true
 	}

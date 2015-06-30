@@ -11,9 +11,9 @@
             <objects>
                 <tableViewController id="KuS-5f-sDs" customClass="RecordingTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="LMJ-wJ-X2I">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="58" id="adB-Al-eIs">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -27,7 +27,13 @@
                             <outlet property="delegate" destination="KuS-5f-sDs" id="jGn-zb-Y30"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recording" id="vjb-cF-F25"/>
+                    <navigationItem key="navigationItem" title="Recording" id="vjb-cF-F25">
+                        <barButtonItem key="backBarButtonItem" enabled="NO" id="XPD-06-vW3">
+                            <string key="title" base64-UTF8="YES">
+Cg
+</string>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="adk-LG-rQN">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -42,13 +48,13 @@
         <!--Program Detail View Controller-->
         <scene sceneID="u7b-GK-iHo">
             <objects>
-                <viewController storyboardIdentifier="ProgramDetailView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rqj-fx-chh" customClass="ProgramDetailViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgramDetailView" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rqj-fx-chh" customClass="ProgramDetailViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6dl-Jn-Xc7"/>
                         <viewControllerLayoutGuide type="bottom" id="ODE-qb-hLB"/>
                     </layoutGuides>
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="fCs-G0-Wwi">
-                        <rect key="frame" x="0.0" y="64" width="600" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lgl-S4-OMO">
@@ -104,6 +110,7 @@
                                                     <segment title="Music"/>
                                                     <segment title="Service"/>
                                                 </segments>
+                                                <color key="tintColor" red="0.24313725489999999" green="0.31372549020000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
                                                     <action selector="informationSegmentChanged:" destination="rqj-fx-chh" eventType="valueChanged" id="m9q-5S-0Dm"/>
                                                 </connections>
@@ -190,7 +197,8 @@
                             <constraint firstAttribute="trailing" secondItem="Lgl-S4-OMO" secondAttribute="trailing" id="xy5-4W-C0b"/>
                         </constraints>
                     </scrollView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>
@@ -412,9 +420,14 @@
             <objects>
                 <navigationController id="ucO-Vr-b8X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="xCb-lx-cZ8"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fbp-Ru-FUB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fbp-Ru-FUB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.75686274509803919" green="0.86274509803921573" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="KuS-5f-sDs" kind="relationship" relationship="rootViewController" id="5f1-vb-IdE"/>
@@ -429,10 +442,12 @@
             <objects>
                 <tabBarController id="AMO-7n-nUe" customClass="BFPaperTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="lU0-xb-oXR">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="lU0-xb-oXR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.96470588235294119" green="0.16470588235294117" blue="0.12941176470588237" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="ucO-Vr-b8X" kind="relationship" relationship="viewControllers" id="ca6-l1-6qY"/>
@@ -449,7 +464,7 @@
             <objects>
                 <tableViewController title="Settings" id="Ogp-UB-SZY" customClass="SettingTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="s5Z-zm-xND">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="FOw-qj-GJU">
@@ -578,9 +593,9 @@
             <objects>
                 <tableViewController id="QEN-1b-GdU" customClass="ReservingTableViewController" customModule="YRYR" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="kPW-50-Nyh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" rowHeight="58" id="KHP-wm-LgX">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -611,9 +626,14 @@
             <objects>
                 <navigationController id="n44-8E-7Ji" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="SoA-HJ-HYD"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PAk-J6-hJB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="PAk-J6-hJB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.75686274509999996" green="0.86274509799999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="QEN-1b-GdU" kind="relationship" relationship="rootViewController" id="46y-lg-c6m"/>
@@ -630,6 +650,6 @@
         <image name="pause" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pog-bE-naL"/>
+        <segue reference="PB7-aD-ker"/>
     </inferredMetricsTieBreakers>
 </document>

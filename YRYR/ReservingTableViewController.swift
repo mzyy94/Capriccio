@@ -179,7 +179,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				
 			}
 			
-			skip.backgroundColor = UIColor.redColor()
+			skip.backgroundColor = UIColor.paperColorRed500()
 			
 			return [skip]
 		case .ManualReserving:
@@ -204,7 +204,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				
 			}
 			
-			remove.backgroundColor = UIColor.redColor()
+			remove.backgroundColor = UIColor.paperColorRed500()
 			
 			return [remove]
 		case .SkippedReserving:
@@ -227,7 +227,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				self.parentViewController?.presentViewController(confirmAlertView, animated: true, completion: nil)
 			}
 			
-			unskip.backgroundColor = UIColor.redColor()
+			unskip.backgroundColor = UIColor.paperColorRed500()
 			
 			return [unskip]
 		default:

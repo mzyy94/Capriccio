@@ -53,7 +53,7 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 		// Initialization code
 
 		borderLayer = CALayer()
-		borderLayer.backgroundColor = UIColor.lightGrayColor().CGColor
+		borderLayer.backgroundColor = UIColor.paperColorBlueGray400().CGColor
 		borderLayer.frame = CGRect(x: 0, y: self.frame.size.height - borderHeight, width: self.frame.size.width, height: borderHeight)
 		
 		// BFPaperTableViewCell settings
@@ -62,7 +62,7 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 		self.tapCircleDiameter = bfPaperTableViewCell_tapCircleDiameterSmall
 		self.alwaysCompleteFullAnimation = false
 		
-		self.tintColor = .grayColor()
+		self.tintColor = UIColor.paperColorTeal100()
 	}
 
 	
