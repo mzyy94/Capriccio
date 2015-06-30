@@ -9,12 +9,13 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import StoreKit
 
-class MusicStoreManager: NSObject {
+class MusicStoreManager: NSObject, SKStoreProductViewControllerDelegate {
 	
 	// MARK: - Instance fileds
 
-	var token: String = ""
+	var token: NSString = "1l3v4mQ"
 	
 	
 	// MARK: - Class fileds
@@ -40,6 +41,34 @@ class MusicStoreManager: NSObject {
 					success?(tracks)
 				}
 		}
+	}
+	
+	
+	// MARK: - Open iTunes Store
+	
+	func openStoreView(trackId: NSNumber, inViewController viewController: AnyObject) {
+		let target = viewController as! UIViewController
+		let store = SKStoreProductViewController()
+		store.delegate = self
+
+	
+		target.presentViewController(store, animated: true, completion: {
+			let params: [String: AnyObject] = [SKStoreProductParameterITunesItemIdentifier: trackId,
+				SKStoreProductParameterAffiliateToken: self.token]
+			store.loadProductWithParameters(params, completionBlock: {(completed, error) in
+				if error != nil {
+					let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC))
+					// TODO: Show error message
+					dispatch_after(popTime, dispatch_get_main_queue(), {
+						store.dismissViewControllerAnimated(true, completion: nil)
+					})
+				}
+			})
+		})
+	}
+	
+	func productViewControllerDidFinish(viewController: SKStoreProductViewController!) {
+		viewController.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
 }

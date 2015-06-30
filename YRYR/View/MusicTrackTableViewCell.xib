@@ -43,6 +43,9 @@
                             <constraint firstAttribute="height" constant="30" id="vaP-s4-myr"/>
                         </constraints>
                         <state key="normal" title="¥100"/>
+                        <connections>
+                            <action selector="buyMusicButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TZT-WU-17P"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

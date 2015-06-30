@@ -17,6 +17,7 @@ class MusicTrackTableViewCell: UITableViewCell {
 	var audioItem: AVPlayerItem!
 	var audioPlayer: AVPlayer!
 	var previewUrl: NSURL!
+	var trackId: Int!
 	var circularProgressView: CircularAudioProgressView!
 	var nowPreviewTrackPlaying: Bool = false
 	
@@ -40,16 +41,19 @@ class MusicTrackTableViewCell: UITableViewCell {
 		buyMusicButton.layer.borderColor = self.tintColor.CGColor
 		buyMusicButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 		
-		// Set tag gesture event
+		// Set tap gesture event
 		let artworkImageTapGesture = UITapGestureRecognizer(target: self, action: Selector("playPreviewTrack:"))
 		artworkImage.addGestureRecognizer(artworkImageTapGesture)
+		let cellTapGesture = UITapGestureRecognizer(target: self, action: Selector("buyMusicButtonPressed:"))
+		self.addGestureRecognizer(cellTapGesture)
 		
 	}
 
-	override func setSelected(selected: Bool, animated: Bool) {
-		super.setSelected(selected, animated: animated)
 
-		// Configure the view for the selected state
+	// MARK: - Interface Builder actions
+	
+	@IBAction func buyMusicButtonPressed(sender: AnyObject) {
+		NSNotificationCenter.defaultCenter().postNotificationName("openStoreView", object: nil, userInfo: ["trackId": trackId])
 	}
 	
 	

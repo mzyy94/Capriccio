@@ -12,6 +12,7 @@ class MusicTrackInformation: NSObject {
 	
 	// MARK: - Instance fileds
 	
+	var trackId: Int
 	var trackName: String
 	var artistName: String
 	var collectionName: String?
@@ -26,6 +27,7 @@ class MusicTrackInformation: NSObject {
 	// MARK: - Initialization
 	
 	init(fromDictionary dict: NSDictionary) {
+		self.trackId = dict["trackId"]!.integerValue
 		self.trackName = dict["trackName"] as! String
 		self.artistName = dict["artistName"] as! String
 		self.collectionName = dict["collectionName"] as? String

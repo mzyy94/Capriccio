@@ -149,8 +149,11 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
-		NSNotificationCenter.defaultCenter().removeObserver(self)
 		self.stopAllPreviewTrack(nil)
+	}
+
+	deinit {
+		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 	
 	
@@ -290,6 +293,15 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 
 	
+	// MARK: - Open iTunes Store view
+	
+	func openStoreView(notification: NSNotification) {
+		let trackId = notification.userInfo!["trackId"]! as! Int
+		self.informationTable.reloadData()
+		MusicStoreManager.sharedManager.openStoreView(trackId, inViewController: self)
+	}
+	
+	
 	// MARK: - Table view data source
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -357,6 +369,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			}
 			cell.buyMusicButton.setTitle("¥\(Int(track.trackPrice))", forState: .Normal)
 			cell.previewUrl = track.previewUrl
+			cell.trackId = track.trackId
 			
 			SDWebImageManager.sharedManager().downloadImageWithURL(track.artworkUrl,
 				options: .CacheMemoryOnly,
@@ -367,6 +380,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 					cell.artworkImage.image = image
 			})
 			NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stopAllPreviewTrack:"), name: "startPreviewTrackPlaying", object: cell)
+			NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("openStoreView:"), name: "openStoreView", object: nil)
 			
 			return cell
 		case .service:
