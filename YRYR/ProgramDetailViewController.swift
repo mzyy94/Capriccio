@@ -16,9 +16,11 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	// MARK: - Instance fileds
 	
 	var program: PVRProgram! = nil
-	enum viewType {
-		case detail
-		case service
+	var musicTracks: [MusicTrackInformation] = []
+	enum viewType: NSNumber {
+		case detail = 0
+		case music = 1
+		case service = 2
 	}
 	var currentViewType: viewType = .detail
 	
@@ -101,16 +103,17 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				
 		})
 		
-		
 		// Setup table view
 		self.informationTable.delegate = self
 		self.informationTable.dataSource = self
 
+		let programCellNib = UINib(nibName: "MusicTrackTableViewCell", bundle: nil)
+		self.informationTable.registerNib(programCellNib, forCellReuseIdentifier: "MusicTrackCell")
+		
 		self.informationTable.removeConstraints((self.informationTable.constraints()))
 		self.informationTable.addConstraint(NSLayoutConstraint(item: informationTable, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 44 * 5))
 
 		self.informationTable.reloadData()
-		
 		
 		// Setup file download button
 		if manager.fileDownloaded(self.program.id) {
@@ -143,6 +146,15 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 	
 	
+	// MARK: - View deinitialization
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		NSNotificationCenter.defaultCenter().removeObserver(self)
+		self.stopAllPreviewTrack(nil)
+	}
+	
+	
 	// MARK: - Memory/resource management
 	
 	override func didReceiveMemoryWarning() {
@@ -150,6 +162,29 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		// Dispose of any resources that can be recreated.
 	}
 
+	
+	// MARK: - Interface Builder actions
+	
+	@IBAction func informationSegmentChanged(sender: UISegmentedControl) {
+		currentViewType = viewType(rawValue: sender.selectedSegmentIndex)!
+		switch currentViewType {
+		case .detail:
+			self.informationTable.separatorStyle = .None
+			self.informationTable.reloadData()
+		case .music:
+			self.informationTable.separatorStyle = .SingleLine
+			self.informationTable.reloadData()
+			MusicStoreManager.sharedManager.getRelatedMusicTracks(self.program.title,
+				success: {tracks in
+					self.musicTracks = tracks
+					self.informationTable.reloadData()
+				}, failure: {error in
+			})
+		case .service:
+			return
+		}
+	}
+	
 	
 	// MARK: - Video download
 	
@@ -230,6 +265,16 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 	
 	
+	// MARK: - Preview track control
+	
+	func stopAllPreviewTrack(sender: AnyObject?) {
+		for i in 0..<musicTracks.count {
+			let musicTrackCell = self.informationTable.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? MusicTrackTableViewCell
+			musicTrackCell?.audioTrackDidFinished(nil)
+		}
+	}
+
+	
 	// MARK: - Table view data source
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -240,8 +285,21 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		switch currentViewType {
 		case .detail:
 			return 5
+		case .music:
+			return musicTracks.count
 		case .service:
 			return 0
+		}
+	}
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		switch currentViewType {
+		case .detail:
+			return 44
+		case .music:
+			return 63
+		case .service:
+			return 44
 		}
 	}
 	
@@ -271,6 +329,29 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			default:
 				return cell
 			}
+			
+			return cell
+		case .music:
+			let cell = tableView.dequeueReusableCellWithIdentifier("MusicTrackCell", forIndexPath: indexPath) as! MusicTrackTableViewCell
+			let track = musicTracks[indexPath.row]
+			cell.trackNameLabel.text = track.trackName
+			if let collectionName = track.collectionName {
+				cell.trackInfoLabel.text = "\(track.artistName) - \(collectionName)"
+			} else {
+				cell.trackInfoLabel.text = track.artistName
+			}
+			cell.buyMusicButton.setTitle("¥\(Int(track.trackPrice))", forState: .Normal)
+			cell.previewUrl = track.previewUrl
+			
+			SDWebImageManager.sharedManager().downloadImageWithURL(track.artworkUrl,
+				options: .CacheMemoryOnly,
+				progress: {(received, expected) in
+					return
+				},
+				completed: {(image, error, cacheType, finished, imageURL) in
+					cell.artworkImage.image = image
+			})
+			NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stopAllPreviewTrack:"), name: "startPreviewTrackPlaying", object: cell)
 			
 			return cell
 		case .service:

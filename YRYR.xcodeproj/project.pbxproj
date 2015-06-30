@@ -31,6 +31,9 @@
 		9EBAD36A1B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */; };
 		9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */; };
 		9EBAD36E1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */; };
+		9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */; };
+		9EBAD3721B41B5BE00906B5C /* MusicTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */; };
+		9EBAD3761B41E3E000906B5C /* CircularAudioProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */; };
 		9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */; };
 		9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */; };
 		9EE583781B1DFBC60011E41A /* PVRChannelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */; };
@@ -74,6 +77,9 @@
 		9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GSIndeterminateProgressView+ShowColor.swift"; path = "Extension/GSIndeterminateProgressView+ShowColor.swift"; sourceTree = "<group>"; };
 		9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicTrackInformation.swift; path = MusicStoreManager/MusicTrackInformation.swift; sourceTree = "<group>"; };
 		9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicStoreManager.swift; path = MusicStoreManager/MusicStoreManager.swift; sourceTree = "<group>"; };
+		9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicTrackTableViewCell.swift; path = View/MusicTrackTableViewCell.swift; sourceTree = "<group>"; };
+		9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MusicTrackTableViewCell.xib; path = View/MusicTrackTableViewCell.xib; sourceTree = "<group>"; };
+		9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularAudioProgressView.swift; path = View/CircularAudioProgressView.swift; sourceTree = "<group>"; };
 		9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailViewController.swift; sourceTree = "<group>"; };
 		9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRProgramStore.swift; path = CoreDataObject/PVRProgramStore.swift; sourceTree = "<group>"; };
 		9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRChannelStore.swift; path = CoreDataObject/PVRChannelStore.swift; sourceTree = "<group>"; };
@@ -222,6 +228,9 @@
 			children = (
 				9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */,
 				9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */,
+				9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */,
+				9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */,
+				9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -340,6 +349,7 @@
 				9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */,
 				9E8C3BEC1B18A32300C57833 /* Main.storyboard in Resources */,
 				9E8C3BF11B18A32300C57833 /* LaunchScreen.xib in Resources */,
+				9EBAD3721B41B5BE00906B5C /* MusicTrackTableViewCell.xib in Resources */,
 				9E8C3BEE1B18A32300C57833 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,9 +467,11 @@
 				9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */,
 				9EB59A761B2E80DF0046846B /* RecordingTableViewController.swift in Sources */,
 				9E8C3C0B1B18AAC600C57833 /* PVRManager.swift in Sources */,
+				9EBAD3761B41E3E000906B5C /* CircularAudioProgressView.swift in Sources */,
 				9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
 				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
 				9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */,
+				9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */,
 				9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */,
 				9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */,
 				9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */,

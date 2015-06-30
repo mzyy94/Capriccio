@@ -101,8 +101,12 @@
                                                 </constraints>
                                                 <segments>
                                                     <segment title="Details"/>
+                                                    <segment title="Music"/>
                                                     <segment title="Service"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="informationSegmentChanged:" destination="rqj-fx-chh" eventType="valueChanged" id="m9q-5S-0Dm"/>
+                                                </connections>
                                             </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
