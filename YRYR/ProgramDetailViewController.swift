@@ -110,8 +110,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		let programCellNib = UINib(nibName: "MusicTrackTableViewCell", bundle: nil)
 		self.informationTable.registerNib(programCellNib, forCellReuseIdentifier: "MusicTrackCell")
 		
-		self.informationTable.removeConstraints((self.informationTable.constraints()))
-		self.informationTable.addConstraint(NSLayoutConstraint(item: informationTable, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 44 * 5))
+		self.setupTableViewHeight()
 
 		self.informationTable.reloadData()
 		
@@ -178,11 +177,27 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				success: {tracks in
 					self.musicTracks = tracks
 					self.informationTable.reloadData()
+
+					self.setupTableViewHeight()
 				}, failure: {error in
 			})
 		case .service:
 			return
 		}
+		setupTableViewHeight()
+	}
+	
+	
+	// MARK: - Table View height
+	
+	func setupTableViewHeight() {
+		let cellHeight = self.tableView(self.informationTable, heightForRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+		let cellCount = self.tableView(self.informationTable, numberOfRowsInSection: 0)
+		if cellCount == 0 {
+			return
+		}
+		self.informationTable.removeConstraints((self.informationTable.constraints()))
+		self.informationTable.addConstraint(NSLayoutConstraint(item: self.informationTable, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: cellHeight * CGFloat(cellCount)))
 	}
 	
 	
