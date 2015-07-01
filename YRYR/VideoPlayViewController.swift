@@ -123,7 +123,6 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		}
 		
 		// Status bar styling
-		UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 	}
 	
@@ -153,7 +152,6 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		mediaPlayer.stop()
 
 		// Status bar styling
-		UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 		
 		// Unset external display events
