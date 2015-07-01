@@ -415,11 +415,11 @@ Cg
             </objects>
             <point key="canvasLocation" x="3211" y="931"/>
         </scene>
-        <!--Item-->
+        <!--Recording-->
         <scene sceneID="E82-tR-nCP">
             <objects>
                 <navigationController id="ucO-Vr-b8X" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="xCb-lx-cZ8"/>
+                    <tabBarItem key="tabBarItem" title="Recording" image="video_library" id="xCb-lx-cZ8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fbp-Ru-FUB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -621,11 +621,11 @@ Cg
             </objects>
             <point key="canvasLocation" x="1788" y="1653"/>
         </scene>
-        <!--Item-->
+        <!--Reserving-->
         <scene sceneID="F9X-dS-TvP">
             <objects>
                 <navigationController id="n44-8E-7Ji" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="SoA-HJ-HYD"/>
+                    <tabBarItem key="tabBarItem" title="Reserving" image="av_timer" id="SoA-HJ-HYD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="PAk-J6-hJB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -645,9 +645,11 @@ Cg
         </scene>
     </scenes>
     <resources>
+        <image name="av_timer" width="36" height="36"/>
         <image name="forward_30_white" width="36" height="36"/>
         <image name="pause_white" width="36" height="36"/>
         <image name="replay_30_white" width="36" height="36"/>
+        <image name="video_library" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PB7-aD-ker"/>
