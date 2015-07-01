@@ -43,13 +43,11 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		
 		
 		// Progress view initialization
-		let navigationBar = self.navigationController!.navigationBar
-		
-		self.progressView = GSIndeterminateProgressView(frame: CGRect(x: 0, y: navigationBar.frame.size.height, width: navigationBar.frame.size.width, height: 2))
-		self.progressView.progressTintColor = navigationBar.superview!.tintColor
+		self.progressView = GSIndeterminateProgressView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2))
+		self.progressView.progressTintColor = UIColor.paperColorBlue400()
 		self.progressView.backgroundColor = UIColor.clearColor()
 		self.progressView.autoresizingMask = .FlexibleWidth | .FlexibleTopMargin
-		navigationBar.addSubview(self.progressView)
+		self.navigationController?.view.addSubview(self.progressView)
 		
 		// Set refresh control action
 		self.refreshControl!.addTarget(self, action: Selector("updateRecordingPrograms"), forControlEvents: .ValueChanged)
