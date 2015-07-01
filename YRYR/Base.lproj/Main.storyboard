@@ -62,6 +62,7 @@ Cg
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fj6-OL-xsa">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="fj6-OL-xsa" secondAttribute="height" multiplier="16:9" id="yam-tV-E3p"/>
                                         </constraints>

@@ -65,6 +65,20 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		summaryView.sizeToFit()
 		
+		
+		// Place play button
+		self.playButton = BFPaperButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 56, height: 56)), raised: true)
+		self.playButton.cornerRadius = self.playButton.frame.size.width / 2
+		self.playButton.backgroundColor = UIColor.paperColorLightBlue600()
+		self.playButton.setImage(UIImage(named: "play_arrow_white"), forState: .Normal)
+		self.playButton.tintColor = UIColor(white: 0.9, alpha: 0.9)
+		self.playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
+		
+		self.view.addSubview(self.playButton)
+		// Force layout to use Facade layouting
+		self.view.setNeedsLayout()
+		self.view.layoutIfNeeded()
+		
 
 		// Thumbnail loader
 		let imageLoadingIndicatorView = MRActivityIndicatorView()
@@ -90,16 +104,6 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				imageLoadingIndicatorView.stopAnimating()
 				
 				self.previewImageView.image = image
-				
-				self.playButton = BFPaperButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 56, height: 56)), raised: true)
-				self.playButton.cornerRadius = self.playButton.frame.size.width / 2
-				self.playButton.backgroundColor = UIColor.paperColorLightBlue600()
-				self.playButton.setImage(UIImage(named: "play_arrow_white"), forState: .Normal)
-				self.playButton.tintColor = UIColor(white: 0.9, alpha: 0.9)
-				self.playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
-				
-				self.view.addSubview(self.playButton)
-				
 		})
 		
 		// Setup table view
