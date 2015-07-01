@@ -14,7 +14,7 @@ class ProgramTableViewController: UITableViewController {
 	
 	var programIds: [String] = []
 	var programsById: [String: PVRProgram] = [:]
-	
+	let marginView = UIView()
 	
 	// MARK: - View initialization
 	
@@ -86,7 +86,7 @@ class ProgramTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		return UIView()
+		return marginView
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
