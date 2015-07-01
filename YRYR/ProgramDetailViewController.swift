@@ -12,6 +12,7 @@ import MRProgress
 import FFCircularProgressView
 import BFPaperButton
 import Facade
+import HMSegmentedControl
 
 class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -75,6 +76,22 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		self.playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
 		
 		self.view.addSubview(self.playButton)
+		
+		// Place informationSegment
+		let informationSegment = HMSegmentedControl(sectionTitles: ["Detail", "Music", "Service"])
+		informationSegment.frame = CGRect(x: 0, y: 0, width: 600, height: 32)
+		informationSegment.addTarget(self, action: Selector("informationSegmentChanged:"), forControlEvents: .ValueChanged)
+		informationSegment.backgroundColor = UIColor.paperColorBlueGray400()
+		informationSegment.selectionIndicatorColor = UIColor.paperColorCyan100()
+		informationSegment.segmentEdgeInset = UIEdgeInsetsZero
+		informationSegment.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.paperColorGray300(), NSFontAttributeName: UIFont.systemFontOfSize(14)]
+		informationSegment.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+		informationSegment.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+		informationSegment.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
+		informationSegment.selectionIndicatorHeight = 2
+		
+		self.informationTable.tableHeaderView = informationSegment
+		
 		// Force layout to use Facade layouting
 		self.view.setNeedsLayout()
 		self.view.layoutIfNeeded()
@@ -216,9 +233,9 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 
 	
-	// MARK: - Interface Builder actions
+	// MARK: - Segmented controller event
 	
-	@IBAction func informationSegmentChanged(sender: UISegmentedControl) {
+	func informationSegmentChanged(sender: UISegmentedControl) {
 		currentViewType = viewType(rawValue: sender.selectedSegmentIndex)!
 		switch currentViewType {
 		case .detail:
@@ -251,7 +268,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			return
 		}
 		self.informationTable.removeConstraints((self.informationTable.constraints()))
-		self.informationTable.addConstraint(NSLayoutConstraint(item: self.informationTable, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: cellHeight * CGFloat(cellCount)))
+		self.informationTable.addConstraint(NSLayoutConstraint(item: self.informationTable, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: cellHeight * CGFloat(cellCount) + 44))
 	}
 	
 	
