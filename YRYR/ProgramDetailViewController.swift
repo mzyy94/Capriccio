@@ -10,6 +10,8 @@ import UIKit
 import SDWebImage
 import MRProgress
 import FFCircularProgressView
+import BFPaperButton
+import Facade
 
 class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -23,6 +25,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		case service = 2
 	}
 	var currentViewType: viewType = .detail
+	var playButton: BFPaperButton!
 	
 	
 	// MARK: - Interface Builder outlets
@@ -88,18 +91,14 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				
 				self.previewImageView.image = image
 				
-				let playButton = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 80, height: 80)))
-				playButton.setImage(UIImage(named: "play_circle_outline_white"), forState: .Normal)
-				playButton.tintColor = UIColor(white: 0.9, alpha: 0.9)
-				playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
+				self.playButton = BFPaperButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 56, height: 56)), raised: true)
+				self.playButton.cornerRadius = self.playButton.frame.size.width / 2
+				self.playButton.backgroundColor = UIColor.paperColorLightBlue600()
+				self.playButton.setImage(UIImage(named: "play_arrow_white"), forState: .Normal)
+				self.playButton.tintColor = UIColor(white: 0.9, alpha: 0.9)
+				self.playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
 				
-				playButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-				self.view.addSubview(playButton)
-				
-				playButton.addConstraint(NSLayoutConstraint(item: playButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 80))
-				playButton.addConstraint(NSLayoutConstraint(item: playButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 80))
-				self.view.addConstraint(NSLayoutConstraint(item: playButton, attribute: .CenterX, relatedBy: .Equal, toItem: self.previewImageView, attribute: .CenterX, multiplier: 1.0, constant: 0))
-				self.view.addConstraint(NSLayoutConstraint(item: playButton, attribute: .CenterY, relatedBy: .Equal, toItem: self.previewImageView, attribute: .CenterY, multiplier: 1.0, constant: 0))
+				self.view.addSubview(self.playButton)
 				
 		})
 		
@@ -189,6 +188,19 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 
 	deinit {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+	
+	
+	// MARK: - View layout
+	
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		
+		self.layoutFacade()
+	}
+	
+	func layoutFacade() {
+		playButton?.alignUnder(self.previewImageView, withRightPadding: 16, topPadding: -28, width: 56, height: 56)
 	}
 	
 	
