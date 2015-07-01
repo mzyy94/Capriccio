@@ -89,7 +89,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				self.previewImageView.image = image
 				
 				let playButton = UIButton(frame: CGRect(origin: CGPointZero, size: CGSize(width: 80, height: 80)))
-				playButton.setImage(UIImage(named: "play"), forState: .Normal)
+				playButton.setImage(UIImage(named: "play_circle_outline_white"), forState: .Normal)
 				playButton.tintColor = UIColor(white: 0.9, alpha: 0.9)
 				playButton.addTarget(self, action: Selector("playVideo:"), forControlEvents: .TouchUpInside)
 				

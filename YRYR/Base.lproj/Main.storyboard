@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AMO-7n-nUe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AMO-7n-nUe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -291,15 +291,15 @@ Cg
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6g-7s-msw">
-                                                    <rect key="frame" x="290" y="12" width="20" height="20"/>
+                                                    <rect key="frame" x="285" y="7" width="30" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="0OQ-Jh-St4"/>
+                                                        <constraint firstAttribute="height" constant="30" id="0OQ-Jh-St4"/>
                                                         <constraint firstAttribute="width" constant="30" id="4S7-6g-aLy"/>
                                                         <constraint firstAttribute="width" constant="80" id="gzw-9c-5c4"/>
-                                                        <constraint firstAttribute="width" constant="20" id="rrQ-et-LUY"/>
+                                                        <constraint firstAttribute="width" constant="30" id="rrQ-et-LUY"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" image="pause">
+                                                    <state key="normal" image="pause_white">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
@@ -313,13 +313,13 @@ Cg
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYI-e4-KWv">
-                                                    <rect key="frame" x="370" y="12" width="20" height="20"/>
+                                                    <rect key="frame" x="375" y="7" width="30" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="I6x-UX-scy"/>
-                                                        <constraint firstAttribute="width" constant="20" id="pL9-bW-V6q"/>
+                                                        <constraint firstAttribute="height" constant="30" id="I6x-UX-scy"/>
+                                                        <constraint firstAttribute="width" constant="30" id="pL9-bW-V6q"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" image="forward">
+                                                    <state key="normal" image="forward_30_white">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -327,13 +327,13 @@ Cg
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oem-4C-GH2">
-                                                    <rect key="frame" x="210" y="12" width="20" height="20"/>
+                                                    <rect key="frame" x="195" y="7" width="30" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="4SH-es-dEU"/>
-                                                        <constraint firstAttribute="width" constant="20" id="9MW-EH-wgB"/>
+                                                        <constraint firstAttribute="height" constant="30" id="4SH-es-dEU"/>
+                                                        <constraint firstAttribute="width" constant="30" id="9MW-EH-wgB"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <state key="normal" image="backward">
+                                                    <state key="normal" image="replay_30_white">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -341,7 +341,7 @@ Cg
                                                     </connections>
                                                 </button>
                                                 <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="lfM-JX-KT7" customClass="MPVolumeView">
-                                                    <rect key="frame" x="16" y="14" width="178" height="16"/>
+                                                    <rect key="frame" x="16" y="14" width="163" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="3Ag-cY-qsn"/>
                                                     </constraints>
@@ -645,9 +645,9 @@ Cg
         </scene>
     </scenes>
     <resources>
-        <image name="backward" width="500" height="500"/>
-        <image name="forward" width="500" height="500"/>
-        <image name="pause" width="500" height="500"/>
+        <image name="forward_30_white" width="36" height="36"/>
+        <image name="pause_white" width="36" height="36"/>
+        <image name="replay_30_white" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PB7-aD-ker"/>

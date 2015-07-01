@@ -44,10 +44,10 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBAction func playPauseButtonTapped(sender: UIButton) {
 		if mediaPlayer.isPlaying() {
 			mediaPlayer.pause()
-			sender.setImage(UIImage(named: "play"), forState: .Normal)
+			sender.setImage(UIImage(named: "play_arrow_white"), forState: .Normal)
 		} else {
 			mediaPlayer.play()
-			sender.setImage(UIImage(named: "pause"), forState: .Normal)
+			sender.setImage(UIImage(named: "pause_white"), forState: .Normal)
 		}
 	}
 	
@@ -123,6 +123,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		}
 		
 		// Status bar styling
+		UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 	}
 	
@@ -152,6 +153,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		mediaPlayer.stop()
 
 		// Status bar styling
+		UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: false)
 		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 		
 		// Unset external display events
