@@ -423,10 +423,10 @@ Cg
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fbp-Ru-FUB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.75686274509803919" green="0.86274509803921573" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="0.90823972225189209" green="0.92638683319091797" blue="0.9317171573638916" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -609,7 +609,13 @@ Cg
                             <outlet property="delegate" destination="QEN-1b-GdU" id="KRz-aX-qDH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reserving" id="i4E-YC-SMa"/>
+                    <navigationItem key="navigationItem" title="Reserving" id="i4E-YC-SMa">
+                        <barButtonItem key="backBarButtonItem" id="tlz-6g-X7j">
+                            <string key="title" base64-UTF8="YES">
+Cg
+</string>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="LvU-Gj-VRJ">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -629,10 +635,10 @@ Cg
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="PAk-J6-hJB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.75686274509999996" green="0.86274509799999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="0.90823972230000005" green="0.92638683320000004" blue="0.93171715740000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>

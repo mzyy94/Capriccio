@@ -120,7 +120,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 
 		} else {
 			let circularProgressView = FFCircularProgressView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-			circularProgressView.tintColor = UIColor.paperColorLime500()
+			circularProgressView.tintColor = UIColor.paperColorGray50()
 			let downloadButton = UIBarButtonItem(customView: circularProgressView)
 			self.navigationItem.rightBarButtonItem = downloadButton
 			if let request: AnyObject = self.program.userData {
