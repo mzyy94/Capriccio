@@ -17,6 +17,7 @@ target 'YRYR' do
 	pod 'UIColor+BFPaperColors', '~> 1.7.1'
 	pod 'BFPaperButton', '~> 2.0.18'
 	pod 'Facade', '~> 0.2.1'
+	pod 'HMSegmentedControl', '~> 1.5.2'
 end
 
 target 'YRYRTests' do
