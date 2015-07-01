@@ -1,9 +1,12 @@
 PODS:
   - Alamofire (1.2.2)
+  - BFPaperButton (2.0.18):
+    - UIColor+BFPaperColors
   - BFPaperTabBarController (2.1.10):
     - UIColor+BFPaperColors
   - BFPaperTableViewCell (2.3.3):
     - UIColor+BFPaperColors
+  - Facade (0.2.1)
   - FFCircularProgressView (0.5)
   - GSIndeterminateProgressBar (0.1.0)
   - KeychainAccess (1.2.1)
@@ -47,8 +50,10 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 1.2.2)
+  - BFPaperButton (~> 2.0.18)
   - BFPaperTabBarController (~> 2.1.10)
   - BFPaperTableViewCell (~> 2.3.3)
+  - Facade (~> 0.2.1)
   - FFCircularProgressView (~> 0.3)
   - GSIndeterminateProgressBar (~> 0.1.0)
   - KeychainAccess (~> 1.2.1)
@@ -72,8 +77,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
+  BFPaperButton: 16b3ec9c2964d24f89f623a4113321d3f003ed60
   BFPaperTabBarController: feeb736ab4249226e850ae6cd677697c26158079
   BFPaperTableViewCell: 71fbd5fc1b3479c0c8620dc121d31d2a6694b4a8
+  Facade: 9c7d45613bb5b3fe3e32fb92e0a284016de53105
   FFCircularProgressView: 683a4ab1e1bd613246a3dffa61503ffdebcde8d8
   GSIndeterminateProgressBar: eb29d5968109d803518379e925e74eb74b4a8d97
   KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
