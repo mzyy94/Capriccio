@@ -55,28 +55,22 @@ class ProgramTableViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCellWithIdentifier("programCell", forIndexPath: indexPath) as! ProgramInfoTableViewCell
 		let program = programsById[programIds[indexPath.section]]!
 
-		// Date formation
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "yyyy/MM/dd HH:mm-"
-		
 		// Cell configuratoins
-		cell.accessoryType = .DetailButton
-		cell.titleLabel.text = program.title
-		cell.subTitleLabel.text = program.subTitle
-		cell.genreLabel.text = program.genre
-		cell.episodeLabel.text = program.episode != nil && program.episode > 0 ? "#\(program.episode!) " : ""
-		cell.durationLabel.text = "\(Int(program.duration / 60)) min."
-		cell.dateLabel.text = dateFormatter.stringFromDate(program.startTime)
+		NSNotificationCenter.defaultCenter().removeObserver(self, name: "accessoryButtonTapped", object: cell)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("accessoryButtonTapped:"), name: "accessoryButtonTapped", object: cell)
+		cell.setCellEntities(program.title, subTitle: program.subTitle, genre: program.genre, channel: program.channel, episode: program.episode, startTime: program.startTime, duration: program.duration)
 
 		return cell
 	}
 
-	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-		let programDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
+	func accessoryButtonTapped(notification: NSNotification) {
+		let touch = notification.userInfo!["touch"] as! UITouch
+		let touchPoint = touch.locationInView(self.tableView)
+		let indexPath = self.tableView.indexPathForRowAtPoint(touchPoint)!
+		let videoPlayViewController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
+		videoPlayViewController.program = programsById[programIds[indexPath.section]]
 		
-		programDetailViewController.program = programsById[programIds[indexPath.section]]
-		
-		self.navigationController?.pushViewController(programDetailViewController, animated: true)
+		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
 	}
 	
 	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -84,7 +78,7 @@ class ProgramTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return 58
+		return 84
 	}
 	
 	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -96,10 +90,11 @@ class ProgramTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		let videoPlayViewController = self.storyboard!.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
-		videoPlayViewController.program = programsById[programIds[indexPath.section]]
-
-		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
+		let programDetailViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
+		
+		programDetailViewController.program = programsById[programIds[indexPath.section]]
+		
+		self.navigationController?.pushViewController(programDetailViewController, animated: true)
 	}
 
 	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

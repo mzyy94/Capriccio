@@ -134,26 +134,11 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 	
 
 	// MARK: - Table view data source
-
-	override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-		let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-		let programDetailViewController = storyBoard.instantiateViewControllerWithIdentifier("ProgramDetailView") as! ProgramDetailViewController
-		
-		programDetailViewController.program = tableView == self.tableView ?
-			programsById[self.programIds[indexPath.section]] :
-			programsById[resultProgramTableView.programIds[indexPath.section]]
-		
-		self.navigationController!.pushViewController(programDetailViewController, animated: true)
-	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-		let videoPlayViewController = storyBoard.instantiateViewControllerWithIdentifier("VideoPlayView") as! VideoPlayViewController
-		videoPlayViewController.program = tableView == self.tableView ?
-			programsById[self.programIds[indexPath.section]] :
-			programsById[resultProgramTableView.programIds[indexPath.section]]
-		
-		self.presentViewController(videoPlayViewController, animated: true, completion: nil)
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+		cell.accessoryView = nil
+		return cell
 	}
 	
 	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
