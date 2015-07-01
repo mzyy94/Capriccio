@@ -1,0 +1,23 @@
+{
+    "images": [
+        {
+            "filename": "refresh_white.png",
+            "idiom": "universal",
+            "scale": "1x"
+        },
+        {
+            "filename": "refresh_white_2x.png",
+            "idiom": "universal",
+            "scale": "2x"
+        },
+        {
+            "filename": "refresh_white_3x.png",
+            "idiom": "universal",
+            "scale": "3x"
+        }
+    ],
+    "info": {
+        "author": "xcode",
+        "version": 1
+    }
+}
