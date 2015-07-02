@@ -417,7 +417,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				cell.detailTextLabel?.text = "\(program.channel.name) [\(program.channel.channel)]"
 			case 3:
 				cell.textLabel?.text = "Duration"
-				cell.detailTextLabel?.text = "\(Int((program.duration/60)%60)) min."
+				cell.detailTextLabel?.text = "\(Int(program.duration/60)) min."
 			case 4:
 				cell.textLabel?.text = "ID"
 				cell.detailTextLabel?.text = program.id
