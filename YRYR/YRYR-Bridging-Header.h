@@ -11,5 +11,10 @@
 
 #import <MobileVLCKit/MobileVLCKit.h>
 
+#ifndef __IPHONE_9_0
+#import "UIAppearance+Swift.h"
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_9_0
+#import "UIAppearance+Swift.h"
+#endif
 
 #endif

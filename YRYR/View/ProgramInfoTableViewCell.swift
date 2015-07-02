@@ -13,8 +13,8 @@ import BFPaperButton
 class ProgramInfoTableViewCell: BFPaperTableViewCell {
 	
 	// MARK: - Instance fileds
-	var borderLayer: CALayer! = nil
-	let borderHeight: CGFloat = 2
+	var shadowLayer: CALayer! = nil
+	let cornerRadius: CGFloat = 2
 	override var frame: CGRect {
 		get {
 			return super.frame
@@ -59,11 +59,17 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		// Initialization code
 
-		borderLayer = CALayer()
-		borderLayer.backgroundColor = UIColor.paperColorBlueGray400().CGColor
-		borderLayer.frame = CGRect(x: 0, y: self.frame.size.height - borderHeight, width: self.frame.size.width, height: borderHeight)
+		// Shadow layer
+		shadowLayer = CALayer()
+		shadowLayer.backgroundColor = UIColor.whiteColor().CGColor
+		shadowLayer.shouldRasterize = true
+		shadowLayer.rasterizationScale = UIScreen.mainScreen().scale
+		shadowLayer.shadowColor = UIColor.blackColor().CGColor
+		shadowLayer.shadowRadius = 2.4
+		shadowLayer.shadowOpacity = 0.6
+		shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
+		shadowLayer.cornerRadius = cornerRadius
 		
 		// BFPaperTableViewCell settings
 		self.usesSmartColor = true
@@ -78,24 +84,13 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 		playButton.setImage(UIImage(named: "play_arrow_white"), forState: .Normal)
 		playButton.addTarget(self, action: Selector("accessoryButtonTapped:event:"), forControlEvents: .TouchUpInside)
 		self.accessoryView = playButton
+		
+		// Rounded corner
+		self.layer.masksToBounds = false
+		self.layer.cornerRadius = cornerRadius
+		self.backgroundColor = UIColor.clearColor()
 
 		self.tintColor = UIColor.paperColorTeal100()
-	}
-	
-	override func drawRect(rect: CGRect) {
-		super.drawRect(rect)
-		
-		// Title underline
-		let frame = self.titleLabel.frame
-		let unerlineInset = 0.5 / UIScreen.mainScreen().scale
-		let context = UIGraphicsGetCurrentContext()
-		CGContextSaveGState(context)
-		CGContextSetLineWidth(context, unerlineInset)
-		CGContextSetStrokeColorWithColor(context, UIColor.paperColorBlueGray800().CGColor)
-		CGContextMoveToPoint(context, frame.origin.x, frame.origin.y + frame.height)
-		CGContextAddLineToPoint(context, self.titleLabel.frame.width, frame.origin.y + frame.height)
-		CGContextStrokePath(context)
-		CGContextRestoreGState(context)
 	}
 	
 	
@@ -148,13 +143,15 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 	// MARK: - Subview layout
 	
 	override func layoutSubviews() {
-		self.layer.addSublayer(borderLayer)
+		shadowLayer?.removeFromSuperlayer()
+		self.layer.insertSublayer(shadowLayer, atIndex: 0)
 		
 		super.layoutSubviews()
 	}
 	
 	override func layoutSublayersOfLayer(layer: CALayer!) {
-		borderLayer.frame = CGRect(x: 0, y: self.frame.size.height - borderHeight, width: self.frame.size.width, height: borderHeight)
+		shadowLayer?.frame = self.bounds
+		shadowLayer?.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadius).CGPath
 		
 		super.layoutSublayersOfLayer(layer)
 	}

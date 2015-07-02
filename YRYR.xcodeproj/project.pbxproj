@@ -41,6 +41,7 @@
 		9EF414721B18E4A40096C2CE /* ProgramInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */; };
 		9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */; };
 		9EF414761B18E5180096C2CE /* ProgramTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */; };
+		9EF5FA271B44D60700C1A1CF /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */; };
 		A2AE20420DF69DDE9D0DDBA4 /* Pods_YRYR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F573239C182A07098638B044 /* Pods_YRYR.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramInfoTableViewCell.swift; path = View/ProgramInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProgramInfoTableViewCell.xib; path = View/ProgramInfoTableViewCell.xib; sourceTree = "<group>"; };
 		9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewController.swift; sourceTree = "<group>"; };
+		9EF5FA251B44D60700C1A1CF /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAppearance+Swift.h"; path = "Extension/UIAppearance+Swift.h"; sourceTree = "<group>"; };
+		9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAppearance+Swift.m"; path = "Extension/UIAppearance+Swift.m"; sourceTree = "<group>"; };
 		A5F597D4BE7C786FFA9E3FB0 /* Pods-YRYR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYR.release.xcconfig"; path = "Pods/Target Support Files/Pods-YRYR/Pods-YRYR.release.xcconfig"; sourceTree = "<group>"; };
 		B21758A94EFD85CF6C3C0630 /* Pods-YRYR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YRYR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YRYR/Pods-YRYR.debug.xcconfig"; sourceTree = "<group>"; };
 		BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YRYRTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */,
+				9EF5FA251B44D60700C1A1CF /* UIAppearance+Swift.h */,
+				9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */,
 				9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */,
 				9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */,
+				9EF5FA271B44D60700C1A1CF /* UIAppearance+Swift.m in Sources */,
 				9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */,
 				9EA4EEE91B1CEA77008D4059 /* Empty.mm in Sources */,
 				9EBAD3691B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */,

@@ -150,7 +150,7 @@ class RecordingTableViewController: ProgramTableViewController, UISearchBarDeleg
 			
 		}
 		
-		del.backgroundColor = UIColor.paperColorRed500()
+		del.backgroundColor = UIColor.clearColor()
 		
 		return [del]
 	}

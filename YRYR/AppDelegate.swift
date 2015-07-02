@@ -38,9 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		ChinachuPVRManager.sharedManager.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
 		
 		// Global appearance configuration
-		UITabBar.appearance().tintColor = UIColor.paperColorCyan600()
+		UITabBar.appearance().tintColor = UIColor.paperColorTeal200()
 		UINavigationBar.appearance().backIndicatorImage = UIImage(named: "arrow_back")?.imageWithAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
 		UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "arrow_back")?.imageWithAlignmentRectInsets(UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
+		UIButton.appearanceWhenContainedInInstancesOfClasses([ProgramTableViewController.self]).setTitleColor(UIColor.paperColorRed500(), forState: .Normal) // for UITableViewRowAction
 
 		return true
 	}
