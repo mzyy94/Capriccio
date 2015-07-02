@@ -405,7 +405,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			switch indexPath.row {
 			case 0:
 				cell.textLabel?.text = "Genre"
-				cell.detailTextLabel?.text = program.genre
+				cell.detailTextLabel?.text = program.genre.capitalizedString
 			case 1:
 				let dateFormatter = NSDateFormatter()
 				dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
@@ -420,7 +420,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 				cell.detailTextLabel?.text = "\(Int(program.duration/60)) min."
 			case 4:
 				cell.textLabel?.text = "ID"
-				cell.detailTextLabel?.text = program.id
+				cell.detailTextLabel?.text = program.id.uppercaseString
 			default:
 				return cell
 			}
