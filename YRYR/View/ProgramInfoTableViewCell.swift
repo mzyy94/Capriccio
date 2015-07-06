@@ -70,6 +70,7 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 		shadowLayer.shadowOpacity = 0.6
 		shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
 		shadowLayer.cornerRadius = cornerRadius
+		self.layer.insertSublayer(shadowLayer, atIndex: 0)
 		
 		// BFPaperTableViewCell settings
 		self.usesSmartColor = true
@@ -143,17 +144,9 @@ class ProgramInfoTableViewCell: BFPaperTableViewCell {
 	// MARK: - Subview layout
 	
 	override func layoutSubviews() {
-		shadowLayer?.removeFromSuperlayer()
-		self.layer.insertSublayer(shadowLayer, atIndex: 0)
-		
-		super.layoutSubviews()
-	}
-	
-	override func layoutSublayersOfLayer(layer: CALayer!) {
 		shadowLayer?.frame = self.bounds
 		shadowLayer?.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadius).CGPath
-		
-		super.layoutSublayersOfLayer(layer)
+		super.layoutSubviews()
 	}
 	
 }
