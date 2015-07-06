@@ -27,11 +27,20 @@ class YRYRTests: XCTestCase {
 	}
 
 	func testChinachuPVRManager() {
+		let scheduleExpectation = self.expectationWithDescription("Schedule test")
 		let reservingExpectation = self.expectationWithDescription("Reserving test")
 		let recordingExpectation = self.expectationWithDescription("Recording test")
 		
 		let manager = ChinachuPVRManager()
 		manager.remoteHost = NSURL(string: "http://chinachu:10772")!
+
+		manager.getSchedule(
+			success: {program in
+				scheduleExpectation.fulfill()
+			}, failure: {error in
+				XCTFail("\(error)")
+				scheduleExpectation.fulfill()
+		})
 		
 		manager.getReserving(
 			success: {program in
@@ -49,7 +58,7 @@ class YRYRTests: XCTestCase {
 				recordingExpectation.fulfill()
 		})
 		
-		self.waitForExpectationsWithTimeout(30, handler: nil)
+		self.waitForExpectationsWithTimeout(60, handler: nil)
 	}
 	
 	func testMusicStoreManager() {
@@ -66,7 +75,7 @@ class YRYRTests: XCTestCase {
 		})
 		
 		
-		self.waitForExpectationsWithTimeout(30, handler: nil)
+		self.waitForExpectationsWithTimeout(60, handler: nil)
 	}
 	
 	func testPerformanceExample() {
