@@ -121,9 +121,17 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 				break
 			}
 		}
-		
-		// Status bar styling
-		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		// Initialize navigation bar background
+		let emptyImage = UIImage()
+		self.navigationController?.navigationBar.translucent = true
+		self.navigationController?.navigationBar.shadowImage = emptyImage
+		self.navigationController?.navigationBar.setBackgroundImage(emptyImage, forBarMetrics: .Default)
+		self.navigationController?.navigationBar.setBackgroundImage(emptyImage, forBarMetrics: .Compact)
+
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -150,9 +158,6 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		// Media player settings
 		mediaPlayer.setDelegate(nil)
 		mediaPlayer.stop()
-
-		// Status bar styling
-		UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
 		
 		// Unset external display events
 		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIScreenDidConnectNotification, object: nil)
@@ -255,16 +260,18 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 				if self.mediaControlView.hidden || self.mediaProgressNavigationBar.hidden {
 					self.mediaControlView.hidden = false
 					self.mediaProgressNavigationBar.hidden = false
-					UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
+					self.statusBarHidden = false
 					
 					UIView.animateWithDuration(0.4, animations: {
+						self.setNeedsStatusBarAppearanceUpdate()
 						self.mediaControlView.alpha = 1.0
 						self.mediaProgressNavigationBar.alpha = 1.0
 					})
 				} else {
-					UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+					self.statusBarHidden = true
 					
 					UIView.animateWithDuration(0.4, animations: {
+						self.setNeedsStatusBarAppearanceUpdate()
 						self.mediaControlView.alpha = 0.0
 						self.mediaProgressNavigationBar.alpha = 0.0
 						},  completion: { finished in
@@ -274,6 +281,23 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 				}
 			}
 		}
+	}
+	
+	
+	// MARK: - Status bar
+	
+	var statusBarHidden: Bool = false
+	override func prefersStatusBarHidden() -> Bool {
+		return statusBarHidden
+	}
+	
+	
+	override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+		return .Fade
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return .LightContent
 	}
 	
 	
@@ -311,7 +335,6 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 			// Show media controls
 			self.mediaControlView.hidden = false
 			self.mediaProgressNavigationBar.hidden = false
-			UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
 			
 			UIView.animateWithDuration(0.4, animations: {
 				self.mediaControlView.alpha = 1.0

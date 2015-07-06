@@ -402,7 +402,7 @@ Cg
             <objects>
                 <navigationController id="ucO-Vr-b8X" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recording" image="video_library" id="xCb-lx-cZ8"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fbp-Ru-FUB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="fbp-Ru-FUB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -614,7 +614,7 @@ Cg
             <objects>
                 <navigationController id="n44-8E-7Ji" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Reserving" image="av_timer" id="SoA-HJ-HYD"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="PAk-J6-hJB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="PAk-J6-hJB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -28,6 +28,9 @@ class ProgramTableViewController: UITableViewController {
 		// Set table view style
 		self.tableView.separatorStyle = .None
 		self.tableView.backgroundColor = UIColor.paperColorGray50()
+		
+		// Clear Back button
+		self.navigationItem.backBarButtonItem?.title = ""
 	}
 
 	
