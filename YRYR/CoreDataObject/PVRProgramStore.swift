@@ -50,10 +50,10 @@ class PVRProgramStore: NSManagedObject {
 			self.state = object.state.rawValue
 			self.subTitle = object.subTitle
 			self.title = object.title
-			if let channel = PVRChannelStore.by("id", equalTo: object.channel.id).find().firstObject() as? PVRChannelStore {
+			if let channel = PVRChannelStore.by("id", equalTo: object.channel.id).find(inContext: self.context()).firstObject() as? PVRChannelStore {
 				self.channel = channel
 			} else {
-				let channel = PVRChannelStore.create() as! PVRChannelStore
+				let channel = PVRChannelStore.create(inContext: self.context()) as! PVRChannelStore
 				channel.originalObject = object.channel
 				channel.save()
 				self.channel = channel
