@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		097A6E636FDE92C568ED36C7 /* Pods_YRYRTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */; };
+		9E835CCF1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */; };
 		9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE31B18A32300C57833 /* AppDelegate.swift */; };
 		9E8C3BE71B18A32300C57833 /* YRYR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE51B18A32300C57833 /* YRYR.xcdatamodeld */; };
 		9E8C3BEC1B18A32300C57833 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BEA1B18A32300C57833 /* Main.storyboard */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnAirChannelTableViewCell.swift; path = View/OnAirChannelTableViewCell.swift; sourceTree = "<group>"; };
+		9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnAirChannelTableViewCell.xib; path = View/OnAirChannelTableViewCell.xib; sourceTree = "<group>"; };
 		9E8C3BDE1B18A32300C57833 /* YRYR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YRYR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8C3BE21B18A32300C57833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8C3BE31B18A32300C57833 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 				9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */,
 				9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */,
 				9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */,
+				9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */,
+				9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */,
+				9E835CCF1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib in Resources */,
 				9E8C3BEC1B18A32300C57833 /* Main.storyboard in Resources */,
 				9E8C3BF11B18A32300C57833 /* LaunchScreen.xib in Resources */,
 				9EBAD3721B41B5BE00906B5C /* MusicTrackTableViewCell.xib in Resources */,
@@ -475,6 +482,7 @@
 				9EBAD3761B41E3E000906B5C /* CircularAudioProgressView.swift in Sources */,
 				9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
 				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
+				9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */,
 				9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */,
 				9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */,
 				9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */,
