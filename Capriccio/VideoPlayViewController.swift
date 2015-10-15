@@ -34,7 +34,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	// MARK: - Interface Builder actions
 	
 	@IBAction func doneButtonTapped(sender: UIBarButtonItem) {
-		mediaPlayer.setDelegate(nil)
+		mediaPlayer.delegate = nil
 		mediaPlayer.stop()
 
 		self.dismissViewControllerAnimated(true, completion: nil)
@@ -42,7 +42,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	
 	
 	@IBAction func playPauseButtonTapped(sender: UIButton) {
-		if mediaPlayer.isPlaying() {
+		if mediaPlayer.playing {
 			mediaPlayer.pause()
 			sender.setImage(UIImage(named: "play_arrow_white"), forState: .Normal)
 		} else {
@@ -54,9 +54,9 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBAction func backwardButtonTapped() {
 		let second: Float = 30
 		let step: Float = second / Float(program.duration)
-		if mediaPlayer.position() - step > 0 {
-			mediaPlayer.setPosition(mediaPlayer.position() - step)
-			videoProgressSlider.value = mediaPlayer.position()
+		if mediaPlayer.position - step > 0 {
+			mediaPlayer.position = mediaPlayer.position - step
+			videoProgressSlider.value = mediaPlayer.position
 			
 			let time = Int(NSTimeInterval(videoProgressSlider.value) * program.duration)
 			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
@@ -66,9 +66,9 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	@IBAction func forwardButtonTapped() {
 		let second: Float = 30
 		let step: Float = second / Float(program.duration)
-		if mediaPlayer.position() + step < 1 {
-			mediaPlayer.setPosition(mediaPlayer.position() + step)
-			videoProgressSlider.value = mediaPlayer.position()
+		if mediaPlayer.position + step < 1 {
+			mediaPlayer.position = mediaPlayer.position + step
+			videoProgressSlider.value = mediaPlayer.position
 			
 			let time = Int(NSTimeInterval(videoProgressSlider.value) * program.duration)
 			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
@@ -81,7 +81,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	}
 	
 	@IBAction func videoProgressSliderTouchedUp(sender: UISlider) {
-		mediaPlayer.setPosition(sender.value)
+		mediaPlayer.position = sender.value
 	}
 	
 	
@@ -94,9 +94,9 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		let media = VLCMedia(URL: manager.getMediaUrl(program))
 		media.addOptions(["network-caching": 3333])
 		mediaPlayer.drawable = self.mainVideoView
-		mediaPlayer.setMedia(media)
+		mediaPlayer.media = media
 		mediaPlayer.setDeinterlaceFilter("blend")
-		mediaPlayer.setDelegate(self)
+		mediaPlayer.delegate = self
 		mediaPlayer.play()
 		
 		// Generate slider thumb image
@@ -156,7 +156,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		super.viewDidDisappear(animated)
 		
 		// Media player settings
-		mediaPlayer.setDelegate(nil)
+		mediaPlayer.delegate = nil
 		mediaPlayer.stop()
 		
 		// Unset external display events
@@ -217,8 +217,8 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		// Only when slider is not under control
 		if !videoProgressSlider.touchInside {
 			let mediaPlayer = aNotification.object as! VLCMediaPlayer
-			let time = Int(NSTimeInterval(mediaPlayer.position()) * program.duration)
-			videoProgressSlider.value = mediaPlayer.position()
+			let time = Int(NSTimeInterval(mediaPlayer.position) * program.duration)
+			videoProgressSlider.value = mediaPlayer.position
 			videoTimeLabel.text = NSString(format: "%02d:%02d", time / 60, time % 60) as String
 		}
 		
@@ -237,7 +237,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	// MARK: - Media metadata settings
 	
 	func updateMetadata() {
-		let time = Int(NSTimeInterval(mediaPlayer.position()) * program.duration)
+		let time = Int(NSTimeInterval(mediaPlayer.position) * program.duration)
 		let videoInfo = [MPMediaItemPropertyTitle: program.title,
 			MPMediaItemPropertyMediaType: MPMediaType.TVShow.rawValue,
 			MPMediaItemPropertyPlaybackDuration: program.duration,
