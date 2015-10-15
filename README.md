@@ -9,6 +9,8 @@ Chinachu Client for iOS devices
 ## [WIP] ##
 ###########
 
+[Screenshot](https://github.com/mzyy94/Capriccio/wiki/Screenshot)
+
 
 ## Task
 - [x] Watch recorded video
