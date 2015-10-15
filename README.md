@@ -12,6 +12,19 @@ Chinachu Client for iOS devices
 [Screenshot](https://github.com/mzyy94/Capriccio/wiki/Screenshot)
 
 
+## Build
+*Cocoapods required*
+
+```
+$ pod install
+$ open Capriccio.xcworkspace
+```
+Then, build and run Capriccio on Xcode.
+
+> NOTE: MobileVLCKit 2.2.2 doesn't contain bitcode. 
+> It means that current version of Capriccio can only run on iOS Simulator.
+> If you want to run Capriccio on iOS devices, you must compile MobileVLCKit yourself.
+
 ## Task
 - [x] Watch recorded video
 - [x] Watch live TV programs (with :bug:)
