@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		097A6E636FDE92C568ED36C7 /* Pods_YRYRTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_YRYRTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9E6B54B91B4A4CDD009503D9 /* OnAirTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */; };
 		9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */; };
 		9E835CCF1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */; };
 		9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE31B18A32300C57833 /* AppDelegate.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnAirTableViewController.swift; sourceTree = "<group>"; };
 		9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnAirChannelTableViewCell.swift; path = View/OnAirChannelTableViewCell.swift; sourceTree = "<group>"; };
 		9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnAirChannelTableViewCell.xib; path = View/OnAirChannelTableViewCell.xib; sourceTree = "<group>"; };
 		9E8C3BDE1B18A32300C57833 /* YRYR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YRYR.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +153,7 @@
 				9E8C3C0C1B18AB5500C57833 /* PVRManager */,
 				9EBAD36B1B41A9C300906B5C /* MusicStoreManager */,
 				9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */,
+				9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */,
 				9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */,
 				9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */,
 				9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */,
@@ -483,6 +486,7 @@
 				9EBAD3761B41E3E000906B5C /* CircularAudioProgressView.swift in Sources */,
 				9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
 				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
+				9E6B54B91B4A4CDD009503D9 /* OnAirTableViewController.swift in Sources */,
 				9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */,
 				9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */,
 				9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */,

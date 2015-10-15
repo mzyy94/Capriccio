@@ -297,13 +297,18 @@ class ChinachuPVRManager: PVRManager {
 	
 	// MARK: - Remote/local media
 	
-	func getMediaUrl(programId: String, isRecording: Bool = false) -> NSURL {
-		if NSFileManager.defaultManager().fileExistsAtPath(getDownloadedFileUrl(programId).relativePath!) {
-			return getDownloadedFileUrl(programId)
+	func getMediaUrl(program: PVRProgram, isRecording: Bool = false) -> NSURL {
+		if NSFileManager.defaultManager().fileExistsAtPath(getDownloadedFileUrl(program.id).relativePath!) {
+			return getDownloadedFileUrl(program.id)
 		} else {
 			let (username, password) = getAccount()
-
-			return NSURL(scheme: remoteHost.scheme, host: "\(username):\(password)@\(remoteHost.host!):\(remoteHost.port!)", path: "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+            
+            if program.isOnAir() {
+                return NSURL(scheme: remoteHost.scheme, host: "\(username):\(password)@\(remoteHost.host!):\(remoteHost.port!)", path: "/api/channel/" + program.channel.id + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+            }
+            
+            return NSURL(scheme: remoteHost.scheme, host: "\(username):\(password)@\(remoteHost.host!):\(remoteHost.port!)", path: "/api/" + (isRecording ? "recording/" : "recorded/") + program.id + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+                
 		}
 	}
 
