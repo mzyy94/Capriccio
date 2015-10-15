@@ -316,6 +316,7 @@
 		9E8C3BD61B18A32300C57833 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Yuki MIZUNO";
 				TargetAttributes = {

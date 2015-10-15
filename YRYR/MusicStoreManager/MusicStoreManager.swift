@@ -26,20 +26,22 @@ class MusicStoreManager: NSObject, SKStoreProductViewControllerDelegate {
 	// MARK: - Get music tracks
 	
 	func getRelatedMusicTracks(keyword: String, success: (([MusicTrackInformation]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
-		Alamofire.request(.GET, "https://itunes.apple.com/search?term=\(keyword.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)&country=JP&lang=ja_jp&media=music")
-			.responseJSON { (request, response, data, error) in
-				if error != nil {
-					failure?(error!)
-				} else {
-					let json = JSON(data!)
-					var tracks: [MusicTrackInformation] = []
-					for value in json["results"].arrayValue {
-						let track = MusicTrackInformation(fromDictionary: value.dictionaryObject!)
-						tracks.append(track)
-					}
-
-					success?(tracks)
-				}
+		Alamofire.request(.GET, "https://itunes.apple.com/search?term=\(keyword.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.alphanumericCharacterSet())!)&country=JP&lang=ja_jp&media=music")
+            .responseJSON { response in
+                switch response.result {
+                case .Success:
+                    let data = response.result.value
+                    let json = JSON(data!)
+                    var tracks: [MusicTrackInformation] = []
+                    for value in json["results"].arrayValue {
+                        let track = MusicTrackInformation(fromDictionary: value.dictionaryObject!)
+                        tracks.append(track)
+                    }
+                    
+                    success?(tracks)
+                case .Failure(let error):
+                    failure?(error)
+                }
 		}
 	}
 	
@@ -67,7 +69,7 @@ class MusicStoreManager: NSObject, SKStoreProductViewControllerDelegate {
 		})
 	}
 	
-	func productViewControllerDidFinish(viewController: SKStoreProductViewController!) {
+	func productViewControllerDidFinish(viewController: SKStoreProductViewController) {
 		viewController.dismissViewControllerAnimated(true, completion: nil)
 	}
 	

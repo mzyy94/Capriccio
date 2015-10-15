@@ -21,7 +21,7 @@ internal class CircularAudioProgressView: FFCircularProgressView {
 	}
 
 	required init(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+		super.init(coder: aDecoder)!
 		self.setupIconLayer()
 	}
 	

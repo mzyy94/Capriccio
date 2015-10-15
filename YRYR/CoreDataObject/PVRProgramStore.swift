@@ -33,12 +33,12 @@ class PVRProgramStore: NSManagedObject {
 	var originalObject: PVRProgram {
 		get {
 			return PVRProgram(id: id, title: title, fullTitle: fullTitle, subTitle: subTitle,
-				detail: detail, attributes: split(attributes) { contains(",", $0) }, genre: genre,
+				detail: detail, attributes: attributes.componentsSeparatedByString(","), genre: genre,
 				channel: channel.originalObject, episode: Int(episode), startTime: startTime,
 				endTime: endTime, duration: NSTimeInterval(duration), state: PVRProgramState(rawValue: state)! ,userData: nil)
 		}
 		set (object) {
-			self.attributes = join(",", object.attributes)
+			self.attributes = object.attributes.joinWithSeparator(",")
 			self.detail = object.detail
 			self.duration = object.duration
 			self.endTime = object.endTime

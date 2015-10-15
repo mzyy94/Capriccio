@@ -17,7 +17,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	var program: PVRProgram!
 	
 	var externalWindow: UIWindow! = nil
-	var savedViewConstraints: [AnyObject] = []
+	var savedViewConstraints: [NSLayoutConstraint] = []
 	
 	
 	// MARK: - Interface Builder outlets
@@ -138,7 +138,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		super.viewDidAppear(animated)
 		
 		// Save current constraints
-		savedViewConstraints = self.view.constraints()
+		savedViewConstraints = self.view.constraints
 		
 		// Set external display events
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("screenDidConnect:"), name: UIScreenDidConnectNotification, object: nil)
@@ -175,8 +175,8 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 		return externalWindow == nil
 	}
 	
-	override func supportedInterfaceOrientations() -> Int {
-		return Int(UIInterfaceOrientationMask.All.rawValue)
+	override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+		return UIInterfaceOrientationMask.All
 	}
 
 	
@@ -197,9 +197,9 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	
 	// MARK: - Remote control
 	
-	override func remoteControlReceivedWithEvent(event: UIEvent) {
-		if event.type == .RemoteControl {
-			switch event.subtype {
+	override func remoteControlReceivedWithEvent(event: UIEvent?) {
+		if event!.type == .RemoteControl {
+			switch event!.subtype {
 			case .RemoteControlPlay, .RemoteControlPause, .RemoteControlTogglePlayPause:
 				self.playPauseButtonTapped(playPauseButton)
 				break
@@ -244,19 +244,19 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 			MPNowPlayingInfoPropertyElapsedPlaybackTime: time,
 			MPNowPlayingInfoPropertyPlaybackRate: mediaPlayer.rate
 		]
-		MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = videoInfo as [NSObject : AnyObject]
+//		MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = videoInfo as? [String : AnyObject]
 	}
 	
 
 	// MARK: - Touch events
 	
-	override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
 		super.touchesEnded(touches, withEvent: event)
 		
 		for touch: AnyObject in touches {
 			let t = touch as! UITouch
 			
-			if NSStringFromClass(t.view.classForCoder) == "VLCOpenGLES2VideoView" {
+			if NSStringFromClass(t.view!.classForCoder) == "VLCOpenGLES2VideoView" {
 				if self.mediaControlView.hidden || self.mediaProgressNavigationBar.hidden {
 					self.mediaControlView.hidden = false
 					self.mediaProgressNavigationBar.hidden = false
@@ -306,12 +306,12 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 	func screenDidConnect(aNotification: NSNotification) {
 		let screens = UIScreen.screens()
 		if screens.count > 1 {
-			let externalScreen = screens[1] as! UIScreen
+			let externalScreen = screens[1] 
 			let availableModes = externalScreen.availableModes
 			
 			// Set up external screen
-			externalScreen.currentMode = availableModes.last as? UIScreenMode
-			externalScreen.overscanCompensation = .InsetApplicationFrame
+			externalScreen.currentMode = availableModes.last
+            externalScreen.overscanCompensation = .InsetApplicationFrame
 			
 			// Change device orientation to portrait
 			let portraitOrientation = UIInterfaceOrientation.Portrait.rawValue
@@ -352,7 +352,7 @@ class VideoPlayViewController: UIViewController, VLCMediaPlayerDelegate {
 			self.view.sendSubviewToBack(mainVideoView)
 
 			// Restore view constraints
-			self.view.removeConstraints(self.view.constraints())
+			self.view.removeConstraints(self.view.constraints)
 			self.view.addConstraints(savedViewConstraints)
 
 			self.externalWindow = nil

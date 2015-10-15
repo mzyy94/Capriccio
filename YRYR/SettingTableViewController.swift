@@ -27,7 +27,7 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 		
 		// Get value from text field
 		let pvrUrl = pvrAddressTextField.text!
-		let pvrPort = pvrPortTextField.text.toInt()!
+		let pvrPort = Int(pvrPortTextField.text!)!
 		let pvrUser = pvrUserTextField.text!
 		
 		
@@ -43,7 +43,7 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 		let pvrPass = pvrPasswordTextField.text
 		
 		keychain[pvrUser] = pvrPass
-		keychain.setSharedPassword(pvrPass, account: pvrUser)
+		keychain.setSharedPassword(pvrPass!, account: pvrUser)
 		
 		// Set new url to PVRManager
 		ChinachuPVRManager.sharedManager.remoteHost = NSURL(string: "\(pvrUrl):\(pvrPort)")!
@@ -120,7 +120,7 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 			options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP,
 			authenticationType: .HTTPBasic)
 		
-		if let password = keychain.get(pvrUser) {
+		if let password = try? keychain.get(pvrUser) {
 			pvrPasswordTextField.text = password
 		} else {
 			keychain.getSharedPassword(pvrUser) { (password, error) -> () in

@@ -38,11 +38,11 @@ class ChinachuPVRManager: PVRManager {
 
 		let username = userDefaults.stringForKey("pvrUser")!
 		let password: String
-		if let storedPassword = Keychain(server: remoteHost.absoluteString!,
-			protocolType: remoteHost.scheme! == "https" ? .HTTPS : .HTTP,
+		if let storedPassword = try? Keychain(server: remoteHost.absoluteString,
+			protocolType: remoteHost.scheme == "https" ? .HTTPS : .HTTP,
 			authenticationType: .HTTPBasic).get(username) {
 				
-			password = storedPassword
+			password = storedPassword!
 		} else {
 			password = ""
 		}
@@ -55,12 +55,12 @@ class ChinachuPVRManager: PVRManager {
 	
 	func getSchedule(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
-		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/schedule.json")
+		Alamofire.request(.GET, remoteHost.absoluteString + "/api/schedule.json")
 			.authenticate(user: username, password: password)
-			.responseJSON { (request, response, data, error) in
-				if error != nil {
-					failure?(error!)
-				} else {
+			.responseJSON { response in
+                switch response.result {
+                case .Success:
+                    let data = response.result.value
 					let json = JSON(data!)
 					var programs: [PVRProgram] = []
 					for ch in json.arrayValue {
@@ -84,6 +84,8 @@ class ChinachuPVRManager: PVRManager {
 						}
 					}
 					success?(programs)
+                case .Failure(let error):
+                    failure?(error)
 				}
 		}
 	}
@@ -93,12 +95,12 @@ class ChinachuPVRManager: PVRManager {
 	
 	override func getReserving(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
-		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/reserves.json")
+		Alamofire.request(.GET, remoteHost.absoluteString + "/api/reserves.json")
 			.authenticate(user: username, password: password)
-			.responseJSON { (request, response, data, error) in
-				if error != nil {
-					failure?(error!)
-				} else {
+			.responseJSON { response in
+                switch response.result {
+                case .Success:
+                    let data = response.result.value
 					let json = JSON(data!)
 					var programs: [PVRProgram] = []
 					for prog in json.arrayValue {
@@ -131,6 +133,8 @@ class ChinachuPVRManager: PVRManager {
 						programs.append(program)
 					}
 					success?(programs)
+                case .Failure(let error):
+                    failure?(error)
 				}
 		}
 	}
@@ -138,13 +142,15 @@ class ChinachuPVRManager: PVRManager {
 	func cancelReserving(programId: String, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
 		
-		Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/reserves/" + programId + ".json")
+		Alamofire.request(.DELETE, self.remoteHost.absoluteString + "/api/reserves/" + programId + ".json")
 			.authenticate(user: username, password: password)
-			.response { (request, response, data, error) in
-				if error != nil {
-					failure(error!)
-				} else {
+			.responseJSON { response in
+                switch response.result {
+                case .Success:
 					success()
+                case .Failure(let error):
+                    failure?(error)
+
 				}
 		}
 	}
@@ -152,21 +158,22 @@ class ChinachuPVRManager: PVRManager {
 	func skipReserving(programId: String, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
 		
-		Alamofire.request(.PUT, self.remoteHost.absoluteString! + "/api/reserves/" + programId + "/skip.json")
+		Alamofire.request(.PUT, self.remoteHost.absoluteString + "/api/reserves/" + programId + "/skip.json")
 			.authenticate(user: username, password: password)
-			.response { (request, response, data, error) in
-				if error != nil {
-					failure(error!)
-				} else {
-					success()
-				}
+			.responseJSON { response in
+                switch response.result {
+                case .Success:
+                    success?()
+                case .Failure(let error):
+                    failure?(error)
+                }
 		}
 	}
 	
 	func unskipReserving(programId: String, success: ((Void) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
 		
-		Alamofire.request(.PUT, self.remoteHost.absoluteString! + "/api/reserves/" + programId + "/unskip.json")
+		Alamofire.request(.PUT, self.remoteHost.absoluteString + "/api/reserves/" + programId + "/unskip.json")
 			.authenticate(user: username, password: password)
 			.response { (request, response, data, error) in
 				if error != nil {
@@ -182,12 +189,12 @@ class ChinachuPVRManager: PVRManager {
 	override func getRecording(success: (([PVRProgram]) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
 		
-		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded.json")
+		Alamofire.request(.GET, remoteHost.absoluteString + "/api/recorded.json")
 			.authenticate(user: username, password: password)
-			.responseJSON { (request, response, data, error) in
-				if error != nil {
-					failure?(error!)
-				} else {
+			.responseJSON { response in
+                switch response.result {
+                case .Success:
+                    let data = response.result.value
 					dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 						let json = JSON(data!)
 						var programs: [PVRProgram] = []
@@ -216,6 +223,8 @@ class ChinachuPVRManager: PVRManager {
 							success?(programs)
 						})
 					})
+                case .Failure(let error):
+                    failure?(error)
 				}
 		}
 	}
@@ -225,7 +234,7 @@ class ChinachuPVRManager: PVRManager {
 		
 		switch mode {
 		case .Information:
-			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + ".json")
+			Alamofire.request(.DELETE, self.remoteHost.absoluteString + "/api/recorded/" + programId + ".json")
 				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
@@ -235,7 +244,7 @@ class ChinachuPVRManager: PVRManager {
 					}
 			}
 		case .File:
-			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
+			Alamofire.request(.DELETE, self.remoteHost.absoluteString + "/api/recorded/" + programId + "/file.json")
 				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
@@ -245,13 +254,13 @@ class ChinachuPVRManager: PVRManager {
 					}
 			}
 		case .All:
-			Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + ".json")
+			Alamofire.request(.DELETE, self.remoteHost.absoluteString + "/api/recorded/" + programId + ".json")
 				.authenticate(user: username, password: password)
 				.response { (request, response, data, error) in
 					if error != nil {
 						failure?(error!)
 					} else {
-						Alamofire.request(.DELETE, self.remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.json")
+						Alamofire.request(.DELETE, self.remoteHost.absoluteString + "/api/recorded/" + programId + "/file.json")
 							.authenticate(user: username, password: password)
 							.response { (request, response, data, error) in
 								if error != nil {
@@ -270,19 +279,19 @@ class ChinachuPVRManager: PVRManager {
 	
 	func getPreviewImage(programId: String, isRecording: Bool = false, time: Int = 50, success: ((NSData) -> Void)! = nil, failure: ((NSError) -> Void)! = nil) {
 		let (username, password) = getAccount()
-		Alamofire.request(.GET, remoteHost.absoluteString! + "/api/recorded/" + programId + "/preview.jpg?pos=\(time)")
+		Alamofire.request(.GET, remoteHost.absoluteString + "/api/recorded/" + programId + "/preview.jpg?pos=\(time)")
 			.authenticate(user: username, password: password)
 			.response { (request, response, data, error) in
 				if error != nil {
 					failure?(error!)
 				} else {
-					success?(data as! NSData)
+					success?(data!)
 				}
 		}
 	}
 
 	func getPreviewImageUrl(programId: String, isRecording: Bool = false, time: Int = 50) -> NSURL {
-		return NSURL(string: remoteHost.absoluteString! + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/preview.jpg?pos=\(time)")!
+		return NSURL(string: remoteHost.absoluteString + "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/preview.jpg?pos=\(time)")!
 	}
 	
 	
@@ -294,15 +303,14 @@ class ChinachuPVRManager: PVRManager {
 		} else {
 			let (username, password) = getAccount()
 
-			return NSURL(scheme: remoteHost.scheme!, host: "\(username):\(password)@\(remoteHost.host!):\(remoteHost.port!)", path: "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
+			return NSURL(scheme: remoteHost.scheme, host: "\(username):\(password)@\(remoteHost.host!):\(remoteHost.port!)", path: "/api/" + (isRecording ? "recording/" : "recorded/") + programId + "/watch.m2ts?ext=m2ts&c:v=copy&c:a=copy")!
 		}
 	}
 
 	func getDownloadedFileUrl(programId: String) -> NSURL {
-		var err: NSError? = nil
 		
-		let documentURL = NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: &err)
-		let programDir = documentURL!.URLByAppendingPathComponent(programId)
+		let documentURL =  try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+		let programDir = try! documentURL.URLByAppendingPathComponent(programId)
 		let downloadPath = programDir.URLByAppendingPathComponent("file.m2ts")
 		
 		return downloadPath
@@ -312,19 +320,17 @@ class ChinachuPVRManager: PVRManager {
 	// MARK: - Download video
 	
 	func startDownloadVideo(programId: String, inProgress progress: (Float) -> Void, onComplete complete: (Void) -> Void) -> Request {
-		var err: NSError? = nil
-		
-		let documentURL = NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: &err)
-		let programDir = documentURL!.URLByAppendingPathComponent(programId)
-		if !NSFileManager.defaultManager().fileExistsAtPath(programDir.absoluteString!) {
-			NSFileManager.defaultManager().createDirectoryAtURL(programDir, withIntermediateDirectories: false, attributes: nil, error: &err)
+        let documentURL = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+		let programDir = documentURL.URLByAppendingPathComponent(programId)
+		if !NSFileManager.defaultManager().fileExistsAtPath(programDir.absoluteString) {
+			try! NSFileManager.defaultManager().createDirectoryAtURL(programDir, withIntermediateDirectories: false, attributes: nil)
 		}
 		
 		let downloadPath = programDir.URLByAppendingPathComponent("file.m2ts")
 		
 		let (username, password) = getAccount()
 
-		let downloadRequest = Alamofire.download(.GET, remoteHost.absoluteString! + "/api/recorded/" + programId + "/file.m2ts", { (temporaryURL, response) in
+		let downloadRequest = Alamofire.download(.GET, "\(self.remoteHost.absoluteString)/api/recorded/\(programId)/file.m2ts", destination: { (temporaryURL, response) in
 			return downloadPath
 			})
 			.authenticate(user: username, password: password)
@@ -364,14 +370,10 @@ class ChinachuPVRManager: PVRManager {
 	}
 	
 	func removeDownloadedFile(programId: String, onComplete complete:(Void) -> Void) {
-		var error: NSError?
-		
-		NSFileManager.defaultManager().removeItemAtURL(getDownloadedFileUrl(programId), error: &error)
-		
-		if error == nil {
-			complete()
-		}
-		
+        
+        if let _ = try? NSFileManager.defaultManager().removeItemAtURL(getDownloadedFileUrl(programId)) {
+            complete()
+        }
 	}
 
 }

@@ -103,7 +103,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		imageLoadingIndicatorView.startAnimating()
 		imageLoadingIndicatorView.hidesWhenStopped = true
 
-		imageLoadingIndicatorView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		imageLoadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
 		previewImageView.addSubview(imageLoadingIndicatorView)
 		
 		imageLoadingIndicatorView.addConstraint(NSLayoutConstraint(item: imageLoadingIndicatorView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 60))
@@ -150,7 +150,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 						circularProgressView.progress = CGFloat(progress)
 					})
 					}, onComplete: {
-						let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+						let currentGestureRecognizer = circularProgressView.gestureRecognizers![0]
 						circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
 					}
 				)
@@ -178,7 +178,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			
 			UIGraphicsBeginImageContextWithOptions(size, false, 0)
 			let context = UIGraphicsGetCurrentContext()
-			CGContextDrawLinearGradient(context, gradient, .zeroPoint, CGPointMake(0, size.height), .allZeros)
+            CGContextDrawLinearGradient(context, gradient, .zero, CGPointMake(0, size.height), [])
 			let gradientImage = UIGraphicsGetImageFromCurrentImageContext()
 			UIGraphicsEndImageContext()
 			return gradientImage
@@ -190,8 +190,8 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		// Set navigation bar gradient background
 		self.navigationController?.navigationBar.translucent = true
 		self.navigationController?.navigationBar.shadowImage = UIImage()
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(CGImage: portraitImage.CGImage), forBarMetrics: .Default)
-		self.navigationController?.navigationBar.setBackgroundImage(UIImage(CGImage: landscapeImage.CGImage), forBarMetrics: .Compact)
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(CGImage: portraitImage.CGImage!), forBarMetrics: .Default)
+		self.navigationController?.navigationBar.setBackgroundImage(UIImage(CGImage: landscapeImage.CGImage!), forBarMetrics: .Compact)
 	}
 	
 	
@@ -267,7 +267,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		if cellCount == 0 {
 			return
 		}
-		self.informationTable.removeConstraints((self.informationTable.constraints()))
+		self.informationTable.removeConstraints((self.informationTable.constraints))
 		self.informationTable.addConstraint(NSLayoutConstraint(item: self.informationTable, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: cellHeight * CGFloat(cellCount) + 44))
 	}
 	
@@ -285,17 +285,17 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			})
 			
 			}, onComplete: {
-				let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+				let currentGestureRecognizer = circularProgressView.gestureRecognizers![0]
 				circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
 		})
 		
 		self.program.userData = downloadRequest as AnyObject
 		
-		let navigationViewControllers = self.navigationController!.viewControllers as! [UIViewController]
+		let navigationViewControllers = self.navigationController!.viewControllers
 		let recordingTableViewController = navigationViewControllers[0] as! ProgramTableViewController
 		recordingTableViewController.programsById[self.program.id] = self.program
 		
-		let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+		let currentGestureRecognizer = circularProgressView.gestureRecognizers![0]
 		circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
 		let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillCancel:"))
 		circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
@@ -307,11 +307,11 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		self.program.userData = nil
 		
-		let navigationViewControllers = self.navigationController!.viewControllers as! [UIViewController]
+		let navigationViewControllers = self.navigationController!.viewControllers
 		let recordingTableViewController = navigationViewControllers[0] as! ProgramTableViewController
 		recordingTableViewController.programsById[self.program.id] = self.program
 
-		let currentGestureRecognizer = (circularProgressView.gestureRecognizers as! [UIGestureRecognizer])[0]
+		let currentGestureRecognizer = circularProgressView.gestureRecognizers![0]
 		circularProgressView.removeGestureRecognizer(currentGestureRecognizer)
 		let downloadButtonTapGesture = UITapGestureRecognizer(target: self, action: Selector("downloadWillStart:"))
 		circularProgressView.addGestureRecognizer(downloadButtonTapGesture)
@@ -401,7 +401,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		switch currentViewType {
 		case .detail:
-			let cell = tableView.dequeueReusableCellWithIdentifier("programInfoCell", forIndexPath: indexPath) as! UITableViewCell
+			let cell = tableView.dequeueReusableCellWithIdentifier("programInfoCell", forIndexPath: indexPath)
 			switch indexPath.row {
 			case 0:
 				cell.textLabel?.text = "Genre"
@@ -452,8 +452,7 @@ class ProgramDetailViewController: UIViewController, UITableViewDelegate, UITabl
 			
 			return cell
 		case .service:
-			let cell = tableView.dequeueReusableCellWithIdentifier("programInfoCell", forIndexPath: indexPath) as! UITableViewCell
-			
+			let cell = tableView.dequeueReusableCellWithIdentifier("programInfoCell", forIndexPath: indexPath)
 			return cell
 		}
 	}

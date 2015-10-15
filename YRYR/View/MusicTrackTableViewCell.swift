@@ -71,7 +71,7 @@ class MusicTrackTableViewCell: UITableViewCell {
 		audioPlayer.play()
 		
 		// Remove current gesture recognizer and set new one
-		artworkImage.removeGestureRecognizer(artworkImage.gestureRecognizers![0] as! UIGestureRecognizer)
+		artworkImage.removeGestureRecognizer(artworkImage.gestureRecognizers![0])
 		let stopPreviewTrack = UITapGestureRecognizer(target: self, action: Selector("audioTrackDidFinished:"))
 		artworkImage.addGestureRecognizer(stopPreviewTrack)
 
@@ -90,7 +90,7 @@ class MusicTrackTableViewCell: UITableViewCell {
 	
 	// MARK: - Preview audio track events
 	
-	override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+	override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
 		if keyPath == "status" {
 			circularProgressView.stopSpinProgressBackgroundLayer()
 			NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("changeAudioTrackPlayingProgress:"), userInfo: nil, repeats: true)
@@ -104,7 +104,7 @@ class MusicTrackTableViewCell: UITableViewCell {
 			return
 		}
 		// Change audio progress
-		circularProgressView.progress = CGFloat(CMTimeGetSeconds(audioPlayer.currentTime()) / CMTimeGetSeconds(audioPlayer.currentItem.asset.duration))
+		circularProgressView.progress = CGFloat(CMTimeGetSeconds(audioPlayer.currentTime()) / CMTimeGetSeconds(audioPlayer.currentItem!.asset.duration))
 		if circularProgressView.progress == 1 {
 			// Finish this loop
 			timer.invalidate()
@@ -131,7 +131,7 @@ class MusicTrackTableViewCell: UITableViewCell {
 		
 		
 		// Remove current gesture recognizer and set new one
-		artworkImage.removeGestureRecognizer(artworkImage.gestureRecognizers![0] as! UIGestureRecognizer)
+		artworkImage.removeGestureRecognizer(artworkImage.gestureRecognizers![0])
 		let artworkImageTapGesture = UITapGestureRecognizer(target: self, action: Selector("playPreviewTrack:"))
 		artworkImage.addGestureRecognizer(artworkImageTapGesture)
 

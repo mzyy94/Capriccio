@@ -35,7 +35,7 @@ class YRYRTests: XCTestCase {
 		manager.remoteHost = NSURL(string: "http://chinachu:10772")!
 
 		manager.getSchedule(
-			success: {program in
+			{program in
 				scheduleExpectation.fulfill()
 			}, failure: {error in
 				XCTFail("\(error)")
@@ -43,7 +43,7 @@ class YRYRTests: XCTestCase {
 		})
 		
 		manager.getReserving(
-			success: {program in
+			{program in
 				reservingExpectation.fulfill()
 			}, failure: {error in
 				XCTFail("\(error)")
@@ -51,7 +51,7 @@ class YRYRTests: XCTestCase {
 		})
 		
 		manager.getRecording(
-			success: {program in
+			{program in
 				recordingExpectation.fulfill()
 			}, failure: {error in
 				XCTFail("\(error)")

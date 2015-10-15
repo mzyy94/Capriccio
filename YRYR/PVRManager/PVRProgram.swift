@@ -78,12 +78,11 @@ class PVRProgram: NSObject {
 	// MARK: - Program informations
 	
 	func isOnAir() -> Bool {
-		let now = NSDate.new()
+		let now = NSDate()
 		let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
 		
-		
-		return .OrderedDescending == calendar.compareDate(now, toDate: startTime, toUnitGranularity: .SecondCalendarUnit) &&
-			.OrderedAscending == calendar.compareDate(now, toDate: endTime, toUnitGranularity: .SecondCalendarUnit)
+		return .OrderedDescending == calendar.compareDate(now, toDate: startTime, toUnitGranularity: .NSSecondCalendarUnit) &&
+			.OrderedAscending == calendar.compareDate(now, toDate: endTime, toUnitGranularity: .NSSecondCalendarUnit)
 	}
 
 }

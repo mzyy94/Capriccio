@@ -46,7 +46,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		self.progressView = GSIndeterminateProgressView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 2))
 		self.progressView.progressTintColor = UIColor.paperColorBlue400()
 		self.progressView.backgroundColor = UIColor.clearColor()
-		self.progressView.autoresizingMask = .FlexibleWidth | .FlexibleTopMargin
+		self.progressView.autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin]
 		self.navigationController?.view.addSubview(self.progressView)
 		
 		// Set refresh control action
@@ -80,7 +80,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		self.progressView.startAnimating()
 		let manager = ChinachuPVRManager.sharedManager
-		manager.getReserving(success: { programs in
+		manager.getReserving({ programs in
 			self.refreshControl!.endRefreshing()
 			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 			self.progressView.stopAnimating()
@@ -93,7 +93,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				
 				// Remove unexist program
 				let programCount = self.programsById.count
-				for (index, programId) in enumerate(self.programIds.reverse()) {
+				for (index, programId) in self.programIds.reverse().enumerate() {
 					if upstreamProgramIds[programId] == nil {
 						self.programsById.removeValueForKey(self.programIds.removeAtIndex(programCount - 1 - index) as String)
 						dispatch_sync(dispatch_get_main_queue(), {
@@ -105,7 +105,7 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 				}
 				
 				// Append unexist program
-				for (index, program) in enumerate(programs) {
+				for (index, program) in programs.enumerate() {
 					if self.programsById[program.id] == nil {
 						self.programIds.insert(program.id, atIndex: index)
 						self.programsById[program.id] = program
@@ -138,8 +138,8 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		cell.accessoryView = nil
 		return cell
 	}
-	
-	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 		switch programsById[programIds[indexPath.section]]!.state {
 		case .AutomaticReserving:
 			let skip = UITableViewRowAction(style: .Default, title: "Skip") {
@@ -234,13 +234,13 @@ class ReservingTableViewController: ProgramTableViewController, UISearchBarDeleg
 		if searchText != "" {
 			if scope == 0 {
 				for programId in programIds {
-					if programsById[programId]!.title.rangeOfString(searchText, options: .WidthInsensitiveSearch | .DiacriticInsensitiveSearch | .CaseInsensitiveSearch) != nil {
+					if programsById[programId]!.title.rangeOfString(searchText, options: [.WidthInsensitiveSearch, .DiacriticInsensitiveSearch, .CaseInsensitiveSearch]) != nil {
 						resultProgramTableView.programIds.append(programId)
 					}
 				}
 			} else {
 				for programId in programIds {
-					if programsById[programId]!.detail.rangeOfString(searchText, options: .WidthInsensitiveSearch | .DiacriticInsensitiveSearch | .CaseInsensitiveSearch) != nil {
+					if programsById[programId]!.detail.rangeOfString(searchText, options: [.WidthInsensitiveSearch, .DiacriticInsensitiveSearch, .CaseInsensitiveSearch]) != nil {
 						resultProgramTableView.programIds.append(programId)
 					}
 				}
