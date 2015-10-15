@@ -11,7 +11,7 @@ PODS:
   - GSIndeterminateProgressBar (0.1.0)
   - HMSegmentedControl (1.5.2)
   - KeychainAccess (2.0.1)
-  - MobileVLCKit (3.0.0)
+  - MobileVLCKit (2.2.2)
   - MRProgress (0.8.2):
     - MRProgress/ActivityIndicator (= 0.8.2)
     - MRProgress/Blur (= 0.8.2)
@@ -59,7 +59,7 @@ DEPENDENCIES:
   - GSIndeterminateProgressBar (~> 0.1.0)
   - HMSegmentedControl (~> 1.5.2)
   - KeychainAccess (~> 2.0.1)
-  - MobileVLCKit (from `http://code.videolan.org/videolan/VLCKit.git`, branch `master`)
+  - MobileVLCKit (from `http://code.videolan.org/videolan/VLCKit.git`, tag `2.2.2-pre4`)
   - MRProgress (~> 0.8.2)
   - SDWebImage (~> 3.7.3)
   - SugarRecord/CoreData (from `https://github.com/tonyxiao/SugarRecord.git`, commit
@@ -69,16 +69,16 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   MobileVLCKit:
-    :branch: master
     :git: http://code.videolan.org/videolan/VLCKit.git
+    :tag: 2.2.2-pre4
   SugarRecord:
     :commit: 8253757e26f57869c4b3baebf8f63dfe59f6ee55
     :git: https://github.com/tonyxiao/SugarRecord.git
 
 CHECKOUT OPTIONS:
   MobileVLCKit:
-    :commit: ec2f1a9108f632bc85cc693353b5d5fed26d5aec
     :git: http://code.videolan.org/videolan/VLCKit.git
+    :tag: 2.2.2-pre4
   SugarRecord:
     :commit: 8253757e26f57869c4b3baebf8f63dfe59f6ee55
     :git: https://github.com/tonyxiao/SugarRecord.git
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   GSIndeterminateProgressBar: eb29d5968109d803518379e925e74eb74b4a8d97
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   KeychainAccess: 4f43261905701098847f6995a2de3fe8b90284df
-  MobileVLCKit: e258424cfa5dde2fcb6f306be2acf29611e368d9
+  MobileVLCKit: 653fcdb297c6337b44e1c16dea01d5e733c19ec1
   MRProgress: f4cfe862082418e8f542f077772283f425d6c699
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SugarRecord: 9d55ce666e8161eacdc95c996173eb53eb6d3683
