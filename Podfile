@@ -7,7 +7,7 @@ target 'Capriccio' do
 	pod 'SwiftyJSON', '~> 2.3.0'
 	pod 'SDWebImage', '~> 3.7.3'
 	pod 'MRProgress', '~> 0.8.2'
-	pod 'MobileVLCKit', '~> 2.2.1'
+	pod 'MobileVLCKit', :git => 'http://code.videolan.org/videolan/VLCKit.git', :tag => '2.2.2-pre4'
 	pod 'SugarRecord/CoreData', :git => 'https://github.com/tonyxiao/SugarRecord.git', :commit => '8253757e26f57869c4b3baebf8f63dfe59f6ee55'
 	pod 'FFCircularProgressView', '~> 0.3'
 	pod 'GSIndeterminateProgressBar', '~> 0.1.0'
