@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// PVRManager configuration
 		let userDefaults = NSUserDefaults()
+        
+        initUserDefault(userDefaults)
 		
 		let pvrUrl = userDefaults.stringForKey("pvrUrl")!
 		let pvrPort = userDefaults.integerForKey("pvrPort")
@@ -46,6 +48,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return true
 	}
 
+    func initUserDefault(userDefaults: NSUserDefaults) {
+        let defaultConfig = ["pvrUrl": "http://192.168.100.60", "pvrPort": 10772, "pvrUser": "akari"]
+        userDefaults.registerDefaults(defaultConfig)
+        userDefaults.synchronize()
+    }
+    
 	func applicationWillResignActive(application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

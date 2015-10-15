@@ -36,14 +36,15 @@ class ChinachuPVRManager: PVRManager {
 	private func getAccount() -> (String, String) {
 		let userDefaults = NSUserDefaults()
 
-		let username = userDefaults.stringForKey("pvrUser")!
+		var username = userDefaults.stringForKey("pvrUser")!
 		let password: String
-		if let storedPassword = try? Keychain(server: remoteHost.absoluteString,
+		if let storedPassword = try! Keychain(server: remoteHost.absoluteString,
 			protocolType: remoteHost.scheme == "https" ? .HTTPS : .HTTP,
 			authenticationType: .HTTPBasic).get(username) {
 				
-			password = storedPassword!
+			password = storedPassword
 		} else {
+            username = ""
 			password = ""
 		}
 		

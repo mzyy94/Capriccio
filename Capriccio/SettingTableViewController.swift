@@ -37,6 +37,7 @@ class SettingTableViewController: UITableViewController, UITextFieldDelegate {
 		userDefaults.setObject(pvrUrl, forKey: "pvrUrl")
 		userDefaults.setInteger(pvrPort, forKey: "pvrPort")
 		userDefaults.setObject(pvrUser, forKey: "pvrUser")
+		userDefaults.synchronize()
 		
 		// Save confidential value
 		let keychain = Keychain(server: "\(pvrUrl):\(pvrPort)", protocolType: pvrUrl.rangeOfString("^https://", options: .RegularExpressionSearch) != nil ? .HTTPS : .HTTP, authenticationType: .HTTPBasic)
