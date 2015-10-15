@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		097A6E636FDE92C568ED36C7 /* Pods_CapriccioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_CapriccioTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		097A6E636FDE92C568ED36C7 /* Pods_CapriccioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_CapriccioTests.framework */; };
 		9E6B54B91B4A4CDD009503D9 /* OnAirTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */; };
 		9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */; };
 		9E835CCF1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */; };
@@ -45,7 +45,7 @@
 		9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */; };
 		9EF414761B18E5180096C2CE /* ProgramTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */; };
 		9EF5FA271B44D60700C1A1CF /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */; };
-		A2AE20420DF69DDE9D0DDBA4 /* Pods_Capriccio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F573239C182A07098638B044 /* Pods_Capriccio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A2AE20420DF69DDE9D0DDBA4 /* Pods_Capriccio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F573239C182A07098638B044 /* Pods_Capriccio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
