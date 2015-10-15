@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-target 'YRYR' do
+target 'Capriccio' do
 	pod 'Alamofire', '~> 3.0.0-beta.3'
 	pod 'SwiftyJSON', '~> 2.3.0'
 	pod 'SDWebImage', '~> 3.7.3'
@@ -20,7 +20,7 @@ target 'YRYR' do
 	pod 'HMSegmentedControl', '~> 1.5.2'
 end
 
-target 'YRYRTests' do
+target 'CapriccioTests' do
 	pod 'Alamofire', '~> 3.0.0-beta.3'
 	pod 'SwiftyJSON', '~> 2.3.0'
 	pod 'KeychainAccess', '~> 2.0.1'

@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		097A6E636FDE92C568ED36C7 /* Pods_CapriccioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3692B0279BD04F20756884 /* Pods_CapriccioTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9E6B54B91B4A4CDD009503D9 /* OnAirTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */; };
+		9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */; };
+		9E835CCF1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */; };
+		9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE31B18A32300C57833 /* AppDelegate.swift */; };
+		9E8C3BE71B18A32300C57833 /* Capriccio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BE51B18A32300C57833 /* Capriccio.xcdatamodeld */; };
+		9E8C3BEC1B18A32300C57833 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BEA1B18A32300C57833 /* Main.storyboard */; };
+		9E8C3BEE1B18A32300C57833 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BED1B18A32300C57833 /* Images.xcassets */; };
+		9E8C3BF11B18A32300C57833 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */; };
+		9E8C3BFD1B18A32300C57833 /* CapriccioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3BFC1B18A32300C57833 /* CapriccioTests.swift */; };
+		9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C061B18A9E600C57833 /* PVRChannel.swift */; };
+		9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C081B18AA3E00C57833 /* PVRProgram.swift */; };
+		9E8C3C0B1B18AAC600C57833 /* PVRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C0A1B18AAC600C57833 /* PVRManager.swift */; };
+		9E8C3C0E1B18ADC100C57833 /* ChinachuPVRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */; };
+		9E8C3C0F1B18ADEF00C57833 /* PVRChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C061B18A9E600C57833 /* PVRChannel.swift */; };
+		9E8C3C101B18ADF200C57833 /* PVRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C081B18AA3E00C57833 /* PVRProgram.swift */; };
+		9E8C3C111B18ADF600C57833 /* PVRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C0A1B18AAC600C57833 /* PVRManager.swift */; };
+		9E8C3C121B18ADFC00C57833 /* ChinachuPVRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */; };
+		9E8C3C151B18B89000C57833 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */; };
+		9EA4EEE91B1CEA77008D4059 /* Empty.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9EA4EEE81B1CEA77008D4059 /* Empty.mm */; };
+		9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA4EEEA1B1CEC3C008D4059 /* VideoPlayViewController.swift */; };
+		9EB59A761B2E80DF0046846B /* RecordingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */; };
+		9EBAD3671B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */; };
+		9EBAD3691B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */; };
+		9EBAD36A1B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */; };
+		9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */; };
+		9EBAD36E1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */; };
+		9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */; };
+		9EBAD3721B41B5BE00906B5C /* MusicTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */; };
+		9EBAD3761B41E3E000906B5C /* CircularAudioProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */; };
+		9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */; };
+		9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */; };
+		9EE583781B1DFBC60011E41A /* PVRChannelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */; };
+		9EEF69F21B3853B700099B64 /* ReservingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */; };
+		9EF414721B18E4A40096C2CE /* ProgramInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */; };
+		9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */; };
+		9EF414761B18E5180096C2CE /* ProgramTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */; };
+		9EF5FA271B44D60700C1A1CF /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */; };
+		A2AE20420DF69DDE9D0DDBA4 /* Pods_Capriccio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F573239C182A07098638B044 /* Pods_Capriccio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9E8C3BF71B18A32300C57833 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E8C3BD61B18A32300C57833 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E8C3BDD1B18A32300C57833;
+			remoteInfo = Capriccio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnAirTableViewController.swift; sourceTree = "<group>"; };
+		9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnAirChannelTableViewCell.swift; path = View/OnAirChannelTableViewCell.swift; sourceTree = "<group>"; };
+		9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OnAirChannelTableViewCell.xib; path = View/OnAirChannelTableViewCell.xib; sourceTree = "<group>"; };
+		9E8C3BDE1B18A32300C57833 /* Capriccio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capriccio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E8C3BE21B18A32300C57833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E8C3BE31B18A32300C57833 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9E8C3BE61B18A32300C57833 /* Capriccio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Capriccio.xcdatamodel; sourceTree = "<group>"; };
+		9E8C3BEB1B18A32300C57833 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9E8C3BED1B18A32300C57833 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9E8C3BF01B18A32300C57833 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9E8C3BF61B18A32300C57833 /* CapriccioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapriccioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E8C3BFB1B18A32300C57833 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E8C3BFC1B18A32300C57833 /* CapriccioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapriccioTests.swift; sourceTree = "<group>"; };
+		9E8C3C061B18A9E600C57833 /* PVRChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRChannel.swift; path = PVRManager/PVRChannel.swift; sourceTree = "<group>"; };
+		9E8C3C081B18AA3E00C57833 /* PVRProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRProgram.swift; path = PVRManager/PVRProgram.swift; sourceTree = "<group>"; };
+		9E8C3C0A1B18AAC600C57833 /* PVRManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRManager.swift; path = PVRManager/PVRManager.swift; sourceTree = "<group>"; };
+		9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChinachuPVRManager.swift; sourceTree = "<group>"; };
+		9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		9EA4EEE81B1CEA77008D4059 /* Empty.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Empty.mm; sourceTree = "<group>"; };
+		9EA4EEEA1B1CEC3C008D4059 /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayViewController.swift; sourceTree = "<group>"; };
+		9EA4EF241B1CF0A2008D4059 /* Capriccio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Capriccio-Bridging-Header.h"; sourceTree = "<group>"; };
+		9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingTableViewController.swift; sourceTree = "<group>"; };
+		9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GSIndeterminateProgressView+ShowColor.swift"; path = "Extension/GSIndeterminateProgressView+ShowColor.swift"; sourceTree = "<group>"; };
+		9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicTrackInformation.swift; path = MusicStoreManager/MusicTrackInformation.swift; sourceTree = "<group>"; };
+		9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicStoreManager.swift; path = MusicStoreManager/MusicStoreManager.swift; sourceTree = "<group>"; };
+		9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicTrackTableViewCell.swift; path = View/MusicTrackTableViewCell.swift; sourceTree = "<group>"; };
+		9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MusicTrackTableViewCell.xib; path = View/MusicTrackTableViewCell.xib; sourceTree = "<group>"; };
+		9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularAudioProgressView.swift; path = View/CircularAudioProgressView.swift; sourceTree = "<group>"; };
+		9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDetailViewController.swift; sourceTree = "<group>"; };
+		9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRProgramStore.swift; path = CoreDataObject/PVRProgramStore.swift; sourceTree = "<group>"; };
+		9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PVRChannelStore.swift; path = CoreDataObject/PVRChannelStore.swift; sourceTree = "<group>"; };
+		9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservingTableViewController.swift; sourceTree = "<group>"; };
+		9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramInfoTableViewCell.swift; path = View/ProgramInfoTableViewCell.swift; sourceTree = "<group>"; };
+		9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProgramInfoTableViewCell.xib; path = View/ProgramInfoTableViewCell.xib; sourceTree = "<group>"; };
+		9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTableViewController.swift; sourceTree = "<group>"; };
+		9EF5FA251B44D60700C1A1CF /* UIAppearance+Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAppearance+Swift.h"; path = "Extension/UIAppearance+Swift.h"; sourceTree = "<group>"; };
+		9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAppearance+Swift.m"; path = "Extension/UIAppearance+Swift.m"; sourceTree = "<group>"; };
+		A5F597D4BE7C786FFA9E3FB0 /* Pods-Capriccio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capriccio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capriccio/Pods-Capriccio.release.xcconfig"; sourceTree = "<group>"; };
+		B21758A94EFD85CF6C3C0630 /* Pods-Capriccio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capriccio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capriccio/Pods-Capriccio.debug.xcconfig"; sourceTree = "<group>"; };
+		BD3692B0279BD04F20756884 /* Pods_CapriccioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CapriccioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8A199934B21681BD333F101 /* Pods-CapriccioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CapriccioTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CapriccioTests/Pods-CapriccioTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9057D486511C7DB374E83F0 /* Pods-CapriccioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CapriccioTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CapriccioTests/Pods-CapriccioTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F573239C182A07098638B044 /* Pods_Capriccio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capriccio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9E8C3BDB1B18A32300C57833 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2AE20420DF69DDE9D0DDBA4 /* Pods_Capriccio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E8C3BF31B18A32300C57833 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				097A6E636FDE92C568ED36C7 /* Pods_CapriccioTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9E8C3BD51B18A32300C57833 = {
+			isa = PBXGroup;
+			children = (
+				9E8C3BE01B18A32300C57833 /* Capriccio */,
+				9E8C3BF91B18A32300C57833 /* CapriccioTests */,
+				9E8C3BDF1B18A32300C57833 /* Products */,
+				D7CC54F143B29419CE66FBEF /* Pods */,
+				D2F6794212C6D1AF7ACCF684 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9E8C3BDF1B18A32300C57833 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9E8C3BDE1B18A32300C57833 /* Capriccio.app */,
+				9E8C3BF61B18A32300C57833 /* CapriccioTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9E8C3BE01B18A32300C57833 /* Capriccio */ = {
+			isa = PBXGroup;
+			children = (
+				9EE583791B1DFBCC0011E41A /* CoreDataObject */,
+				9E8C3BE31B18A32300C57833 /* AppDelegate.swift */,
+				9E8C3C0D1B18ADC100C57833 /* ChinachuPVRManager.swift */,
+				9E8C3C0C1B18AB5500C57833 /* PVRManager */,
+				9EBAD36B1B41A9C300906B5C /* MusicStoreManager */,
+				9EBC8D351B1B9F3D00E95548 /* ProgramDetailViewController.swift */,
+				9E6B54B81B4A4CDD009503D9 /* OnAirTableViewController.swift */,
+				9EF414751B18E5180096C2CE /* ProgramTableViewController.swift */,
+				9EB59A751B2E80DF0046846B /* RecordingTableViewController.swift */,
+				9EEF69F11B3853B700099B64 /* ReservingTableViewController.swift */,
+				9EA4EEEA1B1CEC3C008D4059 /* VideoPlayViewController.swift */,
+				9E8C3C141B18B89000C57833 /* SettingTableViewController.swift */,
+				9E8C3BEA1B18A32300C57833 /* Main.storyboard */,
+				9EF414741B18E4AB0096C2CE /* View */,
+				9E8C3BED1B18A32300C57833 /* Images.xcassets */,
+				9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */,
+				9E8C3BE51B18A32300C57833 /* Capriccio.xcdatamodeld */,
+				9EA4EEE81B1CEA77008D4059 /* Empty.mm */,
+				9EA4EF241B1CF0A2008D4059 /* Capriccio-Bridging-Header.h */,
+				9EBAD3651B419C9500906B5C /* Extension */,
+				9E8C3BE11B18A32300C57833 /* Supporting Files */,
+			);
+			path = Capriccio;
+			sourceTree = "<group>";
+		};
+		9E8C3BE11B18A32300C57833 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E8C3BE21B18A32300C57833 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E8C3BF91B18A32300C57833 /* CapriccioTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E8C3BFC1B18A32300C57833 /* CapriccioTests.swift */,
+				9E8C3BFA1B18A32300C57833 /* Supporting Files */,
+			);
+			path = CapriccioTests;
+			sourceTree = "<group>";
+		};
+		9E8C3BFA1B18A32300C57833 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9E8C3BFB1B18A32300C57833 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E8C3C0C1B18AB5500C57833 /* PVRManager */ = {
+			isa = PBXGroup;
+			children = (
+				9E8C3C061B18A9E600C57833 /* PVRChannel.swift */,
+				9E8C3C081B18AA3E00C57833 /* PVRProgram.swift */,
+				9E8C3C0A1B18AAC600C57833 /* PVRManager.swift */,
+			);
+			name = PVRManager;
+			sourceTree = "<group>";
+		};
+		9EBAD3651B419C9500906B5C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9EBAD3661B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift */,
+				9EF5FA251B44D60700C1A1CF /* UIAppearance+Swift.h */,
+				9EF5FA261B44D60700C1A1CF /* UIAppearance+Swift.m */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		9EBAD36B1B41A9C300906B5C /* MusicStoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				9EBAD3681B41A9BA00906B5C /* MusicTrackInformation.swift */,
+				9EBAD36C1B41ACEE00906B5C /* MusicStoreManager.swift */,
+			);
+			name = MusicStoreManager;
+			sourceTree = "<group>";
+		};
+		9EE583791B1DFBCC0011E41A /* CoreDataObject */ = {
+			isa = PBXGroup;
+			children = (
+				9EE583771B1DFBC60011E41A /* PVRChannelStore.swift */,
+				9EE583751B1DFBC50011E41A /* PVRProgramStore.swift */,
+			);
+			name = CoreDataObject;
+			sourceTree = "<group>";
+		};
+		9EF414741B18E4AB0096C2CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9EF414701B18E4A40096C2CE /* ProgramInfoTableViewCell.swift */,
+				9EF414711B18E4A40096C2CE /* ProgramInfoTableViewCell.xib */,
+				9EBAD3751B41E3E000906B5C /* CircularAudioProgressView.swift */,
+				9EBAD36F1B41B5BE00906B5C /* MusicTrackTableViewCell.swift */,
+				9EBAD3701B41B5BE00906B5C /* MusicTrackTableViewCell.xib */,
+				9E835CCC1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift */,
+				9E835CCD1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D2F6794212C6D1AF7ACCF684 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F573239C182A07098638B044 /* Pods_Capriccio.framework */,
+				BD3692B0279BD04F20756884 /* Pods_CapriccioTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7CC54F143B29419CE66FBEF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B21758A94EFD85CF6C3C0630 /* Pods-Capriccio.debug.xcconfig */,
+				A5F597D4BE7C786FFA9E3FB0 /* Pods-Capriccio.release.xcconfig */,
+				D9057D486511C7DB374E83F0 /* Pods-CapriccioTests.debug.xcconfig */,
+				C8A199934B21681BD333F101 /* Pods-CapriccioTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9E8C3BDD1B18A32300C57833 /* Capriccio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E8C3C001B18A32300C57833 /* Build configuration list for PBXNativeTarget "Capriccio" */;
+			buildPhases = (
+				254637CF764DD9F52F360A99 /* Check Pods Manifest.lock */,
+				9E8C3BDA1B18A32300C57833 /* Sources */,
+				9E8C3BDB1B18A32300C57833 /* Frameworks */,
+				9E8C3BDC1B18A32300C57833 /* Resources */,
+				E5FE32CB05C63338EBC6EFB8 /* Embed Pods Frameworks */,
+				56ECE64276406512D91392DF /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Capriccio;
+			productName = Capriccio;
+			productReference = 9E8C3BDE1B18A32300C57833 /* Capriccio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9E8C3BF51B18A32300C57833 /* CapriccioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E8C3C031B18A32300C57833 /* Build configuration list for PBXNativeTarget "CapriccioTests" */;
+			buildPhases = (
+				961640084924127EC44F1B26 /* Check Pods Manifest.lock */,
+				9E8C3BF21B18A32300C57833 /* Sources */,
+				9E8C3BF31B18A32300C57833 /* Frameworks */,
+				9E8C3BF41B18A32300C57833 /* Resources */,
+				DEA9297403F3C8E66FFE06AE /* Embed Pods Frameworks */,
+				39F5B33E31E74F569DA6BC74 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E8C3BF81B18A32300C57833 /* PBXTargetDependency */,
+			);
+			name = CapriccioTests;
+			productName = CapriccioTests;
+			productReference = 9E8C3BF61B18A32300C57833 /* CapriccioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9E8C3BD61B18A32300C57833 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Yuki MIZUNO";
+				TargetAttributes = {
+					9E8C3BDD1B18A32300C57833 = {
+						CreatedOnToolsVersion = 6.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					9E8C3BF51B18A32300C57833 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 9E8C3BDD1B18A32300C57833;
+					};
+				};
+			};
+			buildConfigurationList = 9E8C3BD91B18A32300C57833 /* Build configuration list for PBXProject "Capriccio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9E8C3BD51B18A32300C57833;
+			productRefGroup = 9E8C3BDF1B18A32300C57833 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E8C3BDD1B18A32300C57833 /* Capriccio */,
+				9E8C3BF51B18A32300C57833 /* CapriccioTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9E8C3BDC1B18A32300C57833 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EF414731B18E4A40096C2CE /* ProgramInfoTableViewCell.xib in Resources */,
+				9E835CCF1B4A37E8005AE07F /* OnAirChannelTableViewCell.xib in Resources */,
+				9E8C3BEC1B18A32300C57833 /* Main.storyboard in Resources */,
+				9E8C3BF11B18A32300C57833 /* LaunchScreen.xib in Resources */,
+				9EBAD3721B41B5BE00906B5C /* MusicTrackTableViewCell.xib in Resources */,
+				9E8C3BEE1B18A32300C57833 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E8C3BF41B18A32300C57833 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		254637CF764DD9F52F360A99 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		39F5B33E31E74F569DA6BC74 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CapriccioTests/Pods-CapriccioTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		56ECE64276406512D91392DF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Capriccio/Pods-Capriccio-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		961640084924127EC44F1B26 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DEA9297403F3C8E66FFE06AE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CapriccioTests/Pods-CapriccioTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5FE32CB05C63338EBC6EFB8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Capriccio/Pods-Capriccio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9E8C3BDA1B18A32300C57833 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EF414721B18E4A40096C2CE /* ProgramInfoTableViewCell.swift in Sources */,
+				9EF414761B18E5180096C2CE /* ProgramTableViewController.swift in Sources */,
+				9E8C3C151B18B89000C57833 /* SettingTableViewController.swift in Sources */,
+				9EE583761B1DFBC50011E41A /* PVRProgramStore.swift in Sources */,
+				9EB59A761B2E80DF0046846B /* RecordingTableViewController.swift in Sources */,
+				9E8C3C0B1B18AAC600C57833 /* PVRManager.swift in Sources */,
+				9EBAD3761B41E3E000906B5C /* CircularAudioProgressView.swift in Sources */,
+				9EBAD36D1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
+				9E8C3C071B18A9E600C57833 /* PVRChannel.swift in Sources */,
+				9E6B54B91B4A4CDD009503D9 /* OnAirTableViewController.swift in Sources */,
+				9E835CCE1B4A37E8005AE07F /* OnAirChannelTableViewCell.swift in Sources */,
+				9EA4EEEB1B1CEC3C008D4059 /* VideoPlayViewController.swift in Sources */,
+				9EBAD3711B41B5BE00906B5C /* MusicTrackTableViewCell.swift in Sources */,
+				9EBC8D361B1B9F3D00E95548 /* ProgramDetailViewController.swift in Sources */,
+				9E8C3BE41B18A32300C57833 /* AppDelegate.swift in Sources */,
+				9EF5FA271B44D60700C1A1CF /* UIAppearance+Swift.m in Sources */,
+				9E8C3C091B18AA3E00C57833 /* PVRProgram.swift in Sources */,
+				9EA4EEE91B1CEA77008D4059 /* Empty.mm in Sources */,
+				9EBAD3691B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */,
+				9E8C3C0E1B18ADC100C57833 /* ChinachuPVRManager.swift in Sources */,
+				9EEF69F21B3853B700099B64 /* ReservingTableViewController.swift in Sources */,
+				9E8C3BE71B18A32300C57833 /* Capriccio.xcdatamodeld in Sources */,
+				9EBAD3671B41A6AA00906B5C /* GSIndeterminateProgressView+ShowColor.swift in Sources */,
+				9EE583781B1DFBC60011E41A /* PVRChannelStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E8C3BF21B18A32300C57833 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EBAD36E1B41ACEE00906B5C /* MusicStoreManager.swift in Sources */,
+				9EBAD36A1B41A9BA00906B5C /* MusicTrackInformation.swift in Sources */,
+				9E8C3C121B18ADFC00C57833 /* ChinachuPVRManager.swift in Sources */,
+				9E8C3C0F1B18ADEF00C57833 /* PVRChannel.swift in Sources */,
+				9E8C3C101B18ADF200C57833 /* PVRProgram.swift in Sources */,
+				9E8C3C111B18ADF600C57833 /* PVRManager.swift in Sources */,
+				9E8C3BFD1B18A32300C57833 /* CapriccioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9E8C3BF81B18A32300C57833 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E8C3BDD1B18A32300C57833 /* Capriccio */;
+			targetProxy = 9E8C3BF71B18A32300C57833 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9E8C3BEA1B18A32300C57833 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E8C3BEB1B18A32300C57833 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9E8C3BEF1B18A32300C57833 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9E8C3BF01B18A32300C57833 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9E8C3BFE1B18A32300C57833 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9E8C3BFF1B18A32300C57833 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9E8C3C011B18A32300C57833 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B21758A94EFD85CF6C3C0630 /* Pods-Capriccio.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Capriccio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Capriccio/Capriccio-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9E8C3C021B18A32300C57833 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5F597D4BE7C786FFA9E3FB0 /* Pods-Capriccio.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Capriccio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Capriccio/Capriccio-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		9E8C3C041B18A32300C57833 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9057D486511C7DB374E83F0 /* Pods-CapriccioTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CapriccioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capriccio.app/Capriccio";
+			};
+			name = Debug;
+		};
+		9E8C3C051B18A32300C57833 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8A199934B21681BD333F101 /* Pods-CapriccioTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CapriccioTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Capriccio.app/Capriccio";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9E8C3BD91B18A32300C57833 /* Build configuration list for PBXProject "Capriccio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E8C3BFE1B18A32300C57833 /* Debug */,
+				9E8C3BFF1B18A32300C57833 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E8C3C001B18A32300C57833 /* Build configuration list for PBXNativeTarget "Capriccio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E8C3C011B18A32300C57833 /* Debug */,
+				9E8C3C021B18A32300C57833 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E8C3C031B18A32300C57833 /* Build configuration list for PBXNativeTarget "CapriccioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E8C3C041B18A32300C57833 /* Debug */,
+				9E8C3C051B18A32300C57833 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9E8C3BE51B18A32300C57833 /* Capriccio.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9E8C3BE61B18A32300C57833 /* Capriccio.xcdatamodel */,
+			);
+			currentVersion = 9E8C3BE61B18A32300C57833 /* Capriccio.xcdatamodel */;
+			path = Capriccio.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9E8C3BD61B18A32300C57833 /* Project object */;
+}
